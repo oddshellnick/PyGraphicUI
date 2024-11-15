@@ -1,1 +1,9 @@
-from PyGraphicUI import Animations, Attributes, Charts, Objects, PyObjects, PyStyleSheets, StyleSheets
+from PyGraphicUI import (
+    Animations,
+    Attributes,
+    Charts,
+    Objects,
+    PyObjects,
+    PyStyleSheets,
+    StyleSheets,
+)
