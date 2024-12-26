@@ -837,11 +837,16 @@ class PyProgressWatcher(PyLabel):
     def print_progress(self):
         """Updates the displayed progress information."""
         if not self.block_print:
+            try:
+                progress_percent = (self.current_point / self.end_point) * 100
+            except ZeroDivisionError:
+                progress_percent = 0.0
+
             self.setText(
                 self.output_format.format(
                     current_point=self.current_point,
                     end_point=self.end_point,
-                    progress_percent=(self.current_point / self.end_point) * 100,
+                    progress_percent=progress_percent,
                     points_per_time=self.get_points_per_time_sting(),
                     time_gone=self.get_elapsed_time_string(),
                     est_time=self.get_estimated_time_string(),
@@ -937,11 +942,16 @@ class PyProgressWatcher(PyLabel):
             current_point (int): The current point.
             end_point (int): The end point.
         """
+        try:
+            progress_percent = (current_point / end_point) * 100
+        except ZeroDivisionError:
+            progress_percent = 0.0
+
         self.setText(
             self.output_format.format(
                 current_point=current_point,
                 end_point=end_point,
-                progress_percent=(current_point / end_point) * 100,
+                progress_percent=progress_percent,
                 points_per_time=self.points_per_second_format.format(points=0.0),
                 time_gone=self.get_elapsed_time_string(),
                 est_time=self.get_estimated_time_string(),
