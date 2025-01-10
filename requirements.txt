@@ -1,0 +1,7 @@
+setuptools~=75.1.0
+matplotlib~=3.10.0
+mplfinance~=0.12.10b0
+pandas~=2.2.3
+pyqt6~=6.8.0
+pyqt6-sip~=13.9.1
+python-dateutil~=2.9.0.post0

@@ -1,0 +1,1 @@
+PyGraphicUI enhances PyQt6 GUI development with simplified widget creation, intuitive layout management, dynamic time-based widgets, and an object-oriented approach to stylesheets, reducing boilerplate and improving code readability.
