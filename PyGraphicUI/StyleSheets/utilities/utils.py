@@ -63,10 +63,16 @@ def get_objects_of_style(parent_objects: tuple[str, Selector], **kwargs) -> tupl
 
 
 def get_new_parent_objects(
-		parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
+		parent_css_object: typing.Union[ObjectOfStyle, list[ObjectOfStyle], tuple[ObjectOfStyle], array.array[ObjectOfStyle], collections.deque[ObjectOfStyle]],
 		widget_selector: typing.Union[tuple[str, Selector], None],
 		next_widget_selector: tuple[str, Selector]
-) -> typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]:
+) -> typing.Union[
+	ObjectOfStyle,
+	list[ObjectOfStyle],
+	tuple[ObjectOfStyle],
+	array.array[ObjectOfStyle],
+	collections.deque[ObjectOfStyle]
+]:
 	"""
     Updates parent CSS objects by adding a new child widget selector.
 
@@ -78,7 +84,7 @@ def get_new_parent_objects(
     Returns:
         typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]: The updated parent CSS object(s).
     """
-	if isinstance(parent_css_object, list):
+	if isinstance(parent_css_object, (list, tuple, array.array, collections.deque)):
 		for i in range(len(parent_css_object)):
 			parent_css_object[i].add_css_object_to_object(next_widget_selector[0], next_widget_selector[1])
 	
