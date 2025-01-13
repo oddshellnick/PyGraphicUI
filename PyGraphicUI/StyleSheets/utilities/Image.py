@@ -23,9 +23,9 @@ class ImagePosition:
             image_position (Alignment): The image position value.
         """
 		self.image_position = ""
-		self.set_image_position(image_position)
+		self.set(image_position)
 	
-	def set_image_position(self, image_position: Alignment):
+	def set(self, image_position: Alignment):
 		"""
         Sets the image position value.
 
@@ -60,9 +60,9 @@ class Image:
             image (Url): The image value.
         """
 		self.image = ""
-		self.set_image(image)
+		self.set(image)
 	
-	def set_image(self, image: Url):
+	def set(self, image: Url):
 		"""
         Sets the image value.
 

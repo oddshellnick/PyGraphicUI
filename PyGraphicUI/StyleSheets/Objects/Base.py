@@ -100,7 +100,7 @@ class BaseStyle:
 
     Attributes:
         style (str): The CSS style string.
-        style_sheet_object (typing.Union[StyleSheetObject, None]): The style sheet object that the style is applied to.
+        style_sheet_object (typing.Optional[StyleSheetObject]): The style sheet object that the style is applied to.
         instances (dict): A dictionary of style properties and their values.
 
     :Usage:
@@ -112,148 +112,148 @@ class BaseStyle:
 	
 	def __init__(
 			self,
-			object_of_style: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle], None] = None,
-			alternate_background_color: typing.Union[AlternateBackgroundColor, None] = None,
-			background: typing.Union[Background, None] = None,
-			background_attachment: typing.Union[BackgroundAttachment, None] = None,
-			background_clip: typing.Union[BackgroundClip, None] = None,
-			background_color: typing.Union[BackgroundColor, None] = None,
-			background_image: typing.Union[BackgroundImage, None] = None,
-			background_origin: typing.Union[BackgroundOrigin, None] = None,
-			background_position: typing.Union[BackgroundPosition, None] = None,
-			border: typing.Union[Border, None] = None,
-			border_bottom: typing.Union[BorderBottom, None] = None,
-			border_bottom_color: typing.Union[BorderBottomColor, None] = None,
-			border_bottom_left_radius: typing.Union[BorderBottomLeftRadius, None] = None,
-			border_bottom_right_radius: typing.Union[BorderBottomRightRadius, None] = None,
-			border_bottom_style: typing.Union[BorderBottomStyle, None] = None,
-			border_bottom_width: typing.Union[BorderBottomWidth, None] = None,
-			border_color: typing.Union[BorderColor, None] = None,
-			border_left: typing.Union[BorderLeft, None] = None,
-			border_left_color: typing.Union[BorderLeftColor, None] = None,
-			border_left_style: typing.Union[BorderLeftStyle, None] = None,
-			border_left_width: typing.Union[BorderLeftWidth, None] = None,
-			border_radius: typing.Union[BorderRadius, None] = None,
-			border_right: typing.Union[BorderRight, None] = None,
-			border_right_color: typing.Union[BorderRightColor, None] = None,
-			border_right_style: typing.Union[BorderRightStyle, None] = None,
-			border_right_width: typing.Union[BorderRightWidth, None] = None,
-			border_top: typing.Union[BorderTop, None] = None,
-			border_top_color: typing.Union[BorderTopColor, None] = None,
-			border_top_left_radius: typing.Union[BorderTopLeftRadius, None] = None,
-			border_top_right_radius: typing.Union[BorderTopRightRadius, None] = None,
-			border_top_style: typing.Union[BorderTopStyle, None] = None,
-			border_top_width: typing.Union[BorderTopWidth, None] = None,
-			border_width: typing.Union[BorderWidth, None] = None,
-			borders_style: typing.Union[BordersStyle, None] = None,
-			font: typing.Union[Font, None] = None,
-			height: typing.Union[Height, None] = None,
-			image: typing.Union[Image, None] = None,
-			image_position: typing.Union[ImagePosition, None] = None,
-			margin: typing.Union[Margin, None] = None,
-			margin_bottom: typing.Union[MarginBottom, None] = None,
-			margin_left: typing.Union[MarginLeft, None] = None,
-			margin_right: typing.Union[MarginRight, None] = None,
-			margin_top: typing.Union[MarginTop, None] = None,
-			max_height: typing.Union[MaxHeight, None] = None,
-			max_width: typing.Union[MaxWidth, None] = None,
-			min_height: typing.Union[MinHeight, None] = None,
-			min_width: typing.Union[MinWidth, None] = None,
-			opacity: typing.Union[Opacity, None] = None,
-			outline: typing.Union[Outline, None] = None,
-			outline_bottom_left_radius: typing.Union[OutlineBottomLeftRadius, None] = None,
-			outline_bottom_right_radius: typing.Union[OutlineBottomRightRadius, None] = None,
-			outline_color: typing.Union[OutlineColor, None] = None,
-			outline_radius: typing.Union[OutlineRadius, None] = None,
-			outline_style: typing.Union[OutlineStyle, None] = None,
-			outline_top_left_radius: typing.Union[OutlineTopLeftRadius, None] = None,
-			outline_top_right_radius: typing.Union[OutlineTopRightRadius, None] = None,
-			padding: typing.Union[Padding, None] = None,
-			padding_bottom: typing.Union[PaddingBottom, None] = None,
-			padding_left: typing.Union[PaddingLeft, None] = None,
-			padding_right: typing.Union[PaddingRight, None] = None,
-			padding_top: typing.Union[PaddingTop, None] = None,
-			selection_background_color: typing.Union[SelectionBackgroundColor, None] = None,
-			selection_color: typing.Union[SelectionColor, None] = None,
-			text_align: typing.Union[TextAlign, None] = None,
-			text_color: typing.Union[TextColor, None] = None,
-			text_decoration: typing.Union[TextDecoration, None] = None,
-			width: typing.Union[Width, None] = None
+			object_of_style: typing.Optional[typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]] = None,
+			alternate_background_color: typing.Optional[AlternateBackgroundColor] = None,
+			background: typing.Optional[Background] = None,
+			background_attachment: typing.Optional[BackgroundAttachment] = None,
+			background_clip: typing.Optional[BackgroundClip] = None,
+			background_color: typing.Optional[BackgroundColor] = None,
+			background_image: typing.Optional[BackgroundImage] = None,
+			background_origin: typing.Optional[BackgroundOrigin] = None,
+			background_position: typing.Optional[BackgroundPosition] = None,
+			border: typing.Optional[Border] = None,
+			border_bottom: typing.Optional[BorderBottom] = None,
+			border_bottom_color: typing.Optional[BorderBottomColor] = None,
+			border_bottom_left_radius: typing.Optional[BorderBottomLeftRadius] = None,
+			border_bottom_right_radius: typing.Optional[BorderBottomRightRadius] = None,
+			border_bottom_style: typing.Optional[BorderBottomStyle] = None,
+			border_bottom_width: typing.Optional[BorderBottomWidth] = None,
+			border_color: typing.Optional[BorderColor] = None,
+			border_left: typing.Optional[BorderLeft] = None,
+			border_left_color: typing.Optional[BorderLeftColor] = None,
+			border_left_style: typing.Optional[BorderLeftStyle] = None,
+			border_left_width: typing.Optional[BorderLeftWidth] = None,
+			border_radius: typing.Optional[BorderRadius] = None,
+			border_right: typing.Optional[BorderRight] = None,
+			border_right_color: typing.Optional[BorderRightColor] = None,
+			border_right_style: typing.Optional[BorderRightStyle] = None,
+			border_right_width: typing.Optional[BorderRightWidth] = None,
+			border_top: typing.Optional[BorderTop] = None,
+			border_top_color: typing.Optional[BorderTopColor] = None,
+			border_top_left_radius: typing.Optional[BorderTopLeftRadius] = None,
+			border_top_right_radius: typing.Optional[BorderTopRightRadius] = None,
+			border_top_style: typing.Optional[BorderTopStyle] = None,
+			border_top_width: typing.Optional[BorderTopWidth] = None,
+			border_width: typing.Optional[BorderWidth] = None,
+			borders_style: typing.Optional[BordersStyle] = None,
+			font: typing.Optional[Font] = None,
+			height: typing.Optional[Height] = None,
+			image: typing.Optional[Image] = None,
+			image_position: typing.Optional[ImagePosition] = None,
+			margin: typing.Optional[Margin] = None,
+			margin_bottom: typing.Optional[MarginBottom] = None,
+			margin_left: typing.Optional[MarginLeft] = None,
+			margin_right: typing.Optional[MarginRight] = None,
+			margin_top: typing.Optional[MarginTop] = None,
+			max_height: typing.Optional[MaxHeight] = None,
+			max_width: typing.Optional[MaxWidth] = None,
+			min_height: typing.Optional[MinHeight] = None,
+			min_width: typing.Optional[MinWidth] = None,
+			opacity: typing.Optional[Opacity] = None,
+			outline: typing.Optional[Outline] = None,
+			outline_bottom_left_radius: typing.Optional[OutlineBottomLeftRadius] = None,
+			outline_bottom_right_radius: typing.Optional[OutlineBottomRightRadius] = None,
+			outline_color: typing.Optional[OutlineColor] = None,
+			outline_radius: typing.Optional[OutlineRadius] = None,
+			outline_style: typing.Optional[OutlineStyle] = None,
+			outline_top_left_radius: typing.Optional[OutlineTopLeftRadius] = None,
+			outline_top_right_radius: typing.Optional[OutlineTopRightRadius] = None,
+			padding: typing.Optional[Padding] = None,
+			padding_bottom: typing.Optional[PaddingBottom] = None,
+			padding_left: typing.Optional[PaddingLeft] = None,
+			padding_right: typing.Optional[PaddingRight] = None,
+			padding_top: typing.Optional[PaddingTop] = None,
+			selection_background_color: typing.Optional[SelectionBackgroundColor] = None,
+			selection_color: typing.Optional[SelectionColor] = None,
+			text_align: typing.Optional[TextAlign] = None,
+			text_color: typing.Optional[TextColor] = None,
+			text_decoration: typing.Optional[TextDecoration] = None,
+			width: typing.Optional[Width] = None
 	):
 		"""
         Initializes a BaseStyle object.
 
         Args:
-            object_of_style (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle], None]): The style sheet object or typing.Iterable of objects that the style is applied to.
-            alternate_background_color (typing.Union[AlternateBackgroundColor, None]): The alternate background color value.
-            background (typing.Union[Background, None]): The background value.
-            background_attachment (typing.Union[BackgroundAttachment, None]): The background attachment value.
-            background_clip (typing.Union[BackgroundClip, None]): The background clip value.
-            background_color (typing.Union[BackgroundColor, None]): The background color value.
-            background_image (typing.Union[BackgroundImage, None]): The background image value.
-            background_origin (typing.Union[BackgroundOrigin, None]): The background origin value.
-            background_position (typing.Union[BackgroundPosition, None]): The background position value.
-            border (typing.Union[Border, None]): The border value.
-            border_bottom (typing.Union[BorderBottom, None]): The border bottom value.
-            border_bottom_color (typing.Union[BorderBottomColor, None]): The border bottom color value.
-            border_bottom_left_radius (typing.Union[BorderBottomLeftRadius, None]): The border bottom left radius value.
-            border_bottom_right_radius (typing.Union[BorderBottomRightRadius, None]): The border bottom right radius value.
-            border_bottom_style (typing.Union[BorderBottomStyle, None]): The border bottom style value.
-            border_bottom_width (typing.Union[BorderBottomWidth, None]): The border bottom width value.
-            border_color (typing.Union[BorderColor, None]): The border color value.
-            border_left (typing.Union[BorderLeft, None]): The border left value.
-            border_left_color (typing.Union[BorderLeftColor, None]): The border left color value.
-            border_left_style (typing.Union[BorderLeftStyle, None]): The border left style value.
-            border_left_width (typing.Union[BorderLeftWidth, None]): The border left width value.
-            border_radius (typing.Union[BorderRadius, None]): The border radius value.
-            border_right (typing.Union[BorderRight, None]): The border right value.
-            border_right_color (typing.Union[BorderRightColor, None]): The border right color value.
-            border_right_style (typing.Union[BorderRightStyle, None]): The border right style value.
-            border_right_width (typing.Union[BorderRightWidth, None]): The border right width value.
-            border_top (typing.Union[BorderTop, None]): The border top value.
-            border_top_color (typing.Union[BorderTopColor, None]): The border top color value.
-            border_top_left_radius (typing.Union[BorderTopLeftRadius, None]): The border top left radius value.
-            border_top_right_radius (typing.Union[BorderTopRightRadius, None]): The border top right radius value.
-            border_top_style (typing.Union[BorderTopStyle, None]): The border top style value.
-            border_top_width (typing.Union[BorderTopWidth, None]): The border top width value.
-            border_width (typing.Union[BorderWidth, None]): The border width value.
-            borders_style (typing.Union[BordersStyle, None]): The border style value.
-            font (typing.Union[Font, None]): The font value.
-            height (typing.Union[Height, None]): The height value.
-            image (typing.Union[Image, None]): The image value.
-            image_position (typing.Union[ImagePosition, None]): The image position value.
-            margin (typing.Union[Margin, None]): The margin value.
-            margin_bottom (typing.Union[MarginBottom, None]): The margin bottom value.
-            margin_left (typing.Union[MarginLeft, None]): The margin left value.
-            margin_right (typing.Union[MarginRight, None]): The margin right value.
-            margin_top (typing.Union[MarginTop, None]): The margin top value.
-            max_height (typing.Union[MaxHeight, None]): The maximum height value.
-            max_width (typing.Union[MaxWidth, None]): The maximum width value.
-            min_height (typing.Union[MinHeight, None]): The minimum height value.
-            min_width (typing.Union[MinWidth, None]): The minimum width value.
-            opacity (typing.Union[Opacity, None]): The opacity value.
-            outline (typing.Union[Outline, None]): The outline value.
-            outline_bottom_left_radius (typing.Union[OutlineBottomLeftRadius, None]): The outline bottom left radius value.
-            outline_bottom_right_radius (typing.Union[OutlineBottomRightRadius, None]): The outline bottom right radius value.
-            outline_color (typing.Union[OutlineColor, None]): The outline color value.
-            outline_radius (typing.Union[OutlineRadius, None]): The outline radius value.
-            outline_style (typing.Union[OutlineStyle, None]): The outline style value.
-            outline_top_left_radius (typing.Union[OutlineTopLeftRadius, None]): The outline top left radius value.
-            outline_top_right_radius (typing.Union[OutlineTopRightRadius, None]): The outline top right radius value.
-            padding (typing.Union[Padding, None]): The padding value.
-            padding_bottom (typing.Union[PaddingBottom, None]): The padding bottom value.
-            padding_left (typing.Union[PaddingLeft, None]): The padding left value.
-            padding_right (typing.Union[PaddingRight, None]): The padding right value.
-            padding_top (typing.Union[PaddingTop, None]): The padding top value.
-            selection_background_color (Selectiontyping.Union[BackgroundColor, None]): The selection background color value.
-            selection_color (typing.Union[SelectionColor, None]): The selection color value.
-            text_align (typing.Union[TextAlign, None]): The text alignment value.
-            text_color (typing.Union[TextColor, None]): The text color value.
-            text_decoration (typing.Union[TextDecoration, None]): The text decoration value.
-            width (typing.Union[Width, None]): The width value.
+            object_of_style (typing.Optional[typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]]): The style sheet object or typing.Iterable of objects that the style is applied to.
+            alternate_background_color (typing.Optional[AlternateBackgroundColor]): The alternate background color value.
+            background (typing.Optional[Background]): The background value.
+            background_attachment (typing.Optional[BackgroundAttachment]): The background attachment value.
+            background_clip (typing.Optional[BackgroundClip]): The background clip value.
+            background_color (typing.Optional[BackgroundColor]): The background color value.
+            background_image (typing.Optional[BackgroundImage]): The background image value.
+            background_origin (typing.Optional[BackgroundOrigin]): The background origin value.
+            background_position (typing.Optional[BackgroundPosition]): The background position value.
+            border (typing.Optional[Border]): The border value.
+            border_bottom (typing.Optional[BorderBottom]): The border bottom value.
+            border_bottom_color (typing.Optional[BorderBottomColor]): The border bottom color value.
+            border_bottom_left_radius (typing.Optional[BorderBottomLeftRadius]): The border bottom left radius value.
+            border_bottom_right_radius (typing.Optional[BorderBottomRightRadius]): The border bottom right radius value.
+            border_bottom_style (typing.Optional[BorderBottomStyle]): The border bottom style value.
+            border_bottom_width (typing.Optional[BorderBottomWidth]): The border bottom width value.
+            border_color (typing.Optional[BorderColor]): The border color value.
+            border_left (typing.Optional[BorderLeft]): The border left value.
+            border_left_color (typing.Optional[BorderLeftColor]): The border left color value.
+            border_left_style (typing.Optional[BorderLeftStyle]): The border left style value.
+            border_left_width (typing.Optional[BorderLeftWidth]): The border left width value.
+            border_radius (typing.Optional[BorderRadius]): The border radius value.
+            border_right (typing.Optional[BorderRight]): The border right value.
+            border_right_color (typing.Optional[BorderRightColor]): The border right color value.
+            border_right_style (typing.Optional[BorderRightStyle]): The border right style value.
+            border_right_width (typing.Optional[BorderRightWidth]): The border right width value.
+            border_top (typing.Optional[BorderTop]): The border top value.
+            border_top_color (typing.Optional[BorderTopColor]): The border top color value.
+            border_top_left_radius (typing.Optional[BorderTopLeftRadius]): The border top left radius value.
+            border_top_right_radius (typing.Optional[BorderTopRightRadius]): The border top right radius value.
+            border_top_style (typing.Optional[BorderTopStyle]): The border top style value.
+            border_top_width (typing.Optional[BorderTopWidth]): The border top width value.
+            border_width (typing.Optional[BorderWidth]): The border width value.
+            borders_style (typing.Optional[BordersStyle]): The border style value.
+            font (typing.Optional[Font]): The font value.
+            height (typing.Optional[Height]): The height value.
+            image (typing.Optional[Image]): The image value.
+            image_position (typing.Optional[ImagePosition]): The image position value.
+            margin (typing.Optional[Margin]): The margin value.
+            margin_bottom (typing.Optional[MarginBottom]): The margin bottom value.
+            margin_left (typing.Optional[MarginLeft]): The margin left value.
+            margin_right (typing.Optional[MarginRight]): The margin right value.
+            margin_top (typing.Optional[MarginTop]): The margin top value.
+            max_height (typing.Optional[MaxHeight]): The maximum height value.
+            max_width (typing.Optional[MaxWidth]): The maximum width value.
+            min_height (typing.Optional[MinHeight]): The minimum height value.
+            min_width (typing.Optional[MinWidth]): The minimum width value.
+            opacity (typing.Optional[Opacity]): The opacity value.
+            outline (typing.Optional[Outline]): The outline value.
+            outline_bottom_left_radius (typing.Optional[OutlineBottomLeftRadius]): The outline bottom left radius value.
+            outline_bottom_right_radius (typing.Optional[OutlineBottomRightRadius]): The outline bottom right radius value.
+            outline_color (typing.Optional[OutlineColor]): The outline color value.
+            outline_radius (typing.Optional[OutlineRadius]): The outline radius value.
+            outline_style (typing.Optional[OutlineStyle]): The outline style value.
+            outline_top_left_radius (typing.Optional[OutlineTopLeftRadius]): The outline top left radius value.
+            outline_top_right_radius (typing.Optional[OutlineTopRightRadius]): The outline top right radius value.
+            padding (typing.Optional[Padding]): The padding value.
+            padding_bottom (typing.Optional[PaddingBottom]): The padding bottom value.
+            padding_left (typing.Optional[PaddingLeft]): The padding left value.
+            padding_right (typing.Optional[PaddingRight]): The padding right value.
+            padding_top (typing.Optional[PaddingTop]): The padding top value.
+            selection_background_color (Selectiontyping.Optional[BackgroundColor]): The selection background color value.
+            selection_color (typing.Optional[SelectionColor]): The selection color value.
+            text_align (typing.Optional[TextAlign]): The text alignment value.
+            text_color (typing.Optional[TextColor]): The text color value.
+            text_decoration (typing.Optional[TextDecoration]): The text decoration value.
+            width (typing.Optional[Width]): The width value.
         """
 		self.style = ""
-		self.style_sheet_object: typing.Union[StyleSheetObject, None] = None
+		self.style_sheet_object: typing.Optional[StyleSheetObject] = None
 		self.instances: dict[str, str] = {}
 		
 		if object_of_style is not None:
@@ -1334,7 +1334,10 @@ class BaseStyle:
 		self.instances["alternate_background_color"] = alternate_background_color.alternate_background_color
 		return self.update_style()
 	
-	def set_style_sheet_object(self, object_of_style: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]) -> "BaseStyle":
+	def set_style_sheet_object(
+			self,
+			object_of_style: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]
+	) -> "BaseStyle":
 		"""
         Sets the style sheet object that the style is applied to.
 
@@ -1379,7 +1382,7 @@ class BaseStyleSheet:
         Returns:
             BaseStyleSheet: The updated style sheet object.
         """
-		self.style_sheet = " ".join(list(filter(lambda item: item != "", self.instances.values())))
+		self.style_sheet = " ".join(list(filter(None, self.instances.values())))
 		return self
 	
 	def add_style(self, style: BaseStyle) -> "BaseStyleSheet":

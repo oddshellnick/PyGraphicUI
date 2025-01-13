@@ -15,20 +15,20 @@ class SortFilterProxyModelInit:
 
     Attributes:
         table_model (PyAbstractTableModel): The table model to be filtered and sorted.
-        less_than_key (typing.Union[typing.Callable[[typing.Any], int], None]): A callable to apply to data before comparison for sorting. Defaults to None.
+        less_than_key (typing.Optional[typing.Callable[[typing.Any], int]]): A callable to apply to data before comparison for sorting. Defaults to None.
     """
 	
 	def __init__(
 			self,
 			table_model: PyAbstractTableModel,
-			less_than_key: typing.Union[typing.Callable[[typing.Any], int], None] = None
+			less_than_key: typing.Optional[typing.Callable[[typing.Any], int]] = None
 	):
 		"""
         Initializes a SortFilterProxyModelInit object.
 
         Args:
             table_model (PyAbstractTableModel): The table model to use.
-            less_than_key (typing.Union[typing.Callable[[typing.Any], int], None]): The key function for sorting.
+            less_than_key (typing.Optional[typing.Callable[[typing.Any], int]]): The key function for sorting.
         """
 		self.table_model = table_model
 		self.less_than_key = less_than_key
@@ -40,7 +40,7 @@ class PySortFilterProxyModel(QSortFilterProxyModel):
 
     Attributes:
         table_model (PyAbstractTableModel): The table model to be filtered and sorted.
-        less_than_key (typing.Union[typing.Callable[[typing.Any], int], None]): A callable to apply to data before comparison for sorting. Defaults to None.
+        less_than_key (typing.Optional[typing.Callable[[typing.Any], int]]): A callable to apply to data before comparison for sorting. Defaults to None.
         filters (dict[str, str]): Filters to apply to data before comparison for sorting.
         replaces (dict[str, list[tuple[str, str]]]): Replaces to apply to data before comparison for sorting.
     """
@@ -72,7 +72,11 @@ class PySortFilterProxyModel(QSortFilterProxyModel):
             bool: True if the row is accepted, False otherwise.
         """
 		for key, regex in self.filters.items():
-			ix = self.sourceModel().index(source_row, self.table_model.table_data.columns.get_loc(key), source_parent)
+			ix = self.sourceModel().index(
+					source_row,
+					self.table_model.table_data.columns.get_loc(key),
+					source_parent
+			)
 		
 			if ix.isValid():
 				data_string = str(self.sourceModel().data(ix, Qt.ItemDataRole.DisplayRole))
@@ -85,7 +89,12 @@ class PySortFilterProxyModel(QSortFilterProxyModel):
 		
 		return True
 	
-	def headerData(self, section: int, orientation: Qt.Orientation, role: int = Qt.ItemDataRole.DisplayRole) -> typing.Union[str, None]:
+	def headerData(
+			self,
+			section: int,
+			orientation: Qt.Orientation,
+			role: int = Qt.ItemDataRole.DisplayRole
+	) -> typing.Optional[str]:
 		"""
         Returns the header data for the given section, orientation, and role.
 
@@ -95,7 +104,7 @@ class PySortFilterProxyModel(QSortFilterProxyModel):
             role (int): The data role. Defaults to Qt.ItemDataRole.DisplayRole
 
         Returns:
-            typing.Union[str, None]: The header data.
+            typing.Optional[str]: The header data.
         """
 		return self.table_model.headerData(section, orientation, role)
 	

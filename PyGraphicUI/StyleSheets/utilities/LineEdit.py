@@ -19,9 +19,9 @@ class LineEditPasswordMaskDelay:
             line_edit_mask_delay (int): The mask delay value in milliseconds.
         """
 		self.line_edit_password_mask_delay = ""
-		self.set_line_edit_mask_delay(line_edit_mask_delay)
+		self.set(line_edit_mask_delay)
 	
-	def set_line_edit_mask_delay(self, line_edit_mask_delay: int):
+	def set(self, line_edit_mask_delay: int):
 		"""
         Sets the mask delay value.
 
@@ -56,9 +56,9 @@ class LineEditPasswordCharacter:
             unicode_character (str): The Unicode character to use for password masking.
         """
 		self.line_edit_password_character = ""
-		self.set_line_edit_password_character(unicode_character)
+		self.set(unicode_character)
 	
-	def set_line_edit_password_character(self, unicode_character: str):
+	def set(self, unicode_character: str):
 		"""
         Sets the password character value.
 

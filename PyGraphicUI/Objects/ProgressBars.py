@@ -17,16 +17,16 @@ class ProgressBarInit(WidgetInit):
 
     Attributes:
         name (str): The object name of the progress bar. Defaults to "progress_bar".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the progress bar is enabled. Defaults to True.
         visible (bool): Whether the progress bar is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the progress bar. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the progress bar. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the progress bar. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the progress bar. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the progress bar. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the progress bar. Defaults to None.
-        font (typing.Union[QFont, None]): The font to use for the progress bar text. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the progress bar. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the progress bar. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the progress bar. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the progress bar. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the progress bar. Defaults to None.
+        font (typing.Optional[QFont]): The font to use for the progress bar text. Defaults to None.
         alignment (Qt.AlignmentFlag): The alignment of the progress bar text. Defaults to Qt.AlignmentFlag.AlignCenter.
         minimum_value (int): The minimum value of the progress bar. Defaults to 0.
         maximum_value (int): The maximum value of the progress bar. Defaults to 100.
@@ -36,16 +36,16 @@ class ProgressBarInit(WidgetInit):
 	def __init__(
 			self,
 			name: str = "progress_bar",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
-			font: typing.Union[QFont, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
+			font: typing.Optional[QFont] = None,
 			alignment: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignCenter,
 			minimum_value: int = 0,
 			maximum_value: int = 100,
@@ -56,16 +56,16 @@ class ProgressBarInit(WidgetInit):
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the progress bar is enabled.
             visible (bool): Whether the progress bar is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
-            font (typing.Union[QFont, None]): The font for the text.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
+            font (typing.Optional[QFont]): The font for the text.
             alignment (Qt.AlignmentFlag): The text alignment.
             minimum_value (int): The minimum value.
             maximum_value (int): The maximum value.
@@ -119,7 +119,9 @@ class PyProgressBar(QProgressBar, PyWidget):
 	
 	def set_new_value(self):
 		"""Updates the displayed text of the progress bar according to the format."""
-		self.setFormat(self.progress_bar_format % (((self.value() / self.maximum()) * 100) if self.maximum() != 0 else 0))
+		self.setFormat(
+				self.progress_bar_format % (((self.value() / self.maximum()) * 100) if self.maximum() != 0 else 0)
+		)
 	
 	def reset_range(self, minimum_value: int, maximum_value: int) -> None:
 		"""

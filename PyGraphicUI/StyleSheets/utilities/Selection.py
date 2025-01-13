@@ -22,9 +22,9 @@ class SelectionColor:
             selection_color (Brush): The selection color value.
         """
 		self.selection_color = ""
-		self.set_selection_color(selection_color)
+		self.set(selection_color)
 	
-	def set_selection_color(self, selection_color: Brush):
+	def set(self, selection_color: Brush):
 		"""
         Sets the selection color value.
 
@@ -61,9 +61,9 @@ class SelectionBackgroundColor:
             selection_background_color (Brush): The selection background color value.
         """
 		self.selection_background_color = ""
-		self.set_selection_background_color(selection_background_color)
+		self.set(selection_background_color)
 	
-	def set_selection_background_color(self, selection_background_color: Brush):
+	def set(self, selection_background_color: Brush):
 		"""
         Sets the selection background color value.
 

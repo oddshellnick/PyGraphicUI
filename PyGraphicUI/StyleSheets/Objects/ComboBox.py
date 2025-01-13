@@ -33,7 +33,7 @@ class ComboBoxStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QComboBox")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QComboBox")
+			self.style_sheet_object.add_css_object("QComboBox")
 		
 		self.update_style()
 	
@@ -75,17 +75,23 @@ class ComboBoxStyleSheet(BaseStyleSheet):
     A style sheet class used to manage styles for multiple QComboBox objects.
     """
 	
-	def __init__(self, combo_box_style: typing.Union[ComboBoxStyle, typing.Iterable[ComboBoxStyle], None] = None):
+	def __init__(
+			self,
+			combo_box_style: typing.Optional[typing.Union[ComboBoxStyle, typing.Iterable[ComboBoxStyle]]] = None
+	):
 		"""
         Initializes a ComboBoxStyleSheet object.
 
         Args:
-            combo_box_style (typing.Union[ComboBoxStyle, typing.Iterable[ComboBoxStyle], None]): A ComboBoxStyle object or typing.Iterable of ComboBoxStyle objects representing the styles to be applied to the QComboBox objects.
+            combo_box_style (typing.Optional[typing.Union[ComboBoxStyle, typing.Iterable[ComboBoxStyle]]]): A ComboBoxStyle object or typing.Iterable of ComboBoxStyle objects representing the styles to be applied to the QComboBox objects.
         """
 		super().__init__()
 		
 		if combo_box_style is not None:
-			if isinstance(combo_box_style, (ComboBoxStyle, ComboBoxStyle.ItemViewStyle, ComboBoxStyle.ScrollBar)):
+			if isinstance(
+					combo_box_style,
+					(ComboBoxStyle, ComboBoxStyle.ItemViewStyle, ComboBoxStyle.ScrollBar)
+			):
 				self.add_style(combo_box_style)
 			else:
 				for style in combo_box_style:

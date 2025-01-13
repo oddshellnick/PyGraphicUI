@@ -36,7 +36,7 @@ class CalendarStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QCalendarWidget")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QCalendarWidget")
+			self.style_sheet_object.add_css_object("QCalendarWidget")
 		
 		self.update_style()
 	
@@ -206,12 +206,15 @@ class CalendarStyleSheet(BaseStyleSheet):
     A style sheet class used to manage styles for multiple QCalendarWidget objects.
     """
 	
-	def __init__(self, calendar_style: typing.Union[CalendarStyle, typing.Iterable[CalendarStyle], None] = None):
+	def __init__(
+			self,
+			calendar_style: typing.Optional[typing.Union[CalendarStyle, typing.Iterable[CalendarStyle]]] = None
+	):
 		"""
         Initializes a CalendarStyleSheet object.
 
         Args:
-            calendar_style (typing.Union[CalendarStyle, typing.Iterable[CalendarStyle], None]): A CalendarStyle object or typing.Iterable of CalendarStyle objects representing the styles to be applied to the QCalendarWidget objects.
+            calendar_style (typing.Optional[typing.Union[CalendarStyle, typing.Iterable[CalendarStyle]]]): A CalendarStyle object or typing.Iterable of CalendarStyle objects representing the styles to be applied to the QCalendarWidget objects.
         """
 		super().__init__()
 		

@@ -17,16 +17,16 @@ class CalendarWidgetInit(WidgetInit):
 
     Attributes:
         name (str): The object name of the calendar widget. Defaults to "calendar".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the calendar widget is enabled. Defaults to True.
         visible (bool): Whether the calendar widget is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the calendar widget. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the calendar widget. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the calendar widget. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the calendar widget. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the calendar widget. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the calendar widget. Defaults to None.
-        font (typing.Union[QFont, None]): The font for the calendar widget. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the calendar widget. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the calendar widget. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the calendar widget. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the calendar widget. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the calendar widget. Defaults to None.
+        font (typing.Optional[QFont]): The font for the calendar widget. Defaults to None.
         grid_visible (bool): Whether the grid is visible. Defaults to True.
         vertical_header_format (QCalendarWidget.VerticalHeaderFormat): The vertical header format. Defaults to QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader.
         horizontal_header_format (QCalendarWidget.HorizontalHeaderFormat): The horizontal header format. Defaults to QCalendarWidget.HorizontalHeaderFormat.NoHorizontalHeader.
@@ -36,34 +36,36 @@ class CalendarWidgetInit(WidgetInit):
 	def __init__(
 			self,
 			name: str = "calendar",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
-			font: typing.Union[QFont, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
+			font: typing.Optional[QFont] = None,
 			grid_visible: bool = True,
-			vertical_header_format: QCalendarWidget.VerticalHeaderFormat = QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader, horizontal_header_format: QCalendarWidget.HorizontalHeaderFormat = QCalendarWidget.HorizontalHeaderFormat.NoHorizontalHeader, cursor: Qt.CursorShape = Qt.CursorShape.PointingHandCursor
+			vertical_header_format: QCalendarWidget.VerticalHeaderFormat = QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader,
+			horizontal_header_format: QCalendarWidget.HorizontalHeaderFormat = QCalendarWidget.HorizontalHeaderFormat.NoHorizontalHeader,
+			cursor: Qt.CursorShape = Qt.CursorShape.PointingHandCursor
 	):
 		"""
         Initializes a CalendarWidgetInit object.
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the calendar widget is enabled.
             visible (bool): Whether the calendar widget is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
-            font (typing.Union[QFont, None]): The font to use.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
+            font (typing.Optional[QFont]): The font to use.
             grid_visible (bool): Whether the grid is visible.
             vertical_header_format (QCalendarWidget.VerticalHeaderFormat): The vertical header format.
             horizontal_header_format (QCalendarWidget.HorizontalHeaderFormat): The horizontal header format.

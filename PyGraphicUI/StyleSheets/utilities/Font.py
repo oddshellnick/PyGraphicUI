@@ -23,9 +23,9 @@ class FontFamily:
             font_family (str): The font family value.
         """
 		self.font_family = ""
-		self.set_font_family(font_family)
+		self.set(font_family)
 	
-	def set_font_family(self, font_family: str):
+	def set(self, font_family: str):
 		"""
         Sets the font family value.
 
@@ -60,9 +60,9 @@ class FontSize:
             length_string (typing.Union[PX, PT, EM, EX]): The font size value.
         """
 		self.font_size = ""
-		self.set_font_size(length_string)
+		self.set(length_string)
 	
-	def set_font_size(self, length_string: typing.Union[PX, PT, EM, EX]):
+	def set(self, length_string: typing.Union[PX, PT, EM, EX]):
 		"""
         Sets the font size value.
 
@@ -96,9 +96,9 @@ class FontStyle:
             font_style (str): The font style value.
         """
 		self.font_style = ""
-		self.set_font_style(font_style)
+		self.set(font_style)
 	
-	def set_font_style(self, font_style: str):
+	def set(self, font_style: str):
 		"""
         Sets the font style value.
 
@@ -133,9 +133,9 @@ class FontWeight:
             font_weight (str): The font weight value.
         """
 		self.font_weight = ""
-		self.set_font_weight(font_weight)
+		self.set(font_weight)
 	
-	def set_font_weight(self, font_weight: str):
+	def set(self, font_weight: str):
 		"""
         Sets the font weight value.
 
@@ -167,7 +167,7 @@ class Font:
 			font_style: FontStyle,
 			font_weight: FontWeight,
 			font_size: FontSize,
-			font_family: FontFamily = None
+			font_family: typing.Optional[FontFamily] = None
 	):
 		"""
         Initializes a Font object.
@@ -176,17 +176,17 @@ class Font:
             font_style (FontStyle): The font style value.
             font_weight (FontWeight): The font weight value.
             font_size (FontSize): The font size value.
-            font_family (FontFamily): The font family value (optional).
+            font_family (typing.Optional[FontFamily]): The font family value (optional).
         """
 		self.font = ""
-		self.set_font(font_weight, font_style, font_size, font_family)
+		self.set(font_weight, font_style, font_size, font_family)
 	
-	def set_font(
+	def set(
 			self,
 			font_weight: FontWeight,
 			font_style: FontStyle,
 			font_size: FontSize,
-			font_family: FontFamily = None
+			font_family: typing.Optional[FontFamily] = None
 	):
 		"""
         Sets the font value.
@@ -195,7 +195,7 @@ class Font:
             font_weight (FontWeight): The font weight value.
             font_style (FontStyle): The font style value.
             font_size (FontSize): The font size value.
-            font_family (FontFamily): The font family value (optional).
+            font_family (typing.Optional[FontFamily]): The font family value (optional).
 
         Returns:
             Font: The updated Font object.

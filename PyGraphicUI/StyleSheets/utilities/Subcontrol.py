@@ -24,9 +24,9 @@ class SubcontrolPosition:
             subcontrol_position (Alignment): The subcontrol position value.
         """
 		self.subcontrol_position = ""
-		self.set_subcontrol_position(subcontrol_position)
+		self.set(subcontrol_position)
 	
-	def set_subcontrol_position(self, subcontrol_position: Alignment):
+	def set(self, subcontrol_position: Alignment):
 		"""
         Sets the subcontrol position value.
 
@@ -61,9 +61,9 @@ class SubcontrolOrigin:
             subcontrol_origin (Origin): The subcontrol origin value.
         """
 		self.subcontrol_origin = ""
-		self.set_subcontrol_origin(subcontrol_origin)
+		self.set(subcontrol_origin)
 	
-	def set_subcontrol_origin(self, subcontrol_origin: Origin):
+	def set(self, subcontrol_origin: Origin):
 		"""
         Sets the subcontrol origin value.
 
@@ -77,7 +77,7 @@ class SubcontrolOrigin:
 		return self
 
 
-@dataclass
+@dataclass(frozen=True)
 class SubControls:
 	"""
     Contains subcontrol names for different Qt widgets.
@@ -87,7 +87,7 @@ class SubControls:
         "::branch"
     """
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Button:
 		"""
         Subcontrol names for QPushButton widgets.
@@ -95,7 +95,7 @@ class SubControls:
 		
 		MenuIndicator = "::menu-indicator"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class CheckBox:
 		"""
         Subcontrol names for QCheckBox widgets.
@@ -103,7 +103,7 @@ class SubControls:
 		
 		Indicator = "::indicator"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ComboBox:
 		"""
         Subcontrol names for QComboBox widgets.
@@ -112,7 +112,7 @@ class SubControls:
 		DownArrow = "::down-arrow"
 		DropDown = "::drop-down"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class DockWidget:
 		"""
         Subcontrol names for QDockWidget widgets.
@@ -122,7 +122,7 @@ class SubControls:
 		CloseButton = "::close-button"
 		Title = "::title"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class GroupBox:
 		"""
         Subcontrol names for QGroupBox widgets.
@@ -131,7 +131,7 @@ class SubControls:
 		Indicator = "::indicator"
 		Title = "::title"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class HeaderView:
 		"""
         Subcontrol names for QHeaderView widgets.
@@ -141,7 +141,7 @@ class SubControls:
 		Section = "::section"
 		UpArrow = "::up-arrow"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ItemView:
 		"""
         Subcontrol names for QItemView widgets.
@@ -152,7 +152,7 @@ class SubControls:
 		Item = "::item"
 		Text = "::text"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ListView:
 		"""
         Subcontrol names for QListView widgets.
@@ -160,7 +160,7 @@ class SubControls:
 		
 		Item = "::item"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Menu:
 		"""
         Subcontrol names for QMenu widgets.
@@ -174,7 +174,7 @@ class SubControls:
 		Separator = "::separator"
 		TearOff = "::tearoff"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class MenuBar:
 		"""
         Subcontrol names for QMenuBar widgets.
@@ -182,7 +182,7 @@ class SubControls:
 		
 		Item = "::item"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ProgressBar:
 		"""
         Subcontrol names for QProgressBar widgets.
@@ -190,7 +190,7 @@ class SubControls:
 		
 		Chunk = "::chunk"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class RadioButton:
 		"""
         Subcontrol names for QRadioButton widgets.
@@ -198,7 +198,7 @@ class SubControls:
 		
 		Indicator = "::indicator"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ScrollArea:
 		"""
         Subcontrol names for QScrollArea widgets.
@@ -206,7 +206,7 @@ class SubControls:
 		
 		Corner = "::corner"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ScrollBar:
 		"""
         Subcontrol names for QScrollBar widgets.
@@ -224,7 +224,7 @@ class SubControls:
 		UpArrow = "::up-arrow"
 		UpButton = "::up-button"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Slider:
 		"""
         Subcontrol names for QSlider widgets.
@@ -233,7 +233,7 @@ class SubControls:
 		Handle = "::handle"
 		Groove = "::groove"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class SpinBox:
 		"""
         Subcontrol names for QSpinBox widgets.
@@ -244,7 +244,7 @@ class SubControls:
 		UpArrow = "::up-arrow"
 		UpButton = "::up-button"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Splitter:
 		"""
         Subcontrol names for QSplitter widgets.
@@ -252,7 +252,7 @@ class SubControls:
 		
 		Handle = "::handle"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class StatusBar:
 		"""
         Subcontrol names for QStatusBar widgets.
@@ -260,7 +260,7 @@ class SubControls:
 		
 		Item = "::item"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class TabBar:
 		"""
         Subcontrol names for QTabBar widgets.
@@ -271,7 +271,7 @@ class SubControls:
 		Tab = "::tab"
 		Tear = "::tear"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class TabWidget:
 		"""
         Subcontrol names for QTabWidget widgets.
@@ -282,7 +282,7 @@ class SubControls:
 		Pane = "::pane"
 		TabBar = "::tab-bar"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class TableCornerButton:
 		"""
         Subcontrol names for QTableCornerButton widgets.
@@ -290,7 +290,7 @@ class SubControls:
 		
 		Section = "::section"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class TableView:
 		"""
         Subcontrol names for QTableView widgets.
@@ -299,7 +299,7 @@ class SubControls:
 		Item = "::item"
 		Indicator = "::indicator"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ToolButton:
 		"""
         Subcontrol names for QToolButton widgets.
@@ -309,7 +309,7 @@ class SubControls:
 		MenuArrow = "::menu-arrow"
 		MenuButton = "::menu-button"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class TreeView:
 		"""
         Subcontrol names for QTreeView widgets.

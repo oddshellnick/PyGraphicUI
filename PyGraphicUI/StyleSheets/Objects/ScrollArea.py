@@ -44,7 +44,7 @@ class ScrollAreaStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QScrollArea")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QScrollArea")
+			self.style_sheet_object.add_css_object("QScrollArea")
 		
 		self.update_style()
 	
@@ -55,16 +55,16 @@ class ScrollAreaStyle(BaseStyle):
 		
 		def __init__(
 				self,
-				subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-				subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+				subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+				subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 				**kwargs
 		):
 			"""
             Initializes a ScrollBar object.
 
             Args:
-                subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-                subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+                subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+                subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
                 **kwargs: Additional keyword arguments passed to the ChainScrollBarStyle constructor.
             """
 			parent_objects, kwargs = get_objects_of_style(("QScrollArea", Selector(SelectorFlag.Type)), **kwargs)
@@ -86,12 +86,15 @@ class ScrollAreaStyleSheet(BaseStyleSheet):
         ScrollAreaStyleSheet(scroll_area_style=[ScrollAreaStyle(), ScrollAreaStyle.ScrollBar(subcontrol_position=SubcontrolPosition.AddLine)])
     """
 	
-	def __init__(self, scroll_area_style: typing.Union[ScrollAreaStyle, typing.Iterable[ScrollAreaStyle], None] = None):
+	def __init__(
+			self,
+			scroll_area_style: typing.Optional[typing.Union[ScrollAreaStyle, typing.Iterable[ScrollAreaStyle]]] = None
+	):
 		"""
         Initializes a ScrollAreaStyleSheet object.
 
         Args:
-            scroll_area_style (typing.Union[ScrollAreaStyle, typing.Iterable[ScrollAreaStyle], None]): A ScrollAreaStyle object, ScrollAreaStyle.ScrollBar object, or typing.Iterable of ScrollAreaStyle or ScrollAreaStyle.ScrollBar objects representing the styles to be applied to the QScrollArea objects.
+            scroll_area_style (typing.Optional[typing.Union[ScrollAreaStyle, typing.Iterable[ScrollAreaStyle]]]): A ScrollAreaStyle object, ScrollAreaStyle.ScrollBar object, or typing.Iterable of ScrollAreaStyle or ScrollAreaStyle.ScrollBar objects representing the styles to be applied to the QScrollArea objects.
         """
 		super().__init__()
 		
@@ -116,7 +119,7 @@ class ChainScrollAreaStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			**kwargs
 	):
 		"""
@@ -124,10 +127,14 @@ class ChainScrollAreaStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QScrollArea will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QScrollArea", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QScrollArea", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		
@@ -141,9 +148,9 @@ class ChainScrollAreaStyle(BaseStyle):
 		def __init__(
 				self,
 				parent_css_object: ObjectOfStyle,
-				widget_selector: typing.Union[tuple[str, Selector], None] = None,
-				subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-				subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+				widget_selector: typing.Optional[tuple[str, Selector]] = None,
+				subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+				subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 				**kwargs
 		):
 			"""
@@ -151,13 +158,20 @@ class ChainScrollAreaStyle(BaseStyle):
 
             Args:
                 parent_css_object (ObjectOfStyle): The parent style sheet object.
-                widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to.
-                subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-                subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+                widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to.
+                subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+                subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
                 **kwargs: Additional keyword arguments passed to the ChainScrollBarStyle constructor.
             """
-			new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QScrollArea", Selector(SelectorFlag.Descendant)))
-			parent_objects, kwargs = get_objects_of_style((new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)), **kwargs)
+			new_parent_objects = get_new_parent_objects(
+					parent_css_object,
+					widget_selector,
+					("QScrollArea", Selector(SelectorFlag.Descendant))
+			)
+			parent_objects, kwargs = get_objects_of_style(
+					(new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)),
+					**kwargs
+			)
 			
 			super().__init__(
 					parent_css_object=parent_objects,

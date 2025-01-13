@@ -114,9 +114,9 @@ class Length:
             length_string (typing.Union[PX, PT, EM, EX]): The length in different units.
         """
 		self.length = ""
-		self.set_length(length_string)
+		self.set(length_string)
 	
-	def set_length(self, length_string: typing.Union[PX, PT, EM, EX]):
+	def set(self, length_string: typing.Union[PX, PT, EM, EX]):
 		"""
         Sets the length attribute.
 
@@ -147,9 +147,9 @@ class Width:
             width (Length): The width of the element.
         """
 		self.width = ""
-		self.set_width(width)
+		self.set(width)
 	
-	def set_width(self, width: Length):
+	def set(self, width: Length):
 		"""
         Sets the width attribute.
 
@@ -184,9 +184,9 @@ class MinWidth:
             min_width (Length): The minimum width of the element.
         """
 		self.min_width = ""
-		self.set_min_width(min_width)
+		self.set(min_width)
 	
-	def set_min_width(self, min_width: Length):
+	def set(self, min_width: Length):
 		"""
         Sets the min_width attribute.
 
@@ -221,9 +221,9 @@ class MinHeight:
             min_height (Length): The minimum height of the element.
         """
 		self.min_height = ""
-		self.set_min_height(min_height)
+		self.set(min_height)
 	
-	def set_min_height(self, min_height: Length):
+	def set(self, min_height: Length):
 		"""
         Sets the min_height attribute.
 
@@ -258,9 +258,9 @@ class MaxWidth:
             max_width (Length): The maximum width of the element.
         """
 		self.max_width = ""
-		self.set_max_width(max_width)
+		self.set(max_width)
 	
-	def set_max_width(self, max_width: Length):
+	def set(self, max_width: Length):
 		"""
         Sets the max_width attribute.
 
@@ -295,9 +295,9 @@ class MaxHeight:
             max_height (Length): The maximum height of the element.
         """
 		self.max_height = ""
-		self.set_max_height(max_height)
+		self.set(max_height)
 	
-	def set_max_height(self, max_height: Length):
+	def set(self, max_height: Length):
 		"""
         Sets the max_height attribute.
 
@@ -332,9 +332,9 @@ class Height:
             height (Length): The height of the element.
         """
 		self.height = ""
-		self.set_height(height)
+		self.set(height)
 	
-	def set_height(self, height: Length):
+	def set(self, height: Length):
 		"""
         Sets the height attribute.
 
@@ -372,9 +372,9 @@ class BoxLengths:
             length (typing.Union[Length, typing.Iterable[Length]]): The lengths for the box model.
         """
 		self.length = ""
-		self.set_length(length)
+		self.set(length)
 	
-	def set_length(self, lengths: typing.Union[Length, typing.Iterable[Length]]):
+	def set(self, lengths: typing.Union[Length, typing.Iterable[Length]]):
 		"""
         Sets the length attribute.
 

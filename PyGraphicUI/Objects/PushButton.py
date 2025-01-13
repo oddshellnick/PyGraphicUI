@@ -25,15 +25,15 @@ class PushButtonInit(WidgetInit):
 
     Attributes:
         name (str): The object name of the push button. Defaults to "button".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the push button is enabled. Defaults to True.
         visible (bool): Whether the push button is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the push button. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the push button. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the push button. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the push button. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the push button. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the push button. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the push button. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the push button. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the push button. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the push button. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the push button. Defaults to None.
         cursor (Qt.CursorShape): The cursor shape to use for the push button. Defaults to Qt.CursorShape.PointingHandCursor.
         font (PyFont): The font for the push button. Defaults to a default PyFont object.
     """
@@ -41,15 +41,15 @@ class PushButtonInit(WidgetInit):
 	def __init__(
 			self,
 			name: str = "button",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			cursor: Qt.CursorShape = Qt.CursorShape.PointingHandCursor,
 			font: PyFont = PyFont()
 	):
@@ -57,15 +57,15 @@ class PushButtonInit(WidgetInit):
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the push button is enabled.
             visible (bool): Whether the push button is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
             cursor (Qt.CursorShape): The cursor shape to use.
             font (PyFont): The font to use.
         """
@@ -97,14 +97,14 @@ class PyPushButton(QPushButton, PyWidget):
 	def __init__(
 			self,
 			button_init: PushButtonInit = PushButtonInit(),
-			instance: typing.Union[str, IconInstance, None] = None
+			instance: typing.Optional[typing.Union[str, IconInstance]] = None
 	):
 		"""
         Initializes a PyPushButton object.
 
         Args:
             button_init (PushButtonInit): Initialization parameters for the push button.
-            instance (typing.Union[str, IconInstance, None]): The initial content of the button. Can be text or an IconInstance. Defaults to None.
+            instance (typing.Optional[typing.Union[str, IconInstance]]): The initial content of the button. Can be text or an IconInstance. Defaults to None.
         """
 		super().__init__(widget_init=button_init)
 		
@@ -131,12 +131,15 @@ class PyPushButton(QPushButton, PyWidget):
 		else:
 			self.timer.start(250)
 	
-	def set_button_instance(self, button_instance: typing.Union[str, TextInstance, IconInstance, None] = None):
+	def set_button_instance(
+			self,
+			button_instance: typing.Optional[typing.Union[str, TextInstance, IconInstance]] = None
+	):
 		"""
         Sets the content of the button.
 
         Args:
-            button_instance (typing.Union[str, TextInstance, IconInstance, None]): The content to set. Can be text or an IconInstance. Defaults to None.
+            button_instance (typing.Optional[typing.Union[str, TextInstance, IconInstance]]): The content to set. Can be text or an IconInstance. Defaults to None.
         """
 		if isinstance(button_instance, TextInstance):
 			self.setText(button_instance.text)

@@ -22,9 +22,9 @@ class MarginTop:
             margin (Length): The margin top value.
         """
 		self.margin_top = ""
-		self.set_margin(margin)
+		self.set(margin)
 	
-	def set_margin(self, margin: Length):
+	def set(self, margin: Length):
 		"""
         Sets the margin top value.
 
@@ -59,9 +59,9 @@ class MarginRight:
             margin (Length): The margin right value.
         """
 		self.margin_right = ""
-		self.set_margin(margin)
+		self.set(margin)
 	
-	def set_margin(self, margin: Length):
+	def set(self, margin: Length):
 		"""
         Sets the margin right value.
 
@@ -96,9 +96,9 @@ class MarginLeft:
             margin (Length): The margin left value.
         """
 		self.margin_left = ""
-		self.set_margin(margin)
+		self.set(margin)
 	
-	def set_margin(self, margin: Length):
+	def set(self, margin: Length):
 		"""
         Sets the margin left value.
 
@@ -133,9 +133,9 @@ class MarginBottom:
             margin (Length): The margin bottom value.
         """
 		self.margin_bottom = ""
-		self.set_margin(margin)
+		self.set(margin)
 	
-	def set_margin(self, margin: Length):
+	def set(self, margin: Length):
 		"""
         Sets the margin bottom value.
 
@@ -170,9 +170,9 @@ class Margin:
             margin (BoxLengths): The margin value.
         """
 		self.margin = ""
-		self.set_margin(margin)
+		self.set(margin)
 	
-	def set_margin(self, margin: BoxLengths):
+	def set(self, margin: BoxLengths):
 		"""
         Sets the margin value.
 

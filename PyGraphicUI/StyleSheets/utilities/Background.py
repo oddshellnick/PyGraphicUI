@@ -29,9 +29,9 @@ class BackgroundPosition:
             background_position (Alignment): The background position value.
         """
 		self.background_position = ""
-		self.set_background_position(background_position)
+		self.set(background_position)
 	
-	def set_background_position(self, background_position: Alignment):
+	def set(self, background_position: Alignment):
 		"""
         Sets the background position value.
 
@@ -67,9 +67,9 @@ class BackgroundOrigin:
             background_origin (Origin): The background origin value.
         """
 		self.background_origin = ""
-		self.set_background_origin(background_origin)
+		self.set(background_origin)
 	
-	def set_background_origin(self, background_origin: Origin):
+	def set(self, background_origin: Origin):
 		"""
         Sets the background origin value.
 
@@ -105,9 +105,9 @@ class BackgroundImage:
             background_image (Url): The background image value.
         """
 		self.background_image = ""
-		self.set_background_image(background_image)
+		self.set(background_image)
 	
-	def set_background_image(self, background_image: Url):
+	def set(self, background_image: Url):
 		"""
         Sets the background image value.
 
@@ -143,9 +143,9 @@ class BackgroundColor:
             background_color (Brush): The background color value.
         """
 		self.background_color = ""
-		self.set_background_color(background_color)
+		self.set(background_color)
 	
-	def set_background_color(self, background_color: Brush):
+	def set(self, background_color: Brush):
 		"""
         Sets the background color value.
 
@@ -181,9 +181,9 @@ class BackgroundClip:
             background_clip (Origin): The background clip value.
         """
 		self.background_clip = ""
-		self.set_background_clip(background_clip)
+		self.set(background_clip)
 	
-	def set_background_clip(self, background_clip: Origin):
+	def set(self, background_clip: Origin):
 		"""
         Sets the background clip value.
 
@@ -219,9 +219,9 @@ class BackgroundAttachment:
             background_attachment (Attachment): The background attachment value.
         """
 		self.background_attachment = ""
-		self.set_background_attachment(background_attachment)
+		self.set(background_attachment)
 	
-	def set_background_attachment(self, background_attachment: Attachment):
+	def set(self, background_attachment: Attachment):
 		"""
         Sets the background attachment value.
 
@@ -255,33 +255,33 @@ class Background:
 	def __init__(
 			self,
 			background: typing.Union[Url, Brush, str],
-			repeat: typing.Union[Repeat, None] = None,
-			alignment: typing.Union[Alignment, None] = None
+			repeat: typing.Optional[Repeat] = None,
+			alignment: typing.Optional[Alignment] = None
 	):
 		"""
         Initializes a Background object.
 
         Args:
             background (typing.Union[Url, Brush, str]): The background value.
-            repeat (typing.Union[Repeat, None]): The background repeat value, optional.
-            alignment (typing.Union[Alignment, None]): The background alignment value, optional.
+            repeat (typing.Optional[Repeat]): The background repeat value, optional.
+            alignment (typing.Optional[Alignment]): The background alignment value, optional.
         """
 		self.background = ""
-		self.set_background(background, repeat, alignment)
+		self.set(background, repeat, alignment)
 	
-	def set_background(
+	def set(
 			self,
 			background: typing.Union[Url, Brush, str],
-			repeat: typing.Union[Repeat, None] = None,
-			alignment: typing.Union[Alignment, None] = None
+			repeat: typing.Optional[Repeat] = None,
+			alignment: typing.Optional[Alignment] = None
 	):
 		"""
         Sets the background value.
 
         Args:
             background (typing.Union[Url, Brush, str]): The background value.
-            repeat (typing.Union[Repeat, None]): The background repeat value, optional.
-            alignment (typing.Union[Alignment, None]): The background alignment value, optional.
+            repeat (typing.Optional[Repeat]): The background repeat value, optional.
+            alignment (typing.Optional[Alignment]): The background alignment value, optional.
 
         Returns:
             Background: The updated background object.
@@ -291,7 +291,8 @@ class Background:
 			if isinstance(background, str)
 			else background.brush
 			if isinstance(background, Brush)
-			else background.url]
+			else background.url
+		]
 		
 		if repeat is not None:
 			instances.append(repeat.repeat)
@@ -325,9 +326,9 @@ class AlternateBackgroundColor:
             alternate_background_color (Brush): The alternate background color value.
         """
 		self.alternate_background_color = ""
-		self.set_alternate_background_color(alternate_background_color)
+		self.set(alternate_background_color)
 	
-	def set_alternate_background_color(self, alternate_background_color: Brush):
+	def set(self, alternate_background_color: Brush):
 		"""
         Sets the alternate background color value.
 

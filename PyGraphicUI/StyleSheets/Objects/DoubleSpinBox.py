@@ -38,16 +38,16 @@ class DoubleSpinBoxStyle(BaseStyle):
 	
 	def __init__(
 			self,
-			subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-			subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+			subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+			subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 			**kwargs
 	):
 		"""
         Initializes a DoubleSpinBoxStyle object.
 
         Args:
-            subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-            subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+            subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+            subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
 		super().__init__(**kwargs)
@@ -55,7 +55,7 @@ class DoubleSpinBoxStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QDoubleSpinBox")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QDoubleSpinBox")
+			self.style_sheet_object.add_css_object("QDoubleSpinBox")
 		
 		if subcontrol_position is not None:
 			self.add_subcontrol_position(subcontrol_position)
@@ -98,18 +98,18 @@ class DoubleSpinBoxStyle(BaseStyle):
 		
 		def __init__(
 				self,
-				placeholder_text_color: typing.Union[PlaceholderTextColor, None] = None,
-				line_edit_password_character: typing.Union[LineEditPasswordCharacter, None] = None,
-				line_edit_password_mask_delay: typing.Union[LineEditPasswordMaskDelay, None] = None,
+				placeholder_text_color: typing.Optional[PlaceholderTextColor] = None,
+				line_edit_password_character: typing.Optional[LineEditPasswordCharacter] = None,
+				line_edit_password_mask_delay: typing.Optional[LineEditPasswordMaskDelay] = None,
 				**kwargs
 		):
 			"""
             Initializes a LineEdit object.
 
             Args:
-                placeholder_text_color (typing.Union[PlaceholderTextColor, None]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
-                line_edit_password_character (typing.Union[LineEditPasswordCharacter, None]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
-                line_edit_password_mask_delay (typing.Union[LineEditPasswordMaskDelay, None]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
+                placeholder_text_color (typing.Optional[PlaceholderTextColor]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
+                line_edit_password_character (typing.Optional[LineEditPasswordCharacter]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
+                line_edit_password_mask_delay (typing.Optional[LineEditPasswordMaskDelay]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
                 **kwargs: Additional keyword arguments passed to the ChainLineEditStyle constructor.
             """
 			parent_objects, kwargs = get_objects_of_style(("QDoubleSpinBox", Selector(SelectorFlag.Descendant)), **kwargs)
@@ -132,12 +132,15 @@ class DoubleSpinBoxStyleSheet(BaseStyleSheet):
         SpinBoxStyleSheet(widget_style=[SpinBoxStyle(subcontrol_position=SubcontrolPosition.DownArrow), SpinBoxStyle(subcontrol_position=SubcontrolPosition.UpArrow)])
     """
 	
-	def __init__(self, widget_style: typing.Union[DoubleSpinBoxStyle, typing.Iterable[DoubleSpinBoxStyle], None] = None):
+	def __init__(
+			self,
+			widget_style: typing.Optional[typing.Union[DoubleSpinBoxStyle, typing.Iterable[DoubleSpinBoxStyle]]] = None
+	):
 		"""
         Initializes a DoubleSpinBoxStyleSheet object.
 
         Args:
-            widget_style (typing.Union[DoubleSpinBoxStyle, typing.Iterable[DoubleSpinBoxStyle], None]): A SpinBoxStyle object or typing.Iterable of SpinBoxStyle objects representing the styles to be applied to the QSpinBox objects.
+            widget_style (typing.Optional[typing.Union[DoubleSpinBoxStyle, typing.Iterable[DoubleSpinBoxStyle]]]): A SpinBoxStyle object or typing.Iterable of SpinBoxStyle objects representing the styles to be applied to the QSpinBox objects.
         """
 		super().__init__()
 		
@@ -162,7 +165,7 @@ class ChainDoubleSpinBoxStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			**kwargs
 	):
 		"""
@@ -170,10 +173,14 @@ class ChainDoubleSpinBoxStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QSpinBox will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QDoubleSpinBox", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QDoubleSpinBox", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		
@@ -187,10 +194,10 @@ class ChainDoubleSpinBoxStyle(BaseStyle):
 		def __init__(
 				self,
 				parent_css_object: ObjectOfStyle,
-				widget_selector: typing.Union[tuple[str, Selector], None] = None,
-				placeholder_text_color: typing.Union[PlaceholderTextColor, None] = None,
-				line_edit_password_character: typing.Union[LineEditPasswordCharacter, None] = None,
-				line_edit_password_mask_delay: typing.Union[LineEditPasswordMaskDelay, None] = None,
+				widget_selector: typing.Optional[tuple[str, Selector]] = None,
+				placeholder_text_color: typing.Optional[PlaceholderTextColor] = None,
+				line_edit_password_character: typing.Optional[LineEditPasswordCharacter] = None,
+				line_edit_password_mask_delay: typing.Optional[LineEditPasswordMaskDelay] = None,
 				**kwargs
 		):
 			"""
@@ -198,14 +205,21 @@ class ChainDoubleSpinBoxStyle(BaseStyle):
 
             Args:
                 parent_css_object (ObjectOfStyle): The parent style sheet object.
-                widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to.
-                placeholder_text_color (typing.Union[PlaceholderTextColor, None]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
-                line_edit_password_character (typing.Union[LineEditPasswordCharacter, None]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
-                line_edit_password_mask_delay (typing.Union[LineEditPasswordMaskDelay, None]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
+                widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to.
+                placeholder_text_color (typing.Optional[PlaceholderTextColor]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
+                line_edit_password_character (typing.Optional[LineEditPasswordCharacter]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
+                line_edit_password_mask_delay (typing.Optional[LineEditPasswordMaskDelay]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
                 **kwargs: Additional keyword arguments passed to the ChainLineEditStyle constructor.
             """
-			new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QDoubleSpinBox", Selector(SelectorFlag.Descendant)))
-			parent_objects, kwargs = get_objects_of_style((new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)), **kwargs)
+			new_parent_objects = get_new_parent_objects(
+					parent_css_object,
+					widget_selector,
+					("QDoubleSpinBox", Selector(SelectorFlag.Descendant))
+			)
+			parent_objects, kwargs = get_objects_of_style(
+					(new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)),
+					**kwargs
+			)
 			
 			super().__init__(
 					parent_css_object=parent_objects,

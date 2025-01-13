@@ -2,7 +2,7 @@ import typing
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class PseudoStateFlags:
 	"""
     Constants representing different pseudo-states in Qt.
@@ -79,9 +79,9 @@ class PseudoState:
             pseudo_state (typing.Union[str, typing.Iterable[str]]): The pseudo-state value(s).
         """
 		self.pseudo_state = ""
-		self.set_pseudo_state(pseudo_state)
+		self.set(pseudo_state)
 	
-	def set_pseudo_state(self, pseudo_state: typing.Union[str, typing.Iterable[str]]):
+	def set(self, pseudo_state: typing.Union[str, typing.Iterable[str]]):
 		"""
         Sets the pseudo-state value.
 

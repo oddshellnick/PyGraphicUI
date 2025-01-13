@@ -23,9 +23,9 @@ class Attachment:
             attachment (str): The attachment value, e.g., "scroll" or "fixed".
         """
 		self.attachment = ""
-		self.set_attachment(attachment)
+		self.set(attachment)
 	
-	def set_attachment(self, attachment: str):
+	def set(self, attachment: str):
 		"""
         Sets the attachment value.
 

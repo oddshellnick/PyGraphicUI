@@ -31,16 +31,16 @@ class HeaderViewStyle(BaseStyle):
 	
 	def __init__(
 			self,
-			subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-			subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+			subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+			subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 			**kwargs
 	):
 		"""
         Initializes a HeaderViewStyle object.
 
         Args:
-            subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-            subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+            subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+            subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
 		super().__init__(**kwargs)
@@ -48,7 +48,7 @@ class HeaderViewStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QHeaderView")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QHeaderView")
+			self.style_sheet_object.add_css_object("QHeaderView")
 		
 		if subcontrol_position is not None:
 			self.add_subcontrol_position(subcontrol_position)
@@ -93,12 +93,15 @@ class HeaderViewStyleSheet(BaseStyleSheet):
         HeaderViewStyleSheet(widget_style=[HeaderViewStyle(subcontrol_position=SubcontrolPosition.Section), HeaderViewStyle()])
     """
 	
-	def __init__(self, widget_style: typing.Union[HeaderViewStyle, typing.Iterable[HeaderViewStyle], None] = None):
+	def __init__(
+			self,
+			widget_style: typing.Optional[typing.Union[HeaderViewStyle, typing.Iterable[HeaderViewStyle]]] = None
+	):
 		"""
         Initializes a HeaderViewStyleSheet object.
 
         Args:
-            widget_style (typing.Union[HeaderViewStyle, typing.Iterable[HeaderViewStyle], None]): A HeaderViewStyle object or typing.Iterable of HeaderViewStyle objects representing the styles to be applied to the QHeaderView objects.
+            widget_style (typing.Optional[typing.Union[HeaderViewStyle, typing.Iterable[HeaderViewStyle]]]): A HeaderViewStyle object or typing.Iterable of HeaderViewStyle objects representing the styles to be applied to the QHeaderView objects.
         """
 		super().__init__()
 		
@@ -123,9 +126,9 @@ class ChainHeaderViewStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
-			subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-			subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
+			subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+			subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 			**kwargs
 	):
 		"""
@@ -133,12 +136,16 @@ class ChainHeaderViewStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QHeaderView will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
-            subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-            subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+            subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QHeaderView", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QHeaderView", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		

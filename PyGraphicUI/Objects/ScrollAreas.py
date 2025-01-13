@@ -29,15 +29,15 @@ class ScrollAreaInit(WidgetInit):
 
     Attributes:
         name (str): The object name of the scroll area. Defaults to "scroll_area".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the scroll area is enabled. Defaults to True.
         visible (bool): Whether the scroll area is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the scroll area. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the scroll area. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the scroll area. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the scroll area. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the scroll area. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the scroll area. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the scroll area. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the scroll area. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the scroll area. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the scroll area. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the scroll area. Defaults to None.
         vertical_scroll_bar_policy (Qt.ScrollBarPolicy): The vertical scroll bar policy. Defaults to Qt.ScrollBarPolicy.ScrollBarAsNeeded.
         horizontal_scroll_bar_policy (Qt.ScrollBarPolicy): The horizontal scroll bar policy. Defaults to Qt.ScrollBarPolicy.ScrollBarAsNeeded.
         central_widget_init (WidgetWithLayoutInit): Initialization parameters for the central widget. Defaults to a default WidgetWithLayoutInit object.
@@ -46,15 +46,15 @@ class ScrollAreaInit(WidgetInit):
 	def __init__(
 			self,
 			name: str = "scroll_area",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			vertical_scroll_bar_policy: Qt.ScrollBarPolicy = Qt.ScrollBarPolicy.ScrollBarAsNeeded,
 			horizontal_scroll_bar_policy: Qt.ScrollBarPolicy = Qt.ScrollBarPolicy.ScrollBarAsNeeded,
 			central_widget_init: WidgetWithLayoutInit = WidgetWithLayoutInit()
@@ -64,15 +64,15 @@ class ScrollAreaInit(WidgetInit):
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the scroll area is enabled.
             visible (bool): Whether the scroll area is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
             vertical_scroll_bar_policy (Qt.ScrollBarPolicy): The vertical scroll bar policy.
             horizontal_scroll_bar_policy (Qt.ScrollBarPolicy): The horizontal scroll bar policy.
             central_widget_init (WidgetWithLayoutInit): Initialization parameters for the central widget.
@@ -103,21 +103,26 @@ class PyVerticalScrollArea(QScrollArea, PyWidget):
 	def __init__(
 			self,
 			scroll_area_init: ScrollAreaInit = ScrollAreaInit(),
-			instances: typing.Union[typing.Iterable[LinearLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[LinearLayoutItem]] = None
 	):
 		"""
         Initializes a PyVerticalScrollArea.
 
         Args:
             scroll_area_init (ScrollAreaInit): Scroll area initialization parameters.
-            instances (typing.Union[typing.Iterable[LinearLayoutItem], None]): A typing.Iterable of items to add to the scroll area content. Defaults to None.
+            instances (typing.Optional[typing.Iterable[LinearLayoutItem]]): A typing.Iterable of items to add to the scroll area content. Defaults to None.
         """
 		super().__init__(widget_init=scroll_area_init)
 		
-		self.horizontal_scroll = PyWidgetWithHorizontalLayout(widget_with_layout_init=WidgetWithLayoutInit(widget_init=WidgetInit(parent=self)))
+		self.horizontal_scroll = PyWidgetWithHorizontalLayout(
+				widget_with_layout_init=WidgetWithLayoutInit(widget_init=WidgetInit(parent=self))
+		)
 		scroll_area_init.central_widget_init.widget_init.parent = self.horizontal_scroll
 		
-		self.vertical_scroll = PyWidgetWithVerticalLayout(widget_with_layout_init=scroll_area_init.central_widget_init, instances=instances)
+		self.vertical_scroll = PyWidgetWithVerticalLayout(
+				widget_with_layout_init=scroll_area_init.central_widget_init,
+				instances=instances
+		)
 		self.horizontal_scroll.add_instance(LinearLayoutItem(self.vertical_scroll))
 		self.setHorizontalScrollBarPolicy(scroll_area_init.horizontal_scroll_bar_policy)
 		self.setVerticalScrollBarPolicy(scroll_area_init.vertical_scroll_bar_policy)
@@ -137,25 +142,25 @@ class PyVerticalScrollArea(QScrollArea, PyWidget):
 		"""Clears all widgets from the scroll area."""
 		self.vertical_scroll.clear_widget_layout()
 	
-	def clear_scroll_area_by_type(self, type_to_clear: type):
+	def clear_scroll_area_by_type(self, type_to_clear: typing.Union[type, tuple[type, ...]]):
 		"""
         Clears widgets of the specified type from the scroll area.
 
         Args:
-            type_to_clear (type): The type of widgets to clear.
+            type_to_clear (typing.Union[type, tuple[type, ...]]): The type of widgets to clear.
         """
 		self.vertical_scroll.clear_widget_layout_by_type(type_to_clear)
 	
-	def get_all_instances(self) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances(self) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all widgets and layouts within the scrollable area.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator yielding each widget and layout.
+            typing.Generator[typing.Any, typing.Any, None]: A generator yielding each widget and layout.
         """
 		return self.vertical_scroll.get_all_instances()
 	
-	def get_instance(self, index: int) -> typing.Union[QWidget, QLayout]:
+	def get_instance(self, index: int) -> typing.Any:
 		"""
         Returns the widget at the given index in the scrollable area.
 
@@ -163,7 +168,7 @@ class PyVerticalScrollArea(QScrollArea, PyWidget):
             index (int): The index of the widget to retrieve.
 
         Returns:
-            typing.Union[QWidget, QLayout]: The widget at the specified index, or None if the index is out of range.
+            typing.Any: The widget at the specified index, or None if the index is out of range.
         """
 		return self.vertical_scroll.get_instance(index)
 	
@@ -176,17 +181,29 @@ class PyVerticalScrollArea(QScrollArea, PyWidget):
         """
 		return self.vertical_scroll.get_number_of_instances()
 	
-	def get_number_of_instances_of_type(self, type_to_check: type) -> int:
+	def get_number_of_instances_of_type(self, type_to_check: typing.Union[type, tuple[type, ...]]) -> int:
 		"""
         Returns the number of instances of a specific type within the vertical scroll area.
 
         Args:
-            type_to_check (type): The type of widget or layout to count.
+            type_to_check (typing.Union[type, tuple[type, ...]]): The type of widget or layout to count.
 
         Returns:
             int: The number of instances of the specified type found within the vertical scroll area.
         """
 		return self.vertical_scroll.get_number_of_instances_of_type(type_to_check)
+
+	def get_all_instances_of_type(self, type_to_get: typing.Union[type, tuple[type, ...]]) -> typing.Generator[typing.Any, typing.Any, None]:
+		"""
+        Returns a generator of all instances of a specific type in the vertical scroll area.
+
+        Args:
+            type_to_get (typing.Union[type, tuple[type, ...]]): The type of instances to retrieve.
+
+        Returns:
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
+        """
+		return self.vertical_scroll.get_all_instances_of_type(type_to_get)
 	
 	def insert_instance(self, index: int, instance: LinearLayoutItem):
 		"""
@@ -198,7 +215,6 @@ class PyVerticalScrollArea(QScrollArea, PyWidget):
 
         Raises:
             TypeError: If the provided widget is already managed by a layout.
-
         """
 		self.vertical_scroll.insert_instance(index, instance)
 	
@@ -220,21 +236,26 @@ class PyHorizontalScrollArea(QScrollArea, PyWidget):
 	def __init__(
 			self,
 			scroll_area_init: ScrollAreaInit = ScrollAreaInit(),
-			instances: typing.Union[typing.Iterable[LinearLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[LinearLayoutItem]] = None
 	):
 		"""
         Initializes a PyHorizontalScrollArea.
 
         Args:
             scroll_area_init (ScrollAreaInit): Scroll area initialization parameters.
-            instances (typing.Union[typing.Iterable[LinearLayoutItem], None]): A typing.Iterable of items to add to the scroll area's content. Defaults to None.
+            instances (typing.Optional[typing.Iterable[LinearLayoutItem]]): A typing.Iterable of items to add to the scroll area's content. Defaults to None.
         """
 		super().__init__(widget_init=scroll_area_init)
 		
-		self.vertical_layout = PyWidgetWithVerticalLayout(widget_with_layout_init=WidgetWithLayoutInit(widget_init=WidgetInit(parent=self)))
+		self.vertical_layout = PyWidgetWithVerticalLayout(
+				widget_with_layout_init=WidgetWithLayoutInit(widget_init=WidgetInit(parent=self))
+		)
 		scroll_area_init.central_widget_init.widget_init.parent = self.vertical_layout
 		
-		self.horizontal_scroll = PyWidgetWithHorizontalLayout(widget_with_layout_init=scroll_area_init.central_widget_init, instances=instances)
+		self.horizontal_scroll = PyWidgetWithHorizontalLayout(
+				widget_with_layout_init=scroll_area_init.central_widget_init,
+				instances=instances
+		)
 		self.vertical_layout.add_instance(LinearLayoutItem(self.horizontal_scroll))
 		self.setHorizontalScrollBarPolicy(scroll_area_init.horizontal_scroll_bar_policy)
 		self.setVerticalScrollBarPolicy(scroll_area_init.vertical_scroll_bar_policy)
@@ -254,25 +275,25 @@ class PyHorizontalScrollArea(QScrollArea, PyWidget):
 		"""Clears all widgets from the horizontal layout within the scroll area."""
 		self.horizontal_scroll.clear_widget_layout()
 	
-	def clear_scroll_area_by_type(self, type_to_clear: type):
+	def clear_scroll_area_by_type(self, type_to_clear: typing.Union[type, tuple[type, ...]]):
 		"""
         Clears widgets of a specific type from the horizontal layout within the scroll area.
 
         Args:
-            type_to_clear (type): The type of widgets to clear.
+            type_to_clear (typing.Union[type, tuple[type, ...]]): The type of widgets to clear.
         """
 		self.horizontal_scroll.clear_widget_layout_by_type(type_to_clear)
 	
-	def get_all_instances(self) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances(self) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
-        Returns a generator of all widgets and layouts in the layout.
+        Returns a generator of all widgets and layouts in the scroll area.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		return self.horizontal_scroll.get_all_instances()
 	
-	def get_instance(self, index: int) -> typing.Union[QWidget, QLayout]:
+	def get_instance(self, index: int) -> typing.Any:
 		"""
         Returns the instance at the specified index.
 
@@ -280,7 +301,7 @@ class PyHorizontalScrollArea(QScrollArea, PyWidget):
             index (int): The index of the instance to retrieve.
 
         Returns:
-            typing.Union[QWidget, QLayout]: The instance at the given index, or None if the index is out of range.
+            typing.Any: The instance at the given index, or None if the index is out of range.
         """
 		return self.horizontal_scroll.get_instance(index)
 	
@@ -293,20 +314,33 @@ class PyHorizontalScrollArea(QScrollArea, PyWidget):
         """
 		return self.horizontal_scroll.get_number_of_instances()
 	
-	def get_number_of_instances_of_type(self, type_to_check: type) -> int:
+	def get_number_of_instances_of_type(self, type_to_check: typing.Union[type, tuple[type, ...]]) -> int:
 		"""
-        Returns the number of instances of a specific type in the horizontal layout.
+        Returns the number of instances of a specific type in the horizontal scroll area.
 
         Args:
-            type_to_check (type): The type of instance to count.
+            type_to_check (typing.Union[type, tuple[type, ...]]): The type of instance to count.
 
         Returns:
             int: The number of instances of the specified type in the horizontal layout.
         """
 		return self.horizontal_scroll.get_number_of_instances_of_type(type_to_check)
+
+	def get_all_instances_of_type(self, type_to_get: typing.Union[type, tuple[type, ...]]) -> typing.Generator[typing.Any, typing.Any, None]:
+		"""
+        Returns a generator of all instances of a specific type in the horizontal scroll area.
+
+        Args:
+            type_to_get (typing.Union[type, tuple[type, ...]]): The type of instances to retrieve.
+
+        Returns:
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
+        """
+		return self.horizontal_scroll.get_all_instances_of_type(type_to_get)
 	
 	def insert_instance(self, index: int, instance: LinearLayoutItem):
-		"""Inserts an instance at the specified index in the horizontal layout.
+		"""
+		Inserts an instance at the specified index in the horizontal scroll area.
 
         Args:
             index (int): The index at which to insert the instance.
@@ -316,7 +350,7 @@ class PyHorizontalScrollArea(QScrollArea, PyWidget):
 	
 	def remove_instance(self, instance: typing.Union[QWidget, QLayout, int, QLayoutItem]):
 		"""
-        Removes the specified instance from the horizontal layout.
+        Removes the specified instance from the horizontal scroll area.
 
         Args:
             instance (typing.Union[QWidget, QLayout, int, QLayoutItem]): The instance to be removed from the layout.
@@ -330,24 +364,26 @@ class PyGridScrollArea(QScrollArea, PyWidget):
 	def __init__(
 			self,
 			scroll_area_init: ScrollAreaInit = ScrollAreaInit(),
-			instances: typing.Union[typing.Iterable[GridLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[GridLayoutItem]] = None
 	):
 		"""
         Initializes a PyGridScrollArea.
 
         Args:
             scroll_area_init (ScrollAreaInit): Scroll area initialization parameters.
-            instances (typing.Union[typing.Iterable[GridLayoutItem], None]): A typing.Iterable of GridLayoutItems to add to the scroll area content. Defaults to None.
+            instances (typing.Optional[typing.Iterable[GridLayoutItem]]): A typing.Iterable of GridLayoutItems to add to the scroll area content. Defaults to None.
         """
 		super().__init__(widget_init=scroll_area_init)
 		
-		vertical_scroll = PyWidgetWithVerticalLayout(  # Create a separate vertical layout widget
-		
-			widget_with_layout_init=WidgetWithLayoutInit(widget_init=WidgetInit(parent=self)))
-		
+		vertical_scroll = PyWidgetWithVerticalLayout(
+				# Create a separate vertical layout widget widget_with_layout_init=WidgetWithLayoutInit(widget_init=WidgetInit(parent=self))
+		)
 		scroll_area_init.central_widget_init.widget_init.parent = vertical_scroll
 		
-		self.grid_scroll = PyWidgetWithGridLayout(widget_with_layout_init=scroll_area_init.central_widget_init, instances=instances)
+		self.grid_scroll = PyWidgetWithGridLayout(
+				widget_with_layout_init=scroll_area_init.central_widget_init,
+				instances=instances
+		)
 		vertical_scroll.add_instance(LinearLayoutItem(self.grid_scroll))
 		self.setHorizontalScrollBarPolicy(scroll_area_init.horizontal_scroll_bar_policy)
 		self.setVerticalScrollBarPolicy(scroll_area_init.vertical_scroll_bar_policy)
@@ -367,33 +403,33 @@ class PyGridScrollArea(QScrollArea, PyWidget):
 		"""Clears all items from the grid layout within the scroll area."""
 		self.grid_scroll.clear_widget_layout()
 	
-	def clear_scroll_area_by_type(self, type_to_clear: type):
+	def clear_scroll_area_by_type(self, type_to_clear: typing.Union[type, tuple[type, ...]]):
 		"""
         Clears items of a specific type from the grid layout within the scroll area.
 
         Args:
-            type_to_clear (type): The type of items to clear.
+            type_to_clear (typing.Union[type, tuple[type, ...]]): The type of items to clear.
         """
 		self.grid_scroll.clear_widget_layout_by_type(type_to_clear)
 	
-	def get_all_instances(self) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances(self) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator for all instances in the grid layout within the scroll area.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator that yields all widget and layout instances.
+            typing.Generator[typing.Any, typing.Any, None]: A generator that yields all widget and layout instances.
         """
 		return self.grid_scroll.get_all_instances()
 	
-	def get_instance(self, index: int) -> typing.Union[QWidget, QLayout]:
+	def get_instance(self, index: int) -> typing.Any:
 		"""
-        Returns the instance at the specified index in the grid layout.
+        Returns the instance at the specified index in the grid scroll area.
 
         Args:
             index (int): The index of the instance to retrieve.
 
         Returns:
-            typing.Union[QWidget, QLayout]: The instance at the specified index or None if the index is out of range.
+            typing.Any: The instance at the specified index or None if the index is out of range.
         """
 		return self.grid_scroll.get_instance(index)
 	
@@ -405,13 +441,25 @@ class PyGridScrollArea(QScrollArea, PyWidget):
             int: The number of instances.
         """
 		return self.grid_scroll.get_number_of_instances()
-	
-	def get_number_of_instances_of_type(self, type_to_check: type) -> int:
+
+	def get_all_instances_of_type(self, type_to_get: typing.Union[type, tuple[type, ...]]) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
-        Returns the number of instances of a specific type in the grid layout.
+        Returns a generator of all instances of a specific type in the grid scroll area.
 
         Args:
-            type_to_check (type): The type of instance to count.
+            type_to_get (typing.Union[type, tuple[type, ...]]): The type of instances to retrieve.
+
+        Returns:
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
+        """
+		return self.grid_scroll.get_all_instances_of_type(type_to_get)
+	
+	def get_number_of_instances_of_type(self, type_to_check: typing.Union[type, tuple[type, ...]]) -> int:
+		"""
+        Returns the number of instances of a specific type in the grid scroll area.
+
+        Args:
+            type_to_check (typing.Union[type, tuple[type, ...]]): The type of instance to count.
 
         Returns:
             int: The number of instances of the given type.

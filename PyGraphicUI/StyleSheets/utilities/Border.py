@@ -20,7 +20,12 @@ class BorderTop:
         "border-top: 1px solid #FF0000"
     """
 	
-	def __init__(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def __init__(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Initializes a BorderTop object.
 
@@ -30,9 +35,14 @@ class BorderTop:
             border_color (Brush): The border color value.
         """
 		self.border_top = ""
-		self.set_border(border_width, border_style, border_color)
+		self.set(border_width, border_style, border_color)
 	
-	def set_border(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def set(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Sets the border top value.
 
@@ -65,7 +75,12 @@ class BorderRight:
         "border-right: 1px solid #00FF00"
     """
 	
-	def __init__(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def __init__(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Initializes a BorderRight object.
 
@@ -75,9 +90,14 @@ class BorderRight:
             border_color (Brush): The border color value.
         """
 		self.border_right = ""
-		self.set_border(border_width, border_style, border_color)
+		self.set(border_width, border_style, border_color)
 	
-	def set_border(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def set(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Sets the border right value.
 
@@ -110,7 +130,12 @@ class BorderLeft:
         "border-left: 1px solid #0000FF"
     """
 	
-	def __init__(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def __init__(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Initializes a BorderLeft object.
 
@@ -120,9 +145,14 @@ class BorderLeft:
             border_color (Brush): The border color value.
         """
 		self.border_left = ""
-		self.set_border(border_width, border_style, border_color)
+		self.set(border_width, border_style, border_color)
 	
-	def set_border(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def set(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Sets the border left value.
 
@@ -155,7 +185,12 @@ class BorderBottom:
         "border-bottom: 1px solid #FFFF00"
     """
 	
-	def __init__(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def __init__(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Initializes a BorderBottom object.
 
@@ -165,9 +200,14 @@ class BorderBottom:
             border_color (Brush): The border color value.
         """
 		self.border_bottom = ""
-		self.set_border(border_width, border_style, border_color)
+		self.set(border_width, border_style, border_color)
 	
-	def set_border(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def set(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Sets the border bottom value.
 
@@ -200,7 +240,12 @@ class Border:
         "border: 1px solid #FF0000"
     """
 	
-	def __init__(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def __init__(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Initializes a Border object.
 
@@ -210,9 +255,14 @@ class Border:
             border_color (Brush): The border color value.
         """
 		self.border = ""
-		self.set_border(border_width, border_style, border_color)
+		self.set(border_width, border_style, border_color)
 	
-	def set_border(self, border_width: Length, border_style: BorderStyle, border_color: Brush):
+	def set(
+			self,
+			border_width: Length,
+			border_style: BorderStyle,
+			border_color: Brush
+	):
 		"""
         Sets the border value.
 

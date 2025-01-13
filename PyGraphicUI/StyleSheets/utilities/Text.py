@@ -23,9 +23,9 @@ class TextProperty:
             text (str): The text value.
         """
 		self.text = ""
-		self.set_text(text)
+		self.set(text)
 	
-	def set_text(self, text: str):
+	def set(self, text: str):
 		"""
         Sets the text value.
 
@@ -60,9 +60,9 @@ class TextDecoration:
             text_decoration (Alignment): The text decoration value.
         """
 		self.text_decoration = ""
-		self.set_text_decoration(text_decoration)
+		self.set(text_decoration)
 	
-	def set_text_decoration(self, text_decoration: Alignment):
+	def set(self, text_decoration: Alignment):
 		"""
         Sets the text decoration value.
 
@@ -97,9 +97,9 @@ class TextColor:
             text_color (Brush): The text color value.
         """
 		self.text_color = ""
-		self.set_text_color(text_color)
+		self.set(text_color)
 	
-	def set_text_color(self, text_color: Brush):
+	def set(self, text_color: Brush):
 		"""
         Sets the text color value.
 
@@ -134,9 +134,9 @@ class TextAlign:
             text_align (Alignment): The text align value.
         """
 		self.text_align = ""
-		self.set_text_align(text_align)
+		self.set(text_align)
 	
-	def set_text_align(self, text_align: Alignment):
+	def set(self, text_align: Alignment):
 		"""
         Sets the text align value.
 
@@ -171,9 +171,9 @@ class PlaceholderTextColor:
             placeholder_text_color (Brush): The placeholder text color value.
         """
 		self.placeholder_text_color = ""
-		self.set_placeholder_text_color(placeholder_text_color)
+		self.set(placeholder_text_color)
 	
-	def set_placeholder_text_color(self, placeholder_text_color: Brush):
+	def set(self, placeholder_text_color: Brush):
 		"""
         Sets the placeholder text color value.
 

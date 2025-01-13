@@ -36,13 +36,15 @@ class TableCornerButtonStyleSheet(BaseStyleSheet):
 	
 	def __init__(
 			self,
-			button_style: typing.Union[TableCornerButtonStyle, typing.Iterable[TableCornerButtonStyle], None] = None
+			button_style: typing.Optional[
+				typing.Union[TableCornerButtonStyle, typing.Iterable[TableCornerButtonStyle]]
+			] = None
 	):
 		"""
         Initializes a TableCornerButtonStyleSheet object.
 
         Args:
-            button_style (typing.Union[TableCornerButtonStyle, typing.Iterable[TableCornerButtonStyle], None]): A TableCornerButtonStyle object or typing.Iterable of TableCornerButtonStyle objects representing the styles to be applied to the QTableCornerButton objects.
+            button_style (typing.Optional[typing.Union[TableCornerButtonStyle, typing.Iterable[TableCornerButtonStyle]]]): A TableCornerButtonStyle object or typing.Iterable of TableCornerButtonStyle objects representing the styles to be applied to the QTableCornerButton objects.
         """
 		super().__init__()
 		
@@ -67,7 +69,7 @@ class ChainTableCornerButtonStyle(ChainAbstractButtonStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			*args,
 			**kwargs
 	):
@@ -76,7 +78,7 @@ class ChainTableCornerButtonStyle(ChainAbstractButtonStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QTableCornerButton will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             *args: Additional arguments passed to the ChainAbstractButtonStyle constructor.
             **kwargs: Additional keyword arguments passed to the ChainAbstractButtonStyle constructor.
         """

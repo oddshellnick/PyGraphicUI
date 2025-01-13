@@ -19,9 +19,9 @@ class BorderStyle:
             border_style (str): The border style value.
         """
 		self.border_style = ""
-		self.set_border_style(border_style)
+		self.set(border_style)
 	
-	def set_border_style(self, border_style: str):
+	def set(self, border_style: str):
 		"""
         Sets the border style value.
 
@@ -56,9 +56,9 @@ class BordersStyle:
             borders_style (BorderStyle): The border style value.
         """
 		self.borders_style = ""
-		self.set_border_style(borders_style)
+		self.set(borders_style)
 	
-	def set_border_style(self, borders_style: BorderStyle):
+	def set(self, borders_style: BorderStyle):
 		"""
         Sets the border style value for all sides of the border.
 
@@ -93,9 +93,9 @@ class BorderTopStyle:
             borders_style (BorderStyle): The border top style value.
         """
 		self.borders_top_style = ""
-		self.set_border_style(borders_style)
+		self.set(borders_style)
 	
-	def set_border_style(self, borders_style: BorderStyle):
+	def set(self, borders_style: BorderStyle):
 		"""
         Sets the border top style value.
 
@@ -130,9 +130,9 @@ class BorderRightStyle:
             borders_style (BorderStyle): The border right style value.
         """
 		self.borders_right_style = ""
-		self.set_border_style(borders_style)
+		self.set(borders_style)
 	
-	def set_border_style(self, style: BorderStyle):
+	def set(self, style: BorderStyle):
 		"""
         Sets the border right style value.
 
@@ -167,9 +167,9 @@ class BorderLeftStyle:
             borders_style (BorderStyle): The border left style value.
         """
 		self.borders_left_style = ""
-		self.set_border_style(borders_style)
+		self.set(borders_style)
 	
-	def set_border_style(self, borders_style: BorderStyle):
+	def set(self, borders_style: BorderStyle):
 		"""
         Sets the border left style value.
 
@@ -204,9 +204,9 @@ class BorderBottomStyle:
             borders_style (BorderStyle): The border bottom style value.
         """
 		self.borders_bottom_style = ""
-		self.set_border_style(borders_style)
+		self.set(borders_style)
 	
-	def set_border_style(self, borders_style: BorderStyle):
+	def set(self, borders_style: BorderStyle):
 		"""
         Sets the border bottom style value.
 

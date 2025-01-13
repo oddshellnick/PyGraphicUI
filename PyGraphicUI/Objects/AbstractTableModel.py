@@ -13,23 +13,23 @@ class AbstractTableModelInit:
 
     Attributes:
         data (pandas.DataFrame): The pandas.DataFrame to be displayed in the table model.
-        format_data (typing.Union[typing.Callable[[typing.Any], str], None]): A callable to format all data in the table. Defaults to None.
-        format_data_by_column (typing.Union[dict[int, typing.Callable[[typing.Any], str]], None]): A dictionary mapping column indices to callables for formatting specific columns. Defaults to None.
+        format_data (typing.Optional[typing.Union[typing.Callable[[typing.Any], str]]]): A callable to format all data in the table. Defaults to None.
+        format_data_by_column (typing.Optional[dict[int, typing.Callable[[typing.Any], str]]]): A dictionary mapping column indices to callables for formatting specific columns. Defaults to None.
     """
 	
 	def __init__(
 			self,
 			data: pandas.DataFrame,
-			format_data: typing.Union[typing.Callable[[typing.Any], str], None] = None,
-			format_data_by_column: typing.Union[dict[int, typing.Callable[[typing.Any], str]], None] = None
+			format_data: typing.Optional[typing.Union[typing.Callable[[typing.Any], str]]] = None,
+			format_data_by_column: typing.Optional[dict[int, typing.Callable[[typing.Any], str]]] = None
 	):
 		"""
         Initializes an AbstractTableModelInit object.
 
         Args:
             data (pandas.DataFrame): The pandas.DataFrame for the model.
-            format_data (typing.Union[typing.Callable[[typing.Any], str], None]): A callable to format all data.
-            format_data_by_column (typing.Union[dict[int, typing.Callable[[typing.Any], str]], None]): A dictionary to format data by column.
+            format_data (typing.Optional[typing.Union[typing.Callable[[typing.Any], str]]]): A callable to format all data.
+            format_data_by_column (typing.Optional[dict[int, typing.Callable[[typing.Any], str]]]): A dictionary to format data by column.
         """
 		self.data = data
 		self.format_data = format_data
@@ -42,8 +42,8 @@ class PyAbstractTableModel(QAbstractTableModel):
 
     Attributes:
         table_data (pandas.DataFrame): The pandas.DataFrame to be displayed in the table model.
-        format_data (typing.Union[typing.Callable[[typing.Any], str], None]): A callable to format all data in the table. Defaults to None.
-        format_data_by_column (typing.Union[dict[int, typing.Callable[[typing.Any], str]], None]): A dictionary mapping column indices to callables for formatting specific columns. Defaults to None.
+        format_data (typing.Optional[typing.Union[typing.Callable[[typing.Any], str]]]): A callable to format all data in the table. Defaults to None.
+        format_data_by_column (typing.Optional[dict[int, typing.Callable[[typing.Any], str]]]): A dictionary mapping column indices to callables for formatting specific columns. Defaults to None.
     """
 	
 	def __init__(self, abstract_table_model_init: AbstractTableModelInit):
@@ -71,7 +71,7 @@ class PyAbstractTableModel(QAbstractTableModel):
         """
 		return self.table_data.shape[1]
 	
-	def data(self, index: QModelIndex, role: int = Qt.ItemDataRole.DisplayRole) -> typing.Union[str, None]:
+	def data(self, index: QModelIndex, role: int = Qt.ItemDataRole.DisplayRole) -> typing.Optional[str]:
 		"""
         Returns the data for the given index and role.
 
@@ -80,7 +80,7 @@ class PyAbstractTableModel(QAbstractTableModel):
             role (int): The data role. Defaults to Qt.ItemDataRole.DisplayRole.
 
         Returns:
-            typing.Union[str, None]: The data.
+            typing.Optional[str]: The data.
         """
 		if role == Qt.ItemDataRole.DisplayRole:
 			if self.format_data_by_column is not None:
@@ -97,7 +97,12 @@ class PyAbstractTableModel(QAbstractTableModel):
 		
 		return None
 	
-	def headerData(self, section: int, orientation: Qt.Orientation, role: int = Qt.ItemDataRole.DisplayRole) -> typing.Union[str, None]:
+	def headerData(
+			self,
+			section: int,
+			orientation: Qt.Orientation,
+			role: int = Qt.ItemDataRole.DisplayRole
+	) -> typing.Optional[str]:
 		"""
         Returns the header data for the given section and orientation.
 
@@ -107,7 +112,7 @@ class PyAbstractTableModel(QAbstractTableModel):
             role (int): The data role. Defaults to Qt.ItemDataRole.DisplayRole.
 
         Returns:
-            typing.Union[str, None]: The header data.
+            typing.Optional[str]: The header data.
         """
 		if role == Qt.ItemDataRole.DisplayRole or role == Qt.ItemDataRole.UserRole:
 			if orientation == Qt.Orientation.Horizontal:

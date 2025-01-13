@@ -157,11 +157,17 @@ class Color:
         "#ff0000"
     """
 	
-	def __init__(self, color_string: typing.Union[RGB, RGBA, HSV, HSVA, HSL, HSLA, ColorName, HEX]):
+	def __init__(
+			self,
+			color_string: typing.Union[RGB, RGBA, HSV, HSVA, HSL, HSLA, ColorName, HEX]
+	):
 		self.color = ""
-		self.set_color(color_string)
+		self.set(color_string)
 	
-	def set_color(self, color_string: typing.Union[RGB, RGBA, HSV, HSVA, HSL, HSLA, ColorName, HEX]):
+	def set(
+			self,
+			color_string: typing.Union[RGB, RGBA, HSV, HSVA, HSL, HSLA, ColorName, HEX]
+	):
 		self.color = color_string.color_string
 		return self
 
@@ -181,9 +187,9 @@ class GridLineColor:
 	
 	def __init__(self, grid_line_color: Color):
 		self.grid_line_color = ""
-		self.set_grid_line_color(grid_line_color)
+		self.set(grid_line_color)
 	
-	def set_grid_line_color(self, gridline_color: Color):
+	def set(self, gridline_color: Color):
 		self.grid_line_color = "gridline-color: %s" % gridline_color.color
 		return self
 
@@ -203,9 +209,9 @@ class PaletteRole:
 	
 	def __init__(self, palette_role: str):
 		self.palette_role = ""
-		self.set_palette_role(palette_role)
+		self.set(palette_role)
 	
-	def set_palette_role(self, palette_role: str):
+	def set(self, palette_role: str):
 		self.palette_role = "palette(%s)" % palette_role
 		return self
 
@@ -266,7 +272,13 @@ class RadialGradient:
         "qradialgradient(cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 red, stop:1 blue)"
     """
 	
-	def __init__(self, center_point: AxisPoint, radius: float, focal_point: AxisPoint, stops: list[GradientStop]):
+	def __init__(
+			self,
+			center_point: AxisPoint,
+			radius: float,
+			focal_point: AxisPoint,
+			stops: list[GradientStop]
+	):
 		"""
         center_point are point where gradient starts
 
@@ -281,10 +293,9 @@ class RadialGradient:
         (stops and colors must have the dame length)
         """
 		self.gradient_string = "qradialgradient(%s, %s)" % (
-		
-			"cx:%g, cy:%g, radius:%g, fx:%g, fy:%g"
-		
-			% (center_point.x, center_point.y, radius, focal_point.x, focal_point.y), ", ".join(["stop:%g %s" % (stop.stop, stop.color_on_stop) for stop in stops]), 	)
+				"cx:%g, cy:%g, radius:%g, fx:%g, fy:%g" % (center_point.x, center_point.y, radius, focal_point.x, focal_point.y),
+				", ".join(["stop:%g %s" % (stop.stop, stop.color_on_stop) for stop in stops])
+		)
 
 
 class ConicalGradient:
@@ -335,7 +346,12 @@ class LinearGradient:
         :param stops: typing.Iterable of float between 0.0 and 1.0
         """
 		self.gradient_string = "qlineargradient(%s, %s)" % (
-				", ".join(["x%d:%g, y%d:%g" % (i + 1, point.x, i + 1, point.y) for point, i in zip(points, range(len(points)))]),
+				", ".join(
+						[
+							"x%d:%g, y%d:%g" % (i + 1, point.x, i + 1, point.y)
+							for point, i in zip(points, range(len(points)))
+						]
+				),
 				", ".join(["stop:%g %s" % (stop.stop, stop.color_on_stop) for stop in stops])
 		)
 
@@ -357,11 +373,17 @@ class Gradient:
         "qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 red, stop:1 blue)"
     """
 	
-	def __init__(self, gradient: typing.Union[LinearGradient, ConicalGradient, RadialGradient]):
+	def __init__(
+			self,
+			gradient: typing.Union[LinearGradient, ConicalGradient, RadialGradient]
+	):
 		self.gradient = ""
-		self.set_gradient(gradient)
+		self.set(gradient)
 	
-	def set_gradient(self, gradient: typing.Union[LinearGradient, ConicalGradient, RadialGradient]):
+	def set(
+			self,
+			gradient: typing.Union[LinearGradient, ConicalGradient, RadialGradient]
+	):
 		self.gradient = gradient.gradient_string
 		return self
 
@@ -379,11 +401,19 @@ class Brush:
         "red"
     """
 	
-	def __init__(self, color: typing.Union[Color, Gradient], palette_role: typing.Union[PaletteRole, None] = None):
+	def __init__(
+			self,
+			color: typing.Union[Color, Gradient],
+			palette_role: typing.Optional[PaletteRole] = None
+	):
 		self.brush = ""
-		self.set_brush(color, palette_role)
+		self.set(color, palette_role)
 	
-	def set_brush(self, color: typing.Union[Color, Gradient], palette_role: typing.Union[PaletteRole, None] = None):
+	def set(
+			self,
+			color: typing.Union[Color, Gradient],
+			palette_role: typing.Optional[PaletteRole] = None
+	):
 		instances = [color.color if isinstance(color, Color) else color.gradient]
 		
 		if palette_role is not None:
@@ -408,8 +438,8 @@ class BoxColors:
 	
 	def __init__(self, brush: typing.Union[Brush, typing.Iterable[Brush]]):
 		self.color = ""
-		self.set_color(brush)
+		self.set(brush)
 	
-	def set_color(self, brushes: typing.Union[Brush, typing.Iterable[Brush]]):
+	def set(self, brushes: typing.Union[Brush, typing.Iterable[Brush]]):
 		self.color = " ".join([brush.brush for brush in brushes]) if isinstance(brushes, typing.Iterable) else brushes.brush
 		return self

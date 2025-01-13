@@ -19,9 +19,9 @@ class Repeat:
             repeat (str): The repeat value.
         """
 		self.repeat = ""
-		self.set_repeat(repeat)
+		self.set(repeat)
 	
-	def set_repeat(self, repeat: str):
+	def set(self, repeat: str):
 		"""
         Sets the repeat value.
 

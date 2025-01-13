@@ -32,8 +32,8 @@ class ChainAbstractButtonStyle(BaseStyle):
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
 			button_type: str = "QAbstractButton",
 			widget_selector: tuple[str, Selector] = None,
-			icon: typing.Union[IconProperty, None] = None,
-			text: typing.Union[TextProperty, None] = None,
+			icon: typing.Optional[IconProperty] = None,
+			text: typing.Optional[TextProperty] = None,
 			**kwargs
 	):
 		"""
@@ -42,12 +42,16 @@ class ChainAbstractButtonStyle(BaseStyle):
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the button will inherit styles.
             button_type (str): The type of button to style (e.g., 'QPushButton', 'QRadioButton'). Defaults to 'QAbstractButton'.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
-            icon (typing.Union[IconProperty, None]): An IconProperty object representing the icon to be used for the button.
-            text (typing.Union[TextProperty, None]): A TextProperty object representing the text to be displayed on the button.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            icon (typing.Optional[IconProperty]): An IconProperty object representing the icon to be used for the button.
+            text (typing.Optional[TextProperty]): A TextProperty object representing the text to be displayed on the button.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, (button_type, Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				(button_type, Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		
@@ -99,8 +103,8 @@ class AbstractButtonStyle(BaseStyle):
 	def __init__(
 			self,
 			button_type: str = "QAbstractButton",
-			icon: typing.Union[IconProperty, None] = None,
-			text: typing.Union[TextProperty, None] = None,
+			icon: typing.Optional[IconProperty] = None,
+			text: typing.Optional[TextProperty] = None,
 			**kwargs
 	):
 		"""
@@ -108,8 +112,8 @@ class AbstractButtonStyle(BaseStyle):
 
         Args:
             button_type (str): The type of button to style (e.g., 'QPushButton', 'QRadioButton'). Defaults to 'QAbstractButton'.
-            icon (typing.Union[IconProperty, None]): An IconProperty object representing the icon to be used for the button.
-            text (typing.Union[TextProperty, None]): A TextProperty object representing the text to be displayed on the button.
+            icon (typing.Optional[IconProperty]): An IconProperty object representing the icon to be used for the button.
+            text (typing.Optional[TextProperty]): A TextProperty object representing the text to be displayed on the button.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
 		super().__init__(**kwargs)
@@ -117,7 +121,7 @@ class AbstractButtonStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject(button_type)))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet(button_type)
+			self.style_sheet_object.add_css_object(button_type)
 		
 		if icon is not None:
 			self.add_icon(icon)
@@ -162,12 +166,15 @@ class AbstractButtonStyleSheet(BaseStyleSheet):
         AbstractButtonStyleSheet(button_style=[AbstractButtonStyle(button_type="QPushButton", text="Button 1"), AbstractButtonStyle(button_type="QRadioButton", text="Radio 1")])
     """
 	
-	def __init__(self, button_style: typing.Union[AbstractButtonStyle, typing.Iterable[AbstractButtonStyle], None] = None):
+	def __init__(
+			self,
+			button_style: typing.Optional[typing.Union[AbstractButtonStyle, typing.Iterable[AbstractButtonStyle]]] = None
+	):
 		"""
         Initializes an AbstractButtonStyleSheet object.
 
         Args:
-            button_style (typing.Union[AbstractButtonStyle, typing.Iterable[AbstractButtonStyle], None]): An AbstractButtonStyle object or typing.Iterable of AbstractButtonStyle objects representing the styles to be applied to the buttons.
+            button_style (typing.Optional[typing.Union[AbstractButtonStyle, typing.Iterable[AbstractButtonStyle]]]): An AbstractButtonStyle object or typing.Iterable of AbstractButtonStyle objects representing the styles to be applied to the buttons.
         """
 		super().__init__()
 		

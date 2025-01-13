@@ -25,9 +25,9 @@ class Up:
             up (Length): The up value.
         """
 		self.up = ""
-		self.set_up(up)
+		self.set(up)
 	
-	def set_up(self, up: Length):
+	def set(self, up: Length):
 		"""
         Sets the up value.
 
@@ -62,9 +62,9 @@ class Spacing:
             spacing (Length): The spacing value.
         """
 		self.spacing = ""
-		self.set_spacing(spacing)
+		self.set(spacing)
 	
-	def set_spacing(self, spacing: Length):
+	def set(self, spacing: Length):
 		"""
         Sets the spacing value.
 
@@ -99,9 +99,9 @@ class Right:
             right (Length): The right value.
         """
 		self.right = ""
-		self.set_right(right)
+		self.set(right)
 	
-	def set_right(self, right: Length):
+	def set(self, right: Length):
 		"""
         Sets the right value.
 
@@ -136,9 +136,9 @@ class Left:
             left (Length): The left value.
         """
 		self.left = ""
-		self.set_left(left)
+		self.set(left)
 	
-	def set_left(self, left: Length):
+	def set(self, left: Length):
 		"""
         Sets the left value.
 
@@ -173,9 +173,9 @@ class Bottom:
             bottom (Length): The bottom value.
         """
 		self.bottom = ""
-		self.set_bottom(bottom)
+		self.set(bottom)
 	
-	def set_bottom(self, bottom: Length):
+	def set(self, bottom: Length):
 		"""
         Sets the bottom value.
 
@@ -205,7 +205,10 @@ class Alignment:
         "center space-around"
     """
 	
-	def __init__(self, alignment: typing.Union[str, list[str], tuple[str], array.array[str], collections.deque[str]]):
+	def __init__(
+			self,
+			alignment: typing.Union[str, list[str], tuple[str], array.array[str], collections.deque[str]]
+	):
 		"""
         Initializes an Alignment object.
 
@@ -215,9 +218,9 @@ class Alignment:
 		self.alignment = ""
 		
 		if isinstance(alignment, str):
-			self.set_alignment(alignment)
+			self.set(alignment)
 		elif isinstance(alignment, (list, tuple, array.array, collections.deque)) and len(alignment) > 0:
-			self.set_alignment(alignment[0])
+			self.set(alignment[0])
 			
 			
 			if len(alignment) > 1:
@@ -237,7 +240,7 @@ class Alignment:
 		self.alignment = " ".join([self.alignment, alignment])
 		return self
 	
-	def set_alignment(self, alignment: str):
+	def set(self, alignment: str):
 		"""
         Sets the alignment value.
 

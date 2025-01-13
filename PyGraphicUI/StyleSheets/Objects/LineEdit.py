@@ -32,18 +32,18 @@ class LineEditStyle(BaseStyle):
 	
 	def __init__(
 			self,
-			placeholder_text_color: typing.Union[PlaceholderTextColor, None] = None,
-			line_edit_password_character: typing.Union[LineEditPasswordCharacter, None] = None,
-			line_edit_password_mask_delay: typing.Union[LineEditPasswordMaskDelay, None] = None,
+			placeholder_text_color: typing.Optional[PlaceholderTextColor] = None,
+			line_edit_password_character: typing.Optional[LineEditPasswordCharacter] = None,
+			line_edit_password_mask_delay: typing.Optional[LineEditPasswordMaskDelay] = None,
 			**kwargs
 	):
 		"""
         Initializes a LineEditStyle object.
 
         Args:
-            placeholder_text_color (typing.Union[PlaceholderTextColor, None]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
-            line_edit_password_character (typing.Union[LineEditPasswordCharacter, None]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
-            line_edit_password_mask_delay (typing.Union[LineEditPasswordMaskDelay, None]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
+            placeholder_text_color (typing.Optional[PlaceholderTextColor]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
+            line_edit_password_character (typing.Optional[LineEditPasswordCharacter]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
+            line_edit_password_mask_delay (typing.Optional[LineEditPasswordMaskDelay]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
 		super().__init__(**kwargs)
@@ -51,7 +51,7 @@ class LineEditStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QLineEdit")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QLineEdit")
+			self.style_sheet_object.add_css_object("QLineEdit")
 		
 		if placeholder_text_color is not None:
 			self.add_placeholder_text_color(placeholder_text_color)
@@ -112,12 +112,15 @@ class LineEditStyleSheet(BaseStyleSheet):
         LineEditStyleSheet(line_edit_style=[LineEditStyle(placeholder_text_color=PlaceholderTextColor(Color(RGB(100, 100, 100)))), LineEditStyle()])
     """
 	
-	def __init__(self, line_edit_style: typing.Union[LineEditStyle, typing.Iterable[LineEditStyle], None] = None):
+	def __init__(
+			self,
+			line_edit_style: typing.Optional[typing.Union[LineEditStyle, typing.Iterable[LineEditStyle]]] = None
+	):
 		"""
         Initializes a LineEditStyleSheet object.
 
         Args:
-            line_edit_style (typing.Union[LineEditStyle, typing.Iterable[LineEditStyle], None]): A LineEditStyle object or typing.Iterable of LineEditStyle objects representing the styles to be applied to the QLineEdit objects.
+            line_edit_style (typing.Optional[typing.Union[LineEditStyle, typing.Iterable[LineEditStyle]]]): A LineEditStyle object or typing.Iterable of LineEditStyle objects representing the styles to be applied to the QLineEdit objects.
         """
 		super().__init__()
 		
@@ -142,10 +145,10 @@ class ChainLineEditStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
-			placeholder_text_color: typing.Union[PlaceholderTextColor, None] = None,
-			line_edit_password_character: typing.Union[LineEditPasswordCharacter, None] = None,
-			line_edit_password_mask_delay: typing.Union[LineEditPasswordMaskDelay, None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
+			placeholder_text_color: typing.Optional[PlaceholderTextColor] = None,
+			line_edit_password_character: typing.Optional[LineEditPasswordCharacter] = None,
+			line_edit_password_mask_delay: typing.Optional[LineEditPasswordMaskDelay] = None,
 			**kwargs
 	):
 		"""
@@ -153,13 +156,17 @@ class ChainLineEditStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QLineEdit will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
-            placeholder_text_color (typing.Union[PlaceholderTextColor, None]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
-            line_edit_password_character (typing.Union[LineEditPasswordCharacter, None]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
-            line_edit_password_mask_delay (typing.Union[LineEditPasswordMaskDelay, None]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            placeholder_text_color (typing.Optional[PlaceholderTextColor]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
+            line_edit_password_character (typing.Optional[LineEditPasswordCharacter]): A LineEditPasswordCharacter object representing the character to be used to mask the text in a password line edit.
+            line_edit_password_mask_delay (typing.Optional[LineEditPasswordMaskDelay]): A LineEditPasswordMaskDelay object representing the delay (in milliseconds) before the password mask is applied.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QLineEdit", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QLineEdit", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		

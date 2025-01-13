@@ -42,15 +42,15 @@ class TableViewInit(WidgetInit):
 
     Attributes:
         name (str): The object name of the table view. Defaults to "table_view".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the table view is enabled. Defaults to True.
         visible (bool): Whether the table view is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the table view. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the table view. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the table view. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the table view. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the table view. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the table view. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the table view. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the table view. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the table view. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the table view. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the table view. Defaults to None.
         font (QFont): The font for the table view. Defaults to a default PyFont.
         sorting_enabled (bool): Whether sorting is enabled. Defaults to True.
         vertical_optimize (TableViewOptimize): Vertical optimization settings. Defaults to a default TableViewOptimize.
@@ -60,15 +60,15 @@ class TableViewInit(WidgetInit):
 	def __init__(
 			self,
 			name: str = "table_view",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			font: QFont = PyFont(),
 			sorting_enabled: bool = True,
 			vertical_optimize: TableViewOptimize = TableViewOptimize(),
@@ -79,15 +79,15 @@ class TableViewInit(WidgetInit):
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the table view is enabled.
             visible (bool): Whether the table view is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
             font (QFont): The font to use.
             sorting_enabled (bool): Whether sorting is enabled.
             vertical_optimize (TableViewOptimize): Vertical optimization settings.
@@ -160,7 +160,7 @@ class PyTableView(QTableView, PyWidget):
 		if self.sort_order == Qt.SortOrder.DescendingOrder or self.last_sorted_column != sorted_column:
 			self.sort_order = Qt.SortOrder.AscendingOrder
 		else:
-			self.sort_order = Qt.SortOrder.DescendingO
+			self.sort_order = Qt.SortOrder.DescendingOrder
 	
 	def h_header_clicked(self, column_index: int):
 		"""

@@ -19,7 +19,7 @@ class PyLayout(QLayout):
     Base class for custom layouts, providing common functionality.
     """
 	
-	def get_instance(self, index: int) -> typing.Union[QWidget, QLayout]:
+	def get_instance(self, index: int) -> typing.Any:
 		"""
         Retrieves the widget or layout at the specified index.
 
@@ -27,7 +27,7 @@ class PyLayout(QLayout):
             index (int): The index of the item to retrieve.
 
         Returns:
-            typing.Union[QWidget, QLayout]: The widget or layout at the given index.
+            typing.Any: The widget or layout at the given index.
         """
 		return self.itemAt(index).widget()
 	
@@ -61,36 +61,36 @@ class PyLayout(QLayout):
 		for i in reversed(range(self.count())):
 			self.remove_instance(i)
 	
-	def clear_layout_by_type(self, type_to_clear: type):
+	def clear_layout_by_type(self, type_to_clear: typing.Union[type, tuple[type, ...]]):
 		"""
         Removes all instances of a specific type from the layout.
 
         Args:
-            type_to_clear (type): The type of instances to remove.
+            type_to_clear (typing.Union[type, tuple[type, ...]]): The type of instances to remove.
         """
 		for i in reversed(range(self.count())):
 			if isinstance(self.get_instance(i), type_to_clear):
 				self.remove_instance(i)
 	
-	def get_all_instances(self) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances(self) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all widgets and layouts in the layout.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		for i in range(self.count()):
 			yield self.get_instance(i)
 	
-	def get_all_instances_of_type(self, type_to_get: type) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances_of_type(self, type_to_get: typing.Union[type, tuple[type, ...]]) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all instances of a specific type in the layout.
 
         Args:
-            type_to_get (type): The type of instances to retrieve.
+            type_to_get (typing.Union[type, tuple[type, ...]]): The type of instances to retrieve.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		for i in range(self.count()):
 			instance = self.get_instance(i)
@@ -107,17 +107,20 @@ class PyLayout(QLayout):
         """
 		return self.count()
 	
-	def get_number_of_instances_of_type(self, type_to_check: type) -> int:
+	def get_number_of_instances_of_type(self, type_to_check: typing.Union[type, tuple[type, ...]]) -> int:
 		"""
         Returns the number of instances of a specific type in the layout.
 
         Args:
-            type_to_check (type): The type of instances to count.
+            type_to_check (typing.Union[type, tuple[type, ...]]): The type of instances to count.
 
         Returns:
             int: The number of instances of the specified type.
         """
-		return sum(1 for i in range(self.count()) if isinstance(self.get_instance(i), type_to_check))
+		return sum(
+				1
+				for i in range(self.count()) if isinstance(self.get_instance(i), type_to_check)
+		)
 
 
 class LayoutInit:
@@ -126,9 +129,9 @@ class LayoutInit:
 
     Attributes:
         name (str): The name of the layout. Defaults to "layout".
-        parent (typing.Union[QWidget, None]): The parent widget of the layout. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget of the layout. Defaults to None.
         enabled (bool): Whether the layout is enabled. Defaults to True.
-        alignment (typing.Union[Qt.AlignmentFlag, None]): The alignment of the layout. Defaults to None.
+        alignment (typing.Optional[Qt.AlignmentFlag]): The alignment of the layout. Defaults to None.
         contents_margins (typing.Union[tuple[int, int, int, int], None]): The margins of the layout contents. Defaults to None.
         spacing (int): The spacing between items in the layout. Defaults to 0.
     """
@@ -136,9 +139,9 @@ class LayoutInit:
 	def __init__(
 			self,
 			name: str = "layout",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
-			alignment: typing.Union[Qt.AlignmentFlag, None] = None,
+			alignment: typing.Optional[Qt.AlignmentFlag] = None,
 			contents_margins: typing.Union[tuple[int, int, int, int], None] = None,
 			spacing: int = 0
 	):
@@ -147,9 +150,9 @@ class LayoutInit:
 
         Args:
             name (str): The name of the layout.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the layout is enabled.
-            alignment (typing.Union[Qt.AlignmentFlag, None]): The alignment of the layout.
+            alignment (typing.Optional[Qt.AlignmentFlag]): The alignment of the layout.
             contents_margins (typing.Union[tuple[int, int, int, int], None]): The margins of the layout contents.
             spacing (int): The spacing between items.
         """
@@ -169,14 +172,14 @@ class PyVerticalLayout(QVBoxLayout, PyLayout):
 	def __init__(
 			self,
 			layout_init: LayoutInit = LayoutInit(),
-			instances: typing.Union[typing.Iterable[LinearLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[LinearLayoutItem]] = None
 	):
 		"""
         Initializes a PyVerticalLayout object.
 
         Args:
             layout_init (LayoutInit): Initialization parameters for the layout.
-            instances (typing.Union[typing.Iterable[LinearLayoutItem], None]): A typing.Iterable of items to add to the layout.
+            instances (typing.Optional[typing.Iterable[LinearLayoutItem]]): A typing.Iterable of items to add to the layout.
         """
 		if isinstance(layout_init.parent, QWidget):
 			super().__init__(layout_init.parent)
@@ -246,14 +249,14 @@ class PyHorizontalLayout(QHBoxLayout, PyLayout):
 	def __init__(
 			self,
 			layout_init: LayoutInit = LayoutInit(),
-			instances: typing.Union[typing.Iterable[LinearLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[LinearLayoutItem]] = None
 	):
 		"""
         Initializes a PyHorizontalLayout object.
 
         Args:
             layout_init (LayoutInit): Initialization parameters for the layout.
-            instances (typing.Union[typing.Iterable[LinearLayoutItem], None]): A typing.Iterable of items to add to the layout.
+            instances (typing.Optional[typing.Iterable[LinearLayoutItem]]): A typing.Iterable of items to add to the layout.
         """
 		if isinstance(layout_init.parent, QWidget):
 			super().__init__(layout_init.parent)
@@ -323,14 +326,14 @@ class GridLayout(QGridLayout, PyLayout):
 	def __init__(
 			self,
 			layout_init: LayoutInit = LayoutInit(),
-			instances: typing.Union[typing.Iterable[GridLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[GridLayoutItem]] = None
 	):
 		"""
         Initializes a GridLayout object.
 
         Args:
             layout_init (LayoutInit): Initialization parameters for the layout.
-            instances (typing.Union[typing.Iterable[GridLayoutItem], None]): A typing.Iterable of items to add to the layout.
+            instances (typing.Optional[typing.Iterable[GridLayoutItem]]): A typing.Iterable of items to add to the layout.
         """
 		if isinstance(layout_init.parent, QWidget):
 			super().__init__(layout_init.parent)
@@ -363,7 +366,11 @@ class GridLayout(QGridLayout, PyLayout):
         Args:
             instance (GridLayoutItem): The item to add.
         """
-		parameters = [instance.instance, instance.stretch.vertical_position, instance.stretch.horizontal_position]
+		parameters = [
+			instance.instance,
+			instance.stretch.vertical_position,
+			instance.stretch.horizontal_position
+		]
 		
 		if instance.stretch.vertical_stretch is not None:
 			parameters.append(instance.stretch.vertical_stretch)

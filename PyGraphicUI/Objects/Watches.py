@@ -18,15 +18,15 @@ class TimerInit(LabelInit):
 
     Attributes:
         name (str): The object name of the timer. Defaults to "timer".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the timer is enabled. Defaults to True.
         visible (bool): Whether the timer is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the timer. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the timer. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the timer. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the timer. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the timer. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the timer. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the timer. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the timer. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the timer. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the timer. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the timer. Defaults to None.
         scaled_contents (bool): Whether the contents should be scaled. Defaults to False.
         word_wrap (bool): Whether word wrap is enabled. Defaults to True.
         indent (int): The indentation. Defaults to 10.
@@ -63,15 +63,15 @@ class TimerInit(LabelInit):
 	def __init__(
 			self,
 			name: str = "timer",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			scaled_contents: bool = False,
 			word_wrap: bool = True,
 			indent: int = 10,
@@ -86,7 +86,12 @@ class TimerInit(LabelInit):
 			always_print_hours: bool = True,
 			always_print_minutes: bool = True,
 			always_print_seconds: bool = True,
-			years_format: str = "{value}y", months_format: str = "{value}mon", weeks_format: str = "{value}w", days_format: str = "{value}d", hours_format: str = "{value:02d}", minutes_format: str = "{value:02d}",
+			years_format: str = "{value}y",
+			months_format: str = "{value}mon",
+			weeks_format: str = "{value}w",
+			days_format: str = "{value}d",
+			hours_format: str = "{value:02d}",
+			minutes_format: str = "{value:02d}",
 			seconds_format: str = "{value:02d}",
 			disable_negative_time: bool = True,
 			prefix: str = "",
@@ -97,15 +102,15 @@ class TimerInit(LabelInit):
 
         Args:
             name (str): The object name of the timer. Defaults to "timer".
-            parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+            parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
             enabled (bool): Whether the timer is enabled. Defaults to True.
             visible (bool): Whether the timer is visible. Defaults to True.
             style_sheet (str): The style sheet to apply to the timer. Defaults to "".
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size of the timer. Defaults to None.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size of the timer. Defaults to None.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size of the timer. Defaults to None.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy of the timer. Defaults to None.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the timer. Defaults to None.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size of the timer. Defaults to None.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size of the timer. Defaults to None.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size of the timer. Defaults to None.
+            size_policy (typing.Optional[QSizePolicy]): The size policy of the timer. Defaults to None.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the timer. Defaults to None.
             scaled_contents (bool): Whether the contents should be scaled. Defaults to False.
             word_wrap (bool): Whether word wrap is enabled. Defaults to True.
             indent (int): The indentation. Defaults to 10.
@@ -199,7 +204,7 @@ class PyTimer(PyLabel):
 		self.hours_format = timer_init.hours_format
 		self.minutes_format = timer_init.minutes_format
 		self.seconds_format = timer_init.seconds_format
-		self.end_time: typing.Union[datetime, None] = None
+		self.end_time: typing.Optional[datetime] = None
 		self.disable_negative_time = timer_init.disable_negative_time
 		self.prefix = timer_init.prefix
 		self.postfix = timer_init.postfix
@@ -209,12 +214,12 @@ class PyTimer(PyLabel):
 		
 		self.setText("%s%s%s" % (self.prefix, self.get_time_string(), self.postfix))
 	
-	def get_time_string(self, time_: typing.Union[relativedelta, None] = None) -> str:
+	def get_time_string(self, time_: typing.Optional[relativedelta] = None) -> str:
 		"""
         Formats the time difference into a string.
 
         Args:
-            time_ (typing.Union[relativedelta, None]): The time difference to format.
+            time_ (typing.Optional[relativedelta]): The time difference to format.
 
         Returns:
             str: The formatted time string.
@@ -227,9 +232,17 @@ class PyTimer(PyLabel):
 		weeks_s = self.weeks_format.format(value=time_.weeks) if time_.weeks or self.always_print_weeks else ""
 		days_s = self.days_format.format(value=time_.days) if time_.days or self.always_print_days else ""
 		hours_s = self.hours_format.format(value=time_.hours) if time_.hours or self.always_print_hours else ""
-		minutes_s = (self.minutes_format.format(value=time_.minutes) if time_.minutes or self.always_print_minutes else "")
+		minutes_s = (
+				self.minutes_format.format(value=time_.minutes)
+				if time_.minutes
+				or self.always_print_minutes
+				else ""
+		)
 		seconds_s = (
-				self.seconds_format.format(value=time_.seconds) if time_.seconds or self.always_print_seconds else ""
+				self.seconds_format.format(value=time_.seconds)
+				if time_.seconds
+				or self.always_print_seconds
+				else ""
 		)
 		
 		time_out_of_day = " ".join(list(filter(None, [years_s, months_s, weeks_s, days_s])))
@@ -301,15 +314,15 @@ class StopWatchInit(LabelInit):
 
     Attributes:
         name (str): The object name of the stopwatch. Defaults to "stop_watch".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the stopwatch is enabled. Defaults to True.
         visible (bool): Whether the stopwatch is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the stopwatch. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the stopwatch. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the stopwatch. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the stopwatch. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the stopwatch. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the stopwatch. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the stopwatch. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the stopwatch. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the stopwatch. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the stopwatch. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the stopwatch. Defaults to None.
         scaled_contents (bool): Whether to scale contents. Defaults to False.
         word_wrap (bool): Whether to wrap words. Defaults to True.
         indent (int): Indentation value. Defaults to 10.
@@ -338,15 +351,15 @@ class StopWatchInit(LabelInit):
 	def __init__(
 			self,
 			name: str = "stop_watch",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			scaled_contents: bool = False,
 			word_wrap: bool = True,
 			indent: int = 10,
@@ -361,7 +374,12 @@ class StopWatchInit(LabelInit):
 			always_print_hours: bool = True,
 			always_print_minutes: bool = True,
 			always_print_seconds: bool = True,
-			years_format: str = "{value}y", months_format: str = "{value}mon", weeks_format: str = "{value}w", days_format: str = "{value}d", hours_format: str = "{value:02d}", minutes_format: str = "{value:02d}",
+			years_format: str = "{value}y",
+			months_format: str = "{value}mon",
+			weeks_format: str = "{value}w",
+			days_format: str = "{value}d",
+			hours_format: str = "{value:02d}",
+			minutes_format: str = "{value:02d}",
 			seconds_format: str = "{value:02d}",
 			prefix: str = "",
 			postfix: str = ""
@@ -371,15 +389,15 @@ class StopWatchInit(LabelInit):
 
         Args:
             name (str): The object name of the stopwatch. Defaults to "stop_watch".
-            parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+            parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
             enabled (bool): Whether the stopwatch is enabled. Defaults to True.
             visible (bool): Whether the stopwatch is visible. Defaults to True.
             style_sheet (str): The style sheet to apply to the stopwatch. Defaults to "".
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size of the stopwatch. Defaults to None.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size of the stopwatch. Defaults to None.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size of the stopwatch. Defaults to None.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy of the stopwatch. Defaults to None.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the stopwatch. Defaults to None.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size of the stopwatch. Defaults to None.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size of the stopwatch. Defaults to None.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size of the stopwatch. Defaults to None.
+            size_policy (typing.Optional[QSizePolicy]): The size policy of the stopwatch. Defaults to None.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the stopwatch. Defaults to None.
             scaled_contents (bool): Whether to scale contents. Defaults to False.
             word_wrap (bool): Whether to wrap words. Defaults to True.
             indent (int): Indentation value. Defaults to 10.
@@ -472,7 +490,7 @@ class PyStopWatch(PyLabel):
 		self.hours_format = stop_watch_init.hours_format
 		self.minutes_format = stop_watch_init.minutes_format
 		self.seconds_format = stop_watch_init.seconds_format
-		self.start_time: typing.Union[datetime, None] = None
+		self.start_time: typing.Optional[datetime] = None
 		self.prefix = stop_watch_init.prefix
 		self.postfix = stop_watch_init.postfix
 		
@@ -481,12 +499,12 @@ class PyStopWatch(PyLabel):
 		
 		self.setText("%s%s%s" % (self.prefix, self.get_time_string(), self.postfix))
 	
-	def get_time_string(self, time_: typing.Union[relativedelta, None] = None) -> str:
+	def get_time_string(self, time_: typing.Optional[relativedelta] = None) -> str:
 		"""
         Formats a time delta into a string.
 
         Args:
-            time_ (typing.Union[relativedelta, None]): A relativedelta object representing the time difference. If None, defaults to zero time.
+            time_ (typing.Optional[relativedelta]): A relativedelta object representing the time difference. If None, defaults to zero time.
 
         Returns:
             str: A formatted time string.
@@ -499,9 +517,17 @@ class PyStopWatch(PyLabel):
 		weeks_s = self.weeks_format.format(value=time_.weeks) if time_.weeks or self.always_print_weeks else ""
 		days_s = self.days_format.format(value=time_.days) if time_.days or self.always_print_days else ""
 		hours_s = self.hours_format.format(value=time_.hours) if time_.hours or self.always_print_hours else ""
-		minutes_s = (self.minutes_format.format(value=time_.minutes) if time_.minutes or self.always_print_minutes else "")
+		minutes_s = (
+				self.minutes_format.format(value=time_.minutes)
+				if time_.minutes
+				or self.always_print_minutes
+				else ""
+		)
 		seconds_s = (
-				self.seconds_format.format(value=time_.seconds) if time_.seconds or self.always_print_seconds else ""
+				self.seconds_format.format(value=time_.seconds)
+				if time_.seconds
+				or self.always_print_seconds
+				else ""
 		)
 		
 		time_out_of_day = " ".join(list(filter(None, [years_s, months_s, weeks_s, days_s])))
@@ -547,15 +573,15 @@ class ProgressWatcherInit(LabelInit):
 
     Attributes:
         name (str): The object name of the progress watcher. Defaults to "progress_watcher".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the progress watcher is enabled. Defaults to True.
         visible (bool): Whether the progress watcher is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the progress watcher. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the progress watcher. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the progress watcher. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the progress watcher. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the progress watcher. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the progress watcher. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the progress watcher. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the progress watcher. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the progress watcher. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the progress watcher. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the progress watcher. Defaults to None.
         scaled_contents (bool): Whether to scale the contents. Defaults to False.
         word_wrap (bool): Whether word wrap is enabled. Defaults to True.
         indent (int): The indentation. Defaults to 10.
@@ -597,15 +623,15 @@ class ProgressWatcherInit(LabelInit):
 	def __init__(
 			self,
 			name: str = "progress_watcher",
-			parent: QWidget = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: ObjectSize = None,
-			maximum_size: ObjectSize = None,
-			fixed_size: ObjectSize = None,
-			size_policy: QSizePolicy = None,
-			graphic_effect: QGraphicsEffect = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			scaled_contents: bool = False,
 			word_wrap: bool = True,
 			indent: int = 10,
@@ -624,7 +650,22 @@ class ProgressWatcherInit(LabelInit):
 			always_print_minutes: bool = True,
 			always_print_seconds: bool = True,
 			disable_negative_time: bool = True,
-			points_per_year_format: str = "{points:.2f}/y", points_per_month_format: str = "{points:.2f}/mon", points_per_week_format: str = "{points:.2f}/w", points_per_day_format: str = "{points:.2f}/d", points_per_hour_format: str = "{points:.2f}/h", points_per_minute_format: str = "{points:.2f}/m", points_per_second_format: str = "{points:.2f}/s", points_per_millisecond_format: str = "{points:.2f}/ms", points_per_microsecond_format: str = "{points:.2f}/mcs", points_per_nanosecond_format: str = "{points:.2f}/ns", years_format: str = "{value}y", months_format: str = "{value}mon", weeks_format: str = "{value}w", days_format: str = "{value}d", hours_format: str = "{value:02d}", minutes_format: str = "{value:02d}",
+			points_per_year_format: str = "{points:.2f}/y",
+			points_per_month_format: str = "{points:.2f}/mon",
+			points_per_week_format: str = "{points:.2f}/w",
+			points_per_day_format: str = "{points:.2f}/d",
+			points_per_hour_format: str = "{points:.2f}/h",
+			points_per_minute_format: str = "{points:.2f}/m",
+			points_per_second_format: str = "{points:.2f}/s",
+			points_per_millisecond_format: str = "{points:.2f}/ms",
+			points_per_microsecond_format: str = "{points:.2f}/mcs",
+			points_per_nanosecond_format: str = "{points:.2f}/ns",
+			years_format: str = "{value}y",
+			months_format: str = "{value}mon",
+			weeks_format: str = "{value}w",
+			days_format: str = "{value}d",
+			hours_format: str = "{value:02d}",
+			minutes_format: str = "{value:02d}",
 			seconds_format: str = "{value:02d}",
 			output_format: str = "{current_point}/{end_point} ({progress_percent:.2f}%, {points_per_time}), {time_gone} / {est_time}"
 	):
@@ -633,15 +674,15 @@ class ProgressWatcherInit(LabelInit):
 
         Args:
             name (str): The object name of the progress watcher. Defaults to "progress_watcher".
-            parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+            parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
             enabled (bool): Whether the progress watcher is enabled. Defaults to True.
             visible (bool): Whether the progress watcher is visible. Defaults to True.
             style_sheet (str): The style sheet to apply to the progress watcher. Defaults to "".
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size of the progress watcher. Defaults to None.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size of the progress watcher. Defaults to None.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size of the progress watcher. Defaults to None.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy of the progress watcher. Defaults to None.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the progress watcher. Defaults to None.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size of the progress watcher. Defaults to None.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size of the progress watcher. Defaults to None.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size of the progress watcher. Defaults to None.
+            size_policy (typing.Optional[QSizePolicy]): The size policy of the progress watcher. Defaults to None.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the progress watcher. Defaults to None.
             scaled_contents (bool): Whether to scale the contents. Defaults to False.
             word_wrap (bool): Whether word wrap is enabled. Defaults to True.
             indent (int): The indentation. Defaults to 10.
@@ -773,8 +814,8 @@ class PyProgressWatcher(PyLabel):
 		self.seconds_format = progress_watcher_init.seconds_format
 		self.disable_negative_time = progress_watcher_init.disable_negative_time
 		self.output_format = progress_watcher_init.output_format
-		self.start_time: typing.Union[datetime, None] = None
-		self.end_time: typing.Union[datetime, None] = None
+		self.start_time: typing.Optional[datetime] = None
+		self.end_time: typing.Optional[datetime] = None
 		self.block_print = False
 		self.seconds_for_point = 0.0
 		
@@ -817,13 +858,15 @@ class PyProgressWatcher(PyLabel):
 				progress_percent = 0.0
 		
 			self.setText(
-					self.output_format.format(current_point=self.current_point,
-					end_point=self.end_point,
-					progress_percent=progress_percent,
-					points_per_time=self.get_points_per_time_sting(),
-					time_gone=self.get_elapsed_time_string(),
-					est_time=self.get_estimated_time_string()
-			))
+					self.output_format.format(
+							current_point=self.current_point,
+							end_point=self.end_point,
+							progress_percent=progress_percent,
+							points_per_time=self.get_points_per_time_sting(),
+							time_gone=self.get_elapsed_time_string(),
+							est_time=self.get_estimated_time_string()
+					)
+			)
 	
 	def start_progress_watcher(self, start_point: int, end_point: int, current_point: int):
 		"""
@@ -846,12 +889,12 @@ class PyProgressWatcher(PyLabel):
 		
 		self.timer.start(self.update_interval)
 	
-	def get_time_string(self, time_: typing.Union[relativedelta, None] = None) -> str:
+	def get_time_string(self, time_: typing.Optional[relativedelta] = None) -> str:
 		"""
         Formats a relativedelta object or zero time into a string.
 
         Args:
-            time_ (typing.Union[relativedelta, None]): The time to format. Defaults to None.
+            time_ (typing.Optional[relativedelta]): The time to format. Defaults to None.
 
         Returns:
             str: The formatted time string.
@@ -864,9 +907,17 @@ class PyProgressWatcher(PyLabel):
 		weeks_s = self.weeks_format.format(value=time_.weeks) if time_.weeks or self.always_print_weeks else ""
 		days_s = self.days_format.format(value=time_.days) if time_.days or self.always_print_days else ""
 		hours_s = self.hours_format.format(value=time_.hours) if time_.hours or self.always_print_hours else ""
-		minutes_s = (self.minutes_format.format(value=time_.minutes) if time_.minutes or self.always_print_minutes else "")
+		minutes_s = (
+				self.minutes_format.format(value=time_.minutes)
+				if time_.minutes
+				or self.always_print_minutes
+				else ""
+		)
 		seconds_s = (
-				self.seconds_format.format(value=time_.seconds) if time_.seconds or self.always_print_seconds else ""
+				self.seconds_format.format(value=time_.seconds)
+				if time_.seconds
+				or self.always_print_seconds
+				else ""
 		)
 		
 		time_out_of_day = " ".join(list(filter(None, [years_s, months_s, weeks_s, days_s])))
@@ -918,11 +969,15 @@ class PyProgressWatcher(PyLabel):
 			progress_percent = 0.0
 		
 		self.setText(
-				self.output_format.format(current_point=current_point,
-				end_point=end_point,
-				progress_percent=progress_percent,
-				points_per_time=self.points_per_second_format.format(points=0.0
-		), time_gone=self.get_elapsed_time_string(), est_time=self.get_estimated_time_string(), ))
+				self.output_format.format(
+						current_point=current_point,
+						end_point=end_point,
+						progress_percent=progress_percent,
+						points_per_time=self.points_per_second_format.format(points=0.0),
+						time_gone=self.get_elapsed_time_string(),
+						est_time=self.get_estimated_time_string()
+				)
+		)
 	
 	def stop_progress_watcher(self, save_output: bool = False):
 		"""
@@ -965,7 +1020,9 @@ class PyProgressWatcher(PyLabel):
 		self.current_point += 1
 		try:
 			self.seconds_for_point = (time() - self.start_time.timestamp()) / (self.current_point - self.start_point)
-			self.end_time = datetime.now() + relativedelta(seconds=+int((self.end_point - self.current_point) * self.seconds_for_point))
+			self.end_time = datetime.now() + relativedelta(
+					seconds=+int((self.end_point - self.current_point) * self.seconds_for_point)
+			)
 		except ZeroDivisionError:
 			self.seconds_for_point = 0.0
 			self.end_time = datetime.now()

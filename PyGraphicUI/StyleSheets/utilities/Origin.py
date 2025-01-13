@@ -19,9 +19,9 @@ class Origin:
             origin (str): The origin value.
         """
 		self.origin = ""
-		self.set_origin(origin)
+		self.set(origin)
 	
-	def set_origin(self, origin: str):
+	def set(self, origin: str):
 		"""
         Sets the origin value.
 

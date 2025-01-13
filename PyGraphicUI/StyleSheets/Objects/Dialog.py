@@ -37,7 +37,7 @@ class DialogStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QDialog")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QDialog")
+			self.style_sheet_object.add_css_object("QDialog")
 		
 		self.update_style()
 
@@ -50,12 +50,15 @@ class DialogStyleSheet(BaseStyleSheet):
         DialogStyleSheet(dialog_style=[DialogStyle(), DialogStyle()])
     """
 	
-	def __init__(self, dialog_style: typing.Union[DialogStyle, typing.Iterable[DialogStyle], None] = None):
+	def __init__(
+			self,
+			dialog_style: typing.Optional[typing.Union[DialogStyle, typing.Iterable[DialogStyle]]] = None
+	):
 		"""
         Initializes a DialogStyleSheet object.
 
         Args:
-            dialog_style (typing.Union[DialogStyle, typing.Iterable[DialogStyle], None]): A DialogStyle object or typing.Iterable of DialogStyle objects representing the styles to be applied to the QDialog objects.
+            dialog_style (typing.Optional[typing.Union[DialogStyle, typing.Iterable[DialogStyle]]]): A DialogStyle object or typing.Iterable of DialogStyle objects representing the styles to be applied to the QDialog objects.
         """
 		super().__init__()
 		
@@ -80,7 +83,7 @@ class ChainDialogStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			**kwargs
 	):
 		"""
@@ -88,10 +91,14 @@ class ChainDialogStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QDialog will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QDialog", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QDialog", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		

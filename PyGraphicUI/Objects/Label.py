@@ -21,15 +21,15 @@ class LabelInit(WidgetInit):
 
     Attributes:
         name (str): The object name of the label. Defaults to "label".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the label is enabled. Defaults to True.
         visible (bool): Whether the label is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the label. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the label. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the label. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the label. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the label. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the label. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the label. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the label. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the label. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the label. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the label. Defaults to None.
         scaled_contents (bool): Whether the contents should be scaled to fit the label. Defaults to False.
         word_wrap (bool): Whether the text should wrap. Defaults to True.
         indent (int): The indentation of the text. Defaults to 0.
@@ -42,15 +42,15 @@ class LabelInit(WidgetInit):
 	def __init__(
 			self,
 			name: str = "label",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			scaled_contents: bool = False,
 			word_wrap: bool = True,
 			indent: int = 0,
@@ -64,15 +64,15 @@ class LabelInit(WidgetInit):
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the label is enabled.
             visible (bool): Whether the label is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
             scaled_contents (bool): Whether to scale contents.
             word_wrap (bool): Whether to wrap text.
             indent (int): Text indentation.
@@ -108,13 +108,17 @@ class PyLabel(QLabel, PyWidget):
     Custom label class inheriting from QLabel and PyWidget.
     """
 	
-	def __init__(self, label_init: LabelInit = LabelInit(), instance: typing.Union[str, PixmapInstance, None] = None):
+	def __init__(
+			self,
+			label_init: LabelInit = LabelInit(),
+			instance: typing.Optional[typing.Union[str, PixmapInstance]] = None
+	):
 		"""
         Initializes a PyLabel object.
 
         Args:
             label_init (LabelInit): Initialization parameters for the label.
-            instance (typing.Union[str, PixmapInstance, None]): Initial content for the label, either text or a PixmapInstance. Defaults to None.
+            instance (typing.Optional[typing.Union[str, PixmapInstance]]): Initial content for the label, either text or a PixmapInstance. Defaults to None.
         """
 		super().__init__(widget_init=label_init)
 		
@@ -129,12 +133,15 @@ class PyLabel(QLabel, PyWidget):
 		self.setMargin(label_init.margin)
 		self.set_label_instance(instance)
 	
-	def set_label_instance(self, label_instance: typing.Union[str, TextInstance, PixmapInstance, None] = None):
+	def set_label_instance(
+			self,
+			label_instance: typing.Optional[typing.Union[str, TextInstance, PixmapInstance]] = None
+	):
 		"""
         Set the content to display in label.
 
         Args:
-            label_instance (typing.Union[str, TextInstance, PixmapInstance, None]): The content to display. Defaults to None.
+            label_instance (typing.Optional[typing.Union[str, TextInstance, PixmapInstance]]): The content to display. Defaults to None.
         """
 		if isinstance(label_instance, TextInstance):
 			self.setText(label_instance.text)

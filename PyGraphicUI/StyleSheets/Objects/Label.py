@@ -37,7 +37,7 @@ class LabelStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QLabel")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QLabel")
+			self.style_sheet_object.add_css_object("QLabel")
 		
 		self.update_style()
 
@@ -50,12 +50,15 @@ class LabelStyleSheet(BaseStyleSheet):
         LabelStyleSheet(label_style=[LabelStyle(), LabelStyle()])
     """
 	
-	def __init__(self, label_style: typing.Union[LabelStyle, typing.Iterable[LabelStyle], None] = None):
+	def __init__(
+			self,
+			label_style: typing.Optional[typing.Union[LabelStyle, typing.Iterable[LabelStyle]]] = None
+	):
 		"""
         Initializes a LabelStyleSheet object.
 
         Args:
-            label_style (typing.Union[LabelStyle, typing.Iterable[LabelStyle], None]): A LabelStyle object or typing.Iterable of LabelStyle objects representing the styles to be applied to the QLabel objects.
+            label_style (typing.Optional[typing.Union[LabelStyle, typing.Iterable[LabelStyle]]]): A LabelStyle object or typing.Iterable of LabelStyle objects representing the styles to be applied to the QLabel objects.
         """
 		super().__init__()
 		
@@ -80,7 +83,7 @@ class ChainLabelStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			**kwargs
 	):
 		"""
@@ -88,10 +91,14 @@ class ChainLabelStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QLabel will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QLabel", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QLabel", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		

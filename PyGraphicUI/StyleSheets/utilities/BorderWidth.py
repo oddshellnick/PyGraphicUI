@@ -22,9 +22,9 @@ class BorderWidth:
             border_width (BoxLengths): The border width value.
         """
 		self.border_width = ""
-		self.set_border_width(border_width)
+		self.set(border_width)
 	
-	def set_border_width(self, border_width: BoxLengths):
+	def set(self, border_width: BoxLengths):
 		"""
         Sets the border width value.
 
@@ -59,9 +59,9 @@ class BorderTopWidth:
             border_width (Length): The border top width value.
         """
 		self.border_top_width = ""
-		self.set_border_width(border_width)
+		self.set(border_width)
 	
-	def set_border_width(self, border_width: Length):
+	def set(self, border_width: Length):
 		"""
         Sets the border top width value.
 
@@ -96,9 +96,9 @@ class BorderRightWidth:
             border_width (Length): The border right width value.
         """
 		self.border_right_width = ""
-		self.set_border_width(border_width)
+		self.set(border_width)
 	
-	def set_border_width(self, border_width: Length):
+	def set(self, border_width: Length):
 		"""
         Sets the border right width value.
 
@@ -133,9 +133,9 @@ class BorderLeftWidth:
             border_width (Length): The border left width value.
         """
 		self.border_left_width = ""
-		self.set_border_width(border_width)
+		self.set(border_width)
 	
-	def set_border_width(self, border_width: Length):
+	def set(self, border_width: Length):
 		"""
         Sets the border left width value.
 
@@ -170,9 +170,9 @@ class BorderBottomWidth:
             border_width (Length): The border bottom width value.
         """
 		self.border_bottom_width = ""
-		self.set_border_width(border_width)
+		self.set(border_width)
 	
-	def set_border_width(self, border_width: Length):
+	def set(self, border_width: Length):
 		"""
         Sets the border bottom width value.
 

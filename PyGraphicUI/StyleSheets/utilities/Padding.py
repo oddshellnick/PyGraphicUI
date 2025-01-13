@@ -22,9 +22,9 @@ class PaddingTop:
             padding (Length): The padding top value.
         """
 		self.padding_top = ""
-		self.set_padding(padding)
+		self.set(padding)
 	
-	def set_padding(self, padding: Length):
+	def set(self, padding: Length):
 		"""
         Sets the padding top value.
 
@@ -59,9 +59,9 @@ class PaddingRight:
             padding (Length): The padding right value.
         """
 		self.padding_right = ""
-		self.set_padding(padding)
+		self.set(padding)
 	
-	def set_padding(self, padding: Length):
+	def set(self, padding: Length):
 		"""
         Sets the padding right value.
 
@@ -96,9 +96,9 @@ class PaddingLeft:
             padding (Length): The padding left value.
         """
 		self.padding_left = ""
-		self.set_padding(padding)
+		self.set(padding)
 	
-	def set_padding(self, padding: Length):
+	def set(self, padding: Length):
 		"""
         Sets the padding left value.
 
@@ -133,9 +133,9 @@ class PaddingBottom:
             padding (Length): The padding bottom value.
         """
 		self.padding_bottom = ""
-		self.set_padding(padding)
+		self.set(padding)
 	
-	def set_padding(self, padding: Length):
+	def set(self, padding: Length):
 		"""
         Sets the padding bottom value.
 
@@ -170,9 +170,9 @@ class Padding:
             padding (BoxLengths): The padding value.
         """
 		self.padding = ""
-		self.set_padding(padding)
+		self.set(padding)
 	
-	def set_padding(self, padding: BoxLengths):
+	def set(self, padding: BoxLengths):
 		"""
         Sets the padding value.
 

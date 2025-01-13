@@ -19,9 +19,9 @@ class Opacity:
             opacity (int): The opacity value (0-255).
         """
 		self.opacity = ""
-		self.set_opacity(opacity)
+		self.set(opacity)
 	
-	def set_opacity(self, opacity: int = 255):
+	def set(self, opacity: int = 255):
 		"""
         Sets the opacity value.
 

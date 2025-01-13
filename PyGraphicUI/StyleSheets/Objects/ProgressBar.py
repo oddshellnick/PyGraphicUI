@@ -37,7 +37,7 @@ class ProgressBarStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QProgressBar")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QProgressBar")
+			self.style_sheet_object.add_css_object("QProgressBar")
 		
 		self.update_style()
 
@@ -50,12 +50,15 @@ class ProgressBarStyleSheet(BaseStyleSheet):
         This class is used to create a style sheet for a progress bar.
     """
 	
-	def __init__(self, progress_bar_style: typing.Union[ProgressBarStyle, typing.Iterable[ProgressBarStyle], None] = None):
+	def __init__(
+			self,
+			progress_bar_style: typing.Optional[typing.Union[ProgressBarStyle, typing.Iterable[ProgressBarStyle]]] = None
+	):
 		"""
         Initialize a new ProgressBarStyleSheet instance.
 
         Args:
-            progress_bar_style (typing.Union[ProgressBarStyle, typing.Iterable[ProgressBarStyle], None]): The style(s) to add to the style sheet. Defaults to None.
+            progress_bar_style (typing.Optional[typing.Union[ProgressBarStyle, typing.Iterable[ProgressBarStyle]]]): The style(s) to add to the style sheet. Defaults to None.
         """
 		super().__init__()
 		
@@ -91,7 +94,11 @@ class ChainProgressBarStyle(BaseStyle):
             widget_selector (tuple[str, Selector], optional): The selector for the widget. Defaults to None.
             **kwargs: Keyword arguments, passed to the parent class constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QProgressBar", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QProgressBar", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		

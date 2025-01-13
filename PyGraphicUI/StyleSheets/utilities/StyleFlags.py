@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class StyleFlags:
 	"""
     Constants representing various style flags and options used in CSS.
     """
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Alignment:
 		"""
         Constants for alignment properties.
@@ -29,7 +29,7 @@ class StyleFlags:
 		LeftCenter = "left center"
 		RightCenter = "right center"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Attachment:
 		"""
         Constants for background-attachment property.
@@ -38,7 +38,7 @@ class StyleFlags:
 		Scroll = "scroll"
 		Fixed = "fixed"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Background:
 		"""
         Constants for background property.
@@ -46,7 +46,7 @@ class StyleFlags:
 		
 		None_ = "none"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class BorderStyle:
 		"""
         Constants for border-style property.
@@ -64,7 +64,7 @@ class StyleFlags:
 		Solid = "solid"
 		None_ = "none"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class ColorName:
 		"""
         Constants for color names.
@@ -72,7 +72,7 @@ class StyleFlags:
 		
 		Transparent = "transparent"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class FontStyle:
 		"""
         Constants for font-style property.
@@ -82,7 +82,7 @@ class StyleFlags:
 		Italic = "italic"
 		Oblique = "oblique"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class FontWeight:
 		"""
         Constants for font-weight property.
@@ -91,7 +91,7 @@ class StyleFlags:
 		Normal = "normal"
 		Bold = "bold"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class IconMode:
 		"""
         Constants for icon modes.
@@ -102,7 +102,7 @@ class StyleFlags:
 		Normal = "normal"
 		Selected = "selected"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class IconState:
 		"""
         Constants for icon states.
@@ -111,7 +111,7 @@ class StyleFlags:
 		On = "on"
 		Off = "off"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class LineStyle:
 		"""
         Constants for border-style property and similar.
@@ -128,7 +128,7 @@ class StyleFlags:
 		Solid = "solid"
 		none = "none"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Origin:
 		"""
         Constants for background-origin property.
@@ -139,7 +139,7 @@ class StyleFlags:
 		Content = "content"
 		Border = "border"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class PaletteRole:
 		"""
         Constants for palette roles, used with background color, etc.
@@ -163,7 +163,7 @@ class StyleFlags:
 		Window = "window"
 		WindowText = "window-text"
 	
-	@dataclass
+	@dataclass(frozen=True)
 	class Repeat:
 		"""
         Constants for background-repeat property.

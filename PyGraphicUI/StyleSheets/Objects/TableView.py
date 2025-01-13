@@ -31,12 +31,12 @@ class TableViewStyle(BaseStyle):
         TableViewStyle(gridline_color=GridLineColor(Color(RGB(100, 100, 100))))
     """
 	
-	def __init__(self, gridline_color: typing.Union[GridLineColor, None] = None, **kwargs):
+	def __init__(self, gridline_color: typing.Optional[GridLineColor] = None, **kwargs):
 		"""
         Initializes a TableViewStyle object.
 
         Args:
-            gridline_color (typing.Union[GridLineColor, None]): A GridLineColor object representing the color to be used for the grid lines.
+            gridline_color (typing.Optional[GridLineColor]): A GridLineColor object representing the color to be used for the grid lines.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
 		object_of_style, kwargs = get_objects_of_style(("QTableView", Selector(SelectorFlag.Type)), **kwargs)
@@ -84,16 +84,16 @@ class TableViewStyle(BaseStyle):
 		
 		def __init__(
 				self,
-				subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-				subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+				subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+				subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 				**kwargs
 		):
 			"""
             Initializes a HeaderView object.
 
             Args:
-                subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-                subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+                subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+                subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
                 **kwargs: Additional keyword arguments passed to the ChainHeaderViewStyle constructor.
             """
 			parent_objects, kwargs = get_objects_of_style(("QTableView", Selector(SelectorFlag.Type)), **kwargs)
@@ -113,16 +113,16 @@ class TableViewStyle(BaseStyle):
 		
 		def __init__(
 				self,
-				subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-				subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+				subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+				subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 				**kwargs
 		):
 			"""
             Initializes a ScrollBar object.
 
             Args:
-                subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-                subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+                subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+                subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
                 **kwargs: Additional keyword arguments passed to the ChainScrollBarStyle constructor.
             """
 			parent_objects, kwargs = get_objects_of_style(("QTableView", Selector(SelectorFlag.Type)), **kwargs)
@@ -144,19 +144,27 @@ class TableViewStyleSheet(BaseStyleSheet):
         TableViewStyleSheet(table_view_style=[TableViewStyle(gridline_color=GridLineColor(Color(RGB(100, 100, 100)))), TableViewStyle.ScrollBar(subcontrol_position=SubcontrolPosition.AddLine)])
     """
 	
-	def __init__(self, table_view_style: typing.Union[TableViewStyle, typing.Iterable[TableViewStyle], None] = None):
+	def __init__(
+			self,
+			table_view_style: typing.Optional[typing.Union[TableViewStyle, typing.Iterable[TableViewStyle]]] = None
+	):
 		"""
         Initializes a TableViewStyleSheet object.
 
         Args:
-            table_view_style (typing.Union[TableViewStyle, typing.Iterable[TableViewStyle], None]): A TableViewStyle object, TableViewStyle.HeaderView object, TableViewStyle.ScrollBar object, TableViewStyle.CornerButton object, or typing.Iterable of TableViewStyle, TableViewStyle.HeaderView, TableViewStyle.ScrollBar, or TableViewStyle.CornerButton objects representing the styles to be applied to the QTableView objects.
+            table_view_style (typing.Optional[typing.Union[TableViewStyle, typing.Iterable[TableViewStyle]]]): A TableViewStyle object, TableViewStyle.HeaderView object, TableViewStyle.ScrollBar object, TableViewStyle.CornerButton object, or typing.Iterable of TableViewStyle, TableViewStyle.HeaderView, TableViewStyle.ScrollBar, or TableViewStyle.CornerButton objects representing the styles to be applied to the QTableView objects.
         """
 		super().__init__()
 		
 		if table_view_style is not None:
 			if isinstance(
 					table_view_style,
-					(TableViewStyle, TableViewStyle.HeaderView, TableViewStyle.ScrollBar, TableViewStyle.CornerButton)
+					(
+							TableViewStyle,
+							TableViewStyle.HeaderView,
+							TableViewStyle.ScrollBar,
+							TableViewStyle.CornerButton
+					)
 			):
 				self.add_style(table_view_style)
 			else:
@@ -177,8 +185,8 @@ class ChainTableViewStyles(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
-			gridline_color: typing.Union[GridLineColor, None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
+			gridline_color: typing.Optional[GridLineColor] = None,
 			**kwargs
 	):
 		"""
@@ -186,11 +194,15 @@ class ChainTableViewStyles(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QTableView will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
-            gridline_color (typing.Union[GridLineColor, None]): A GridLineColor object representing the color to be used for the grid lines.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            gridline_color (typing.Optional[GridLineColor]): A GridLineColor object representing the color to be used for the grid lines.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QTableView", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QTableView", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		
@@ -222,7 +234,7 @@ class ChainTableViewStyles(BaseStyle):
 		def __init__(
 				self,
 				parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-				widget_selector: typing.Union[tuple[str, Selector], None] = None,
+				widget_selector: typing.Optional[tuple[str, Selector]] = None,
 				**kwargs
 		):
 			"""
@@ -230,11 +242,18 @@ class ChainTableViewStyles(BaseStyle):
 
             Args:
                 parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The parent style sheet object or typing.Iterable of objects.
-                widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to.
+                widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to.
                 **kwargs: Additional keyword arguments passed to the ChainTableCornerButtonStyle constructor.
             """
-			new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QTableView", Selector(SelectorFlag.Descendant)))
-			parent_objects, kwargs = get_objects_of_style((new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)), **kwargs)
+			new_parent_objects = get_new_parent_objects(
+					parent_css_object,
+					widget_selector,
+					("QTableView", Selector(SelectorFlag.Descendant))
+			)
+			parent_objects, kwargs = get_objects_of_style(
+					(new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)),
+					**kwargs
+			)
 			
 			super().__init__(parent_css_object=parent_objects, widget_selector=None, **kwargs)
 	
@@ -246,9 +265,9 @@ class ChainTableViewStyles(BaseStyle):
 		def __init__(
 				self,
 				parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-				widget_selector: typing.Union[tuple[str, Selector], None] = None,
-				subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-				subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+				widget_selector: typing.Optional[tuple[str, Selector]] = None,
+				subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+				subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 				**kwargs
 		):
 			"""
@@ -256,13 +275,20 @@ class ChainTableViewStyles(BaseStyle):
 
             Args:
                 parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The parent style sheet object or typing.Iterable of objects.
-                widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to.
-                subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-                subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+                widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to.
+                subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+                subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
                 **kwargs: Additional keyword arguments passed to the ChainHeaderViewStyle constructor.
             """
-			new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QTableView", Selector(SelectorFlag.Descendant)))
-			parent_objects, kwargs = get_objects_of_style((new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)), **kwargs)
+			new_parent_objects = get_new_parent_objects(
+					parent_css_object,
+					widget_selector,
+					("QTableView", Selector(SelectorFlag.Descendant))
+			)
+			parent_objects, kwargs = get_objects_of_style(
+					(new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)),
+					**kwargs
+			)
 			
 			super().__init__(
 					parent_css_object=parent_objects,
@@ -280,9 +306,9 @@ class ChainTableViewStyles(BaseStyle):
 		def __init__(
 				self,
 				parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-				widget_selector: typing.Union[tuple[str, Selector], None] = None,
-				subcontrol_position: typing.Union[SubcontrolPosition, None] = None,
-				subcontrol_origin: typing.Union[SubcontrolOrigin, None] = None,
+				widget_selector: typing.Optional[tuple[str, Selector]] = None,
+				subcontrol_position: typing.Optional[SubcontrolPosition] = None,
+				subcontrol_origin: typing.Optional[SubcontrolOrigin] = None,
 				**kwargs
 		):
 			"""
@@ -290,13 +316,20 @@ class ChainTableViewStyles(BaseStyle):
 
             Args:
                 parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The parent style sheet object or typing.Iterable of objects.
-                widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to.
-                subcontrol_position (typing.Union[SubcontrolPosition, None]): A SubcontrolPosition object representing the position of the subcontrol to style.
-                subcontrol_origin (typing.Union[SubcontrolOrigin, None]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
+                widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to.
+                subcontrol_position (typing.Optional[SubcontrolPosition]): A SubcontrolPosition object representing the position of the subcontrol to style.
+                subcontrol_origin (typing.Optional[SubcontrolOrigin]): A SubcontrolOrigin object representing the origin of the subcontrol to style.
                 **kwargs: Additional keyword arguments passed to the ChainScrollBarStyle constructor.
             """
-			new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QTableView", Selector(SelectorFlag.Descendant)))
-			parent_objects, kwargs = get_objects_of_style((new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)), **kwargs)
+			new_parent_objects = get_new_parent_objects(
+					parent_css_object,
+					widget_selector,
+					("QTableView", Selector(SelectorFlag.Descendant))
+			)
+			parent_objects, kwargs = get_objects_of_style(
+					(new_parent_objects.css_object.css_object, Selector(SelectorFlag.Type)),
+					**kwargs
+			)
 			
 			super().__init__(
 					parent_css_object=parent_objects,

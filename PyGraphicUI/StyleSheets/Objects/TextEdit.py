@@ -26,12 +26,16 @@ class TextEditStyle(BaseStyle):
         TextEditStyle(placeholder_text_color=PlaceholderTextColor(Color(RGB(100, 100, 100))))
     """
 	
-	def __init__(self, placeholder_text_color: typing.Union[PlaceholderTextColor, None] = None, **kwargs):
+	def __init__(
+			self,
+			placeholder_text_color: typing.Optional[PlaceholderTextColor] = None,
+			**kwargs
+	):
 		"""
         Initializes a TextEditStyle object.
 
         Args:
-            placeholder_text_color (typing.Union[PlaceholderTextColor, None]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
+            placeholder_text_color (typing.Optional[PlaceholderTextColor]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
 		super().__init__(**kwargs)
@@ -39,7 +43,7 @@ class TextEditStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QTextEdit")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QTextEdit")
+			self.style_sheet_object.add_css_object("QTextEdit")
 		
 		if placeholder_text_color is not None:
 			self.add_placeholder_text_color(placeholder_text_color)
@@ -68,12 +72,15 @@ class TextEditStyleSheet(BaseStyleSheet):
         TextEditStyleSheet(text_edit_style=[TextEditStyle(placeholder_text_color=PlaceholderTextColor(Color(RGB(100, 100, 100)))), TextEditStyle()])
     """
 	
-	def __init__(self, text_edit_style: typing.Union[TextEditStyle, typing.Iterable[TextEditStyle], None] = None):
+	def __init__(
+			self,
+			text_edit_style: typing.Optional[typing.Union[TextEditStyle, typing.Iterable[TextEditStyle]]] = None
+	):
 		"""
         Initializes a TextEditStyleSheet object.
 
         Args:
-            text_edit_style (typing.Union[TextEditStyle, typing.Iterable[TextEditStyle], None]): A TextEditStyle object or typing.Iterable of TextEditStyle objects representing the styles to be applied to the QTextEdit objects.
+            text_edit_style (typing.Optional[typing.Union[TextEditStyle, typing.Iterable[TextEditStyle]]]): A TextEditStyle object or typing.Iterable of TextEditStyle objects representing the styles to be applied to the QTextEdit objects.
         """
 		super().__init__()
 		
@@ -98,8 +105,8 @@ class ChainTextEditStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
-			placeholder_text_color: typing.Union[PlaceholderTextColor, None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
+			placeholder_text_color: typing.Optional[PlaceholderTextColor] = None,
 			**kwargs
 	):
 		"""
@@ -107,11 +114,15 @@ class ChainTextEditStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QTextEdit will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
-            placeholder_text_color (typing.Union[PlaceholderTextColor, None]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            placeholder_text_color (typing.Optional[PlaceholderTextColor]): A PlaceholderTextColor object representing the color to be used for the placeholder text.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QTextEdit", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QTextEdit", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		

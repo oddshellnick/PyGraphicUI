@@ -22,9 +22,9 @@ class BorderTopRightRadius:
             border_radius (Length): The border top right radius value.
         """
 		self.border_top_right_radius = ""
-		self.set_border_radius(border_radius)
+		self.set(border_radius)
 	
-	def set_border_radius(self, border_radius: Length):
+	def set(self, border_radius: Length):
 		"""
         Sets the border top right radius value.
 
@@ -59,9 +59,9 @@ class BorderTopLeftRadius:
             border_radius (Length): The border top left radius value.
         """
 		self.border_top_left_radius = ""
-		self.set_border_radius(border_radius)
+		self.set(border_radius)
 	
-	def set_border_radius(self, border_radius: Length):
+	def set(self, border_radius: Length):
 		"""
         Sets the border top left radius value.
 
@@ -96,9 +96,9 @@ class BorderRadius:
             border_radius (BoxLengths): The border radius value.
         """
 		self.border_radius = ""
-		self.set_border_radius(border_radius)
+		self.set(border_radius)
 	
-	def set_border_radius(self, border_radius: BoxLengths):
+	def set(self, border_radius: BoxLengths):
 		"""
         Sets the border radius value.
 
@@ -133,9 +133,9 @@ class BorderBottomRightRadius:
             border_radius (Length): The border bottom right radius value.
         """
 		self.border_bottom_right_radius = ""
-		self.set_border_radius(border_radius)
+		self.set(border_radius)
 	
-	def set_border_radius(self, border_radius: Length):
+	def set(self, border_radius: Length):
 		"""
         Sets the border bottom right radius value.
 
@@ -170,9 +170,9 @@ class BorderBottomLeftRadius:
             border_radius (Length): The border bottom left radius value.
         """
 		self.border_bottom_left_radius = ""
-		self.set_border_radius(border_radius)
+		self.set(border_radius)
 	
-	def set_border_radius(self, border_radius: Length):
+	def set(self, border_radius: Length):
 		"""
         Sets the border bottom left radius value.
 

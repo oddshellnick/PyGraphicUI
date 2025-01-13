@@ -24,9 +24,9 @@ class OutlineTopRightRadius:
             outline_radius (Length): The outline top right radius value.
         """
 		self.outline_top_right_radius = ""
-		self.set_outline_radius(outline_radius)
+		self.set(outline_radius)
 	
-	def set_outline_radius(self, outline_radius: Length):
+	def set(self, outline_radius: Length):
 		"""
         Sets the outline top right radius value.
 
@@ -61,9 +61,9 @@ class OutlineTopLeftRadius:
             outline_radius (Length): The outline top left radius value.
         """
 		self.outline_top_left_radius = ""
-		self.set_outline_radius(outline_radius)
+		self.set(outline_radius)
 	
-	def set_outline_radius(self, outline_radius: Length):
+	def set(self, outline_radius: Length):
 		"""
         Sets the outline top left radius value.
 
@@ -98,9 +98,9 @@ class OutlineStyle:
             outline_style (BorderStyle): The outline style value.
         """
 		self.outline_style = ""
-		self.set_outline_style(outline_style)
+		self.set(outline_style)
 	
-	def set_outline_style(self, outline_style: BorderStyle):
+	def set(self, outline_style: BorderStyle):
 		"""
         Sets the outline style value.
 
@@ -135,9 +135,9 @@ class OutlineRadius:
             outline_radius (BoxLengths): The outline radius value.
         """
 		self.outline_radius = ""
-		self.set_outline_radius(outline_radius)
+		self.set(outline_radius)
 	
-	def set_outline_radius(self, outline_radius: BoxLengths):
+	def set(self, outline_radius: BoxLengths):
 		"""
         Sets the outline radius value.
 
@@ -172,9 +172,9 @@ class OutlineColor:
             outline_color (BoxColors): The outline color value.
         """
 		self.outline_color = ""
-		self.set_outline_color(outline_color)
+		self.set(outline_color)
 	
-	def set_outline_color(self, outline_color: BoxColors):
+	def set(self, outline_color: BoxColors):
 		"""
         Sets the outline color value.
 
@@ -209,9 +209,9 @@ class OutlineBottomRightRadius:
             outline_radius (Length): The outline bottom right radius value.
         """
 		self.outline_bottom_right_radius = ""
-		self.set_outline_radius(outline_radius)
+		self.set(outline_radius)
 	
-	def set_outline_radius(self, outline_radius: Length):
+	def set(self, outline_radius: Length):
 		"""
         Sets the outline bottom right radius value.
 
@@ -246,9 +246,9 @@ class OutlineBottomLeftRadius:
             outline_radius (Length): The outline bottom left radius value.
         """
 		self.outline_bottom_left_radius = ""
-		self.set_outline_radius(outline_radius)
+		self.set(outline_radius)
 	
-	def set_outline_radius(self, outline_radius: Length):
+	def set(self, outline_radius: Length):
 		"""
         Sets the outline bottom left radius value.
 
@@ -279,7 +279,12 @@ class Outline:
         "outline: 10px solid #FF0000"
     """
 	
-	def __init__(self, outline_offset: Length, outline_style: BorderStyle, outline_color: Color):
+	def __init__(
+			self,
+			outline_offset: Length,
+			outline_style: BorderStyle,
+			outline_color: Color
+	):
 		"""
         Initializes an Outline object.
 
@@ -289,9 +294,14 @@ class Outline:
             outline_color (Color): The outline color value.
         """
 		self.outline = ""
-		self.set_outline(outline_offset, outline_style, outline_color)
+		self.set(outline_offset, outline_style, outline_color)
 	
-	def set_outline(self, outline_offset: Length, outline_style: BorderStyle, outline_color: Color):
+	def set(
+			self,
+			outline_offset: Length,
+			outline_style: BorderStyle,
+			outline_color: Color
+	):
 		"""
         Sets the outline value.
 

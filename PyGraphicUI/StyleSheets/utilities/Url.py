@@ -19,9 +19,9 @@ class Url:
             url (str): The URL value.
         """
 		self.url = ""
-		self.set_url(url)
+		self.set(url)
 	
-	def set_url(self, url: str):
+	def set(self, url: str):
 		"""
         Sets the URL value.
 

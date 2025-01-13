@@ -30,7 +30,7 @@ class ChainAbstractItemViewStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			**kwargs
 	):
 		"""
@@ -38,10 +38,14 @@ class ChainAbstractItemViewStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QAbstractItemView will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QAbstractItemView", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QAbstractItemView", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		
@@ -68,7 +72,7 @@ class AbstractItemViewStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QAbstractItemView")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QAbstractItemView")
+			self.style_sheet_object.add_css_object("QAbstractItemView")
 		
 		self.update_style()
 	
@@ -99,18 +103,23 @@ class AbstractItemViewStyleSheet(BaseStyleSheet):
 	
 	def __init__(
 			self,
-			AbstractItemView_style: typing.Union[AbstractItemViewStyle, typing.Iterable[AbstractItemViewStyle], None] = None
+			AbstractItemView_style: typing.Optional[
+				typing.Union[AbstractItemViewStyle, typing.Iterable[AbstractItemViewStyle]]
+			] = None
 	):
 		"""
         Initializes an AbstractItemViewStyleSheet object.
 
         Args:
-            AbstractItemView_style (typing.Union[AbstractItemViewStyle, typing.Iterable[AbstractItemViewStyle], None]): An AbstractItemViewStyle object or typing.Iterable of AbstractItemViewStyle objects representing the styles to be applied to the QAbstractItemView objects.
+            AbstractItemView_style (typing.Optional[typing.Union[AbstractItemViewStyle, typing.Iterable[AbstractItemViewStyle]]]): An AbstractItemViewStyle object or typing.Iterable of AbstractItemViewStyle objects representing the styles to be applied to the QAbstractItemView objects.
         """
 		super().__init__()
 		
 		if AbstractItemView_style is not None:
-			if isinstance(AbstractItemView_style, (AbstractItemViewStyle, AbstractItemViewStyle.ScrollBar)):
+			if isinstance(
+					AbstractItemView_style,
+					(AbstractItemViewStyle, AbstractItemViewStyle.ScrollBar)
+			):
 				self.add_style(AbstractItemView_style)
 			else:
 				for style in AbstractItemView_style:

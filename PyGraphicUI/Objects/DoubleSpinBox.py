@@ -16,15 +16,15 @@ class DoubleSpinBoxInit(WidgetInit):
 
     Attributes:
         name (str): The object name of the spin box. Defaults to "spinbox".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the spin box is enabled. Defaults to True.
         visible (bool): Whether the spin box is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the spin box. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the spin box. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the spin box. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the spin box. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the spin box. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the spin box. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the spin box. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the spin box. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the spin box. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the spin box. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the spin box. Defaults to None.
         font (PyFont): The font to use for the spin box text. Defaults to a default QFont object.
         minimum (float): The minimum value of the spin box. Defaults to 0.0.
         maximum (float): The maximum value of the spin box. Defaults to 100.0.
@@ -37,15 +37,15 @@ class DoubleSpinBoxInit(WidgetInit):
 	def __init__(
 			self,
 			name: str = "double_spinbox",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			font: PyFont = PyFont(),
 			minimum: float = 0.0,
 			maximum: float = 100.0,
@@ -59,15 +59,15 @@ class DoubleSpinBoxInit(WidgetInit):
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the spin box is enabled.
             visible (bool): Whether the spin box is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
             font (PyFont): The font for the text.
             minimum (int): The minimum value.
             maximum (int): The maximum value.

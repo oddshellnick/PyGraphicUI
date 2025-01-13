@@ -34,12 +34,15 @@ class ToolButtonStyleSheet(BaseStyleSheet):
         ToolButtonStyleSheet(button_style=[ToolButtonStyle(text="Tool Button 1"), ToolButtonStyle(text="Tool Button 2")])
     """
 	
-	def __init__(self, button_style: typing.Union[ToolButtonStyle, typing.Iterable[ToolButtonStyle], None] = None):
+	def __init__(
+			self,
+			button_style: typing.Optional[typing.Union[ToolButtonStyle, typing.Iterable[ToolButtonStyle]]] = None
+	):
 		"""
         Initializes a ToolButtonStyleSheet object.
 
         Args:
-            button_style (typing.Union[ToolButtonStyle, typing.Iterable[ToolButtonStyle], None]): A ToolButtonStyle object or typing.Iterable of ToolButtonStyle objects representing the styles to be applied to the QToolButton objects.
+            button_style (typing.Optional[typing.Union[ToolButtonStyle, typing.Iterable[ToolButtonStyle]]]): A ToolButtonStyle object or typing.Iterable of ToolButtonStyle objects representing the styles to be applied to the QToolButton objects.
         """
 		super().__init__()
 		
@@ -64,7 +67,7 @@ class ChainToolButtonStyle(ChainAbstractButtonStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			**kwargs
 	):
 		"""
@@ -72,7 +75,7 @@ class ChainToolButtonStyle(ChainAbstractButtonStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QToolButton will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             **kwargs: Additional keyword arguments passed to the ChainAbstractButtonStyle constructor.
         """
 		super().__init__(

@@ -18,15 +18,15 @@ class HeaderViewInit(WidgetInit):
     Attributes:
         orientation (Qt.Orientation): The orientation of the header view.
         name (str): The object name of the header view. Defaults to "header_view".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the header view is enabled. Defaults to True.
         visible (bool): Whether the header view is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the header view. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the header view. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the header view. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the header view. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the header view. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the header view. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the header view. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the header view. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the header view. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the header view. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the header view. Defaults to None.
         font (QFont): The font for the header view. Defaults to a default PyFont object.
     """
 	
@@ -34,15 +34,15 @@ class HeaderViewInit(WidgetInit):
 			self,
 			orientation: Qt.Orientation,
 			name: str = "header_view",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			font: QFont = PyFont()
 	):
 		"""
@@ -51,15 +51,15 @@ class HeaderViewInit(WidgetInit):
         Args:
             orientation (Qt.Orientation): The orientation of the header view.
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the header view is enabled.
             visible (bool): Whether the header view is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
             font (QFont): The font to use.
         """
 		super().__init__(
@@ -111,12 +111,12 @@ class PyHeaderView(QHeaderView):
 		if header_view_init.size_policy is not None:
 			self.setSizePolicy(header_view_init.size_policy)
 	
-	def set_minimum_size(self, minimum_size: typing.Union[ObjectSize, None]):
+	def set_minimum_size(self, minimum_size: typing.Optional[ObjectSize]):
 		"""
         Sets the minimum size of the header view.
 
         Args:
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size to set.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size to set.
         """
 		if minimum_size is not None:
 			if minimum_size.size is not None:
@@ -126,12 +126,12 @@ class PyHeaderView(QHeaderView):
 			elif minimum_size.height is not None:
 				self.setMinimumHeight(minimum_size.height)
 	
-	def set_maximum_size(self, maximum_size: typing.Union[ObjectSize, None]):
+	def set_maximum_size(self, maximum_size: typing.Optional[ObjectSize]):
 		"""
         Sets the maximum size of the header view.
 
         Args:
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size to set.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size to set.
         """
 		if maximum_size is not None:
 			if maximum_size.size is not None:
@@ -141,12 +141,12 @@ class PyHeaderView(QHeaderView):
 			elif maximum_size.height is not None:
 				self.setMaximumHeight(maximum_size.height)
 	
-	def set_fixed_size(self, fixed_size: typing.Union[ObjectSize, None]):
+	def set_fixed_size(self, fixed_size: typing.Optional[ObjectSize]):
 		"""
         Sets the fixed size of the header view.
 
         Args:
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size to set.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size to set.
         """
 		if fixed_size is not None:
 			if fixed_size.size is not None:

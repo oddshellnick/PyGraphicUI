@@ -25,9 +25,9 @@ class Selector:
         """
 		self.selector_type = ""
 		self.selector = ""
-		self.set_selector_type(selector_type)
+		self.set(selector_type)
 	
-	def set_selector_type(self, selector_type: str):
+	def set(self, selector_type: str):
 		"""
         Sets the selector type and formats the selector string.
 
@@ -68,33 +68,33 @@ class WidgetSelector:
 	def __init__(
 			self,
 			selector: Selector,
-			widget_name: typing.Union[str, None] = None,
-			object_name: typing.Union[str, None] = None
+			widget_name: typing.Optional[str] = None,
+			object_name: typing.Optional[str] = None
 	):
 		"""
         Initializes a WidgetSelector object.
 
         Args:
             selector (Selector): The CSS selector.
-            widget_name (typing.Union[str, None]): The name of the widget.
-            object_name (typing.Union[str, None]): The object name of the widget.
+            widget_name (typing.Optional[str]): The name of the widget.
+            object_name (typing.Optional[str]): The object name of the widget.
         """
 		self.widget_selector = ""
-		self.set_widget_selector(selector, widget_name, object_name)
+		self.set(selector, widget_name, object_name)
 	
-	def set_widget_selector(
+	def set(
 			self,
 			selector: Selector,
-			widget_name: typing.Union[str, None] = None,
-			object_name: typing.Union[str, None] = None
+			widget_name: typing.Optional[str] = None,
+			object_name: typing.Optional[str] = None
 	):
 		"""
         Formats the widget selector string based on the selector type and arguments.
 
         Args:
             selector (Selector): The CSS selector.
-            widget_name (typing.Union[str, None]): The name of the widget.
-            object_name (typing.Union[str, None]): The object name of the widget.
+            widget_name (typing.Optional[str]): The name of the widget.
+            object_name (typing.Optional[str]): The object name of the widget.
         """
 		if selector.selector_type == "universal":
 			self.widget_selector = "*"

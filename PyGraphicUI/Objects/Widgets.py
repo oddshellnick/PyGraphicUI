@@ -26,44 +26,44 @@ class WidgetInit:
 
     Attributes:
         name (str): The object name of the widget. Defaults to "widget".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the widget is enabled. Defaults to True.
         visible (bool): Whether the widget is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the widget. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the widget. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the widget. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the widget. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the widget. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the widget. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the widget. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the widget. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the widget. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the widget. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the widget. Defaults to None.
     """
 	
 	def __init__(
 			self,
 			name: str = "widget",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None
 	):
 		"""
         Initializes a WidgetInit object.
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the widget is enabled.
             visible (bool): Whether the widget is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
         """
 		self.name = name
 		self.parent = parent
@@ -107,12 +107,12 @@ class PyWidget(QWidget):
 		if widget_init.size_policy is not None:
 			self.setSizePolicy(widget_init.size_policy)
 	
-	def set_minimum_size(self, minimum_size: typing.Union[ObjectSize, None]):
+	def set_minimum_size(self, minimum_size: typing.Optional[ObjectSize]):
 		"""
         Sets the minimum size of the widget.
 
         Args:
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size to set.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size to set.
         """
 		if minimum_size is not None:
 			if minimum_size.size is not None:
@@ -122,12 +122,12 @@ class PyWidget(QWidget):
 			elif minimum_size.height is not None:
 				self.setMinimumHeight(minimum_size.height)
 	
-	def set_maximum_size(self, maximum_size: typing.Union[ObjectSize, None]):
+	def set_maximum_size(self, maximum_size: typing.Optional[ObjectSize]):
 		"""
         Sets the maximum size of the widget.
 
         Args:
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size to set.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size to set.
         """
 		if maximum_size is not None:
 			if maximum_size.size is not None:
@@ -137,12 +137,12 @@ class PyWidget(QWidget):
 			elif maximum_size.height is not None:
 				self.setMaximumHeight(maximum_size.height)
 	
-	def set_fixed_size(self, fixed_size: typing.Union[ObjectSize, None]):
+	def set_fixed_size(self, fixed_size: typing.Optional[ObjectSize]):
 		"""
         Sets the fixed size of the widget.
 
         Args:
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size to set.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size to set.
         """
 		if fixed_size is not None:
 			if fixed_size.size is not None:
@@ -176,7 +176,11 @@ class WidgetWithLayoutInit:
         layout_init (LayoutInit): Initialization parameters for the layout.
     """
 	
-	def __init__(self, widget_init: WidgetInit = WidgetInit(), layout_init: LayoutInit = LayoutInit()):
+	def __init__(
+			self,
+			widget_init: WidgetInit = WidgetInit(),
+			layout_init: LayoutInit = LayoutInit()
+	):
 		"""
         Initializes a WidgetWithLayoutInit object.
 
@@ -196,14 +200,14 @@ class PyWidgetWithVerticalLayout(PyWidget):
 	def __init__(
 			self,
 			widget_with_layout_init: WidgetWithLayoutInit = WidgetWithLayoutInit(),
-			instances: typing.Union[typing.Iterable[LinearLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[LinearLayoutItem]] = None
 	):
 		"""
         Initializes a PyWidgetWithVerticalLayout object.
 
         Args:
             widget_with_layout_init (WidgetWithLayoutInit): Widget and layout initialization parameters.
-            instances (typing.Union[typing.Iterable[LinearLayoutItem], None]): a typing.Iterable of LinearLayoutItem objects to be added to the layout.
+            instances (typing.Optional[typing.Iterable[LinearLayoutItem]]): a typing.Iterable of LinearLayoutItem objects to be added to the layout.
         """
 		super().__init__(widget_init=widget_with_layout_init.widget_init)
 		
@@ -229,37 +233,37 @@ class PyWidgetWithVerticalLayout(PyWidget):
 		"""Clears all items from the layout."""
 		self.vertical_layout.clear_layout()
 	
-	def clear_widget_layout_by_type(self, type_to_clear: type):
+	def clear_widget_layout_by_type(self, type_to_clear: typing.Union[type, tuple[type, ...]]):
 		"""
         Clears items of a specific type from the layout.
 
         Args:
-            type_to_clear (type): The type of items to clear.
+            type_to_clear (typing.Union[type, tuple[type, ...]]): The type of items to clear.
         """
 		self.vertical_layout.clear_layout_by_type(type_to_clear)
 	
-	def get_all_instances(self) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances(self) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all widgets and layouts in the layout.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		return self.vertical_layout.get_all_instances()
 	
-	def get_all_instances_of_type(self, type_to_get: type) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances_of_type(self, type_to_get: typing.Union[type, tuple[type, ...]]) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all instances of a specific type in the layout.
 
         Args:
-            type_to_get (type): The type of instances to retrieve.
+            type_to_get (typing.Union[type, tuple[type, ...]]): The type of instances to retrieve.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		return self.vertical_layout.get_all_instances_of_type(type_to_get)
 	
-	def get_instance(self, index: int) -> typing.Union[QWidget, QLayout]:
+	def get_instance(self, index: int) -> typing.Any:
 		"""
         Returns the instance at a given index.
 
@@ -267,7 +271,7 @@ class PyWidgetWithVerticalLayout(PyWidget):
             index (int): Index of the instance.
 
         Returns:
-            typing.Union[QWidget, QLayout]: The instance at the given index.
+            typing.Any: The instance at the given index.
         """
 		return self.vertical_layout.get_instance(index)
 	
@@ -280,12 +284,12 @@ class PyWidgetWithVerticalLayout(PyWidget):
         """
 		return self.vertical_layout.get_number_of_instances()
 	
-	def get_number_of_instances_of_type(self, type_to_check: type) -> int:
+	def get_number_of_instances_of_type(self, type_to_check: typing.Union[type, tuple[type, ...]]) -> int:
 		"""
         Returns the number of instances of a specific type.
 
         Args:
-            type_to_check (type): The type to check.
+            type_to_check (typing.Union[type, tuple[type, ...]]): The type to check.
 
         Returns:
             int: The number of instances of the given type.
@@ -320,14 +324,14 @@ class PyWidgetWithHorizontalLayout(PyWidget):
 	def __init__(
 			self,
 			widget_with_layout_init: WidgetWithLayoutInit = WidgetWithLayoutInit(),
-			instances: typing.Union[typing.Iterable[LinearLayoutItem], None] = None
+			instances: typing.Optional[typing.Iterable[LinearLayoutItem]] = None
 	):
 		"""
         Initializes a PyWidgetWithHorizontalLayout object.
 
         Args:
             widget_with_layout_init (WidgetWithLayoutInit): Widget and layout initialization parameters.
-            instances (typing.Union[typing.Iterable[LinearLayoutItem], None]): A typing.Iterable of LinearLayoutItem objects to be added to the layout.
+            instances (typing.Optional[typing.Iterable[LinearLayoutItem]]): A typing.Iterable of LinearLayoutItem objects to be added to the layout.
         """
 		super().__init__(widget_init=widget_with_layout_init.widget_init)
 		
@@ -352,37 +356,37 @@ class PyWidgetWithHorizontalLayout(PyWidget):
 		"""Clears all items from the layout."""
 		self.horizontal_layout.clear_layout()
 	
-	def clear_widget_layout_by_type(self, type_to_clear: type):
+	def clear_widget_layout_by_type(self, type_to_clear: typing.Union[type, tuple[type, ...]]):
 		"""
         Clears items of a specific type from the layout.
 
         Args:
-            type_to_clear (type): The type of items to clear.
+            type_to_clear (typing.Union[type, tuple[type, ...]]): The type of items to clear.
         """
 		self.horizontal_layout.clear_layout_by_type(type_to_clear)
 	
-	def get_all_instances(self) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances(self) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all widgets and layouts in the layout.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		return self.horizontal_layout.get_all_instances()
 	
-	def get_all_instances_of_type(self, type_to_get: type) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances_of_type(self, type_to_get: typing.Union[type, tuple[type, ...]]) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all instances of a specific type in the layout.
 
         Args:
-            type_to_get (type): The type of instances to retrieve.
+            type_to_get (typing.Union[type, tuple[type, ...]]): The type of instances to retrieve.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		return self.horizontal_layout.get_all_instances_of_type(type_to_get)
 	
-	def get_instance(self, index: int) -> typing.Union[QWidget, QLayout]:
+	def get_instance(self, index: int) -> typing.Any:
 		"""
         Returns the instance at the specified index.
 
@@ -390,7 +394,7 @@ class PyWidgetWithHorizontalLayout(PyWidget):
             index (int): The index of the desired instance.
 
         Returns:
-             typing.Union[QWidget, QLayout]: The instance at the given index.
+             typing.Any: The instance at the given index.
         """
 		return self.horizontal_layout.get_instance(index)
 	
@@ -404,12 +408,12 @@ class PyWidgetWithHorizontalLayout(PyWidget):
         """
 		return self.horizontal_layout.get_number_of_instances()
 	
-	def get_number_of_instances_of_type(self, type_to_check: type) -> int:
+	def get_number_of_instances_of_type(self, type_to_check: typing.Union[type, tuple[type, ...]]) -> int:
 		"""
         Returns the number of instances of a specified type.
 
         Args:
-            type_to_check (type): The type of instances to count.
+            type_to_check (typing.Union[type, tuple[type, ...]]): The type of instances to count.
 
         Returns:
             int: The number of instances of the specified type.
@@ -444,7 +448,7 @@ class PyWidgetWithGridLayout(PyWidget):
 	def __init__(
 			self,
 			widget_with_layout_init: WidgetWithLayoutInit = WidgetWithLayoutInit(),
-			instances: typing.Union[typing.Iterable[GridLayoutItem], None] = None,
+			instances: typing.Optional[typing.Iterable[GridLayoutItem]] = None,
 			# Corrected type hint
 	):
 		"""
@@ -452,7 +456,7 @@ class PyWidgetWithGridLayout(PyWidget):
 
         Args:
             widget_with_layout_init (WidgetWithLayoutInit): Widget and layout initialization parameters.
-            instances (typing.Union[typing.Iterable[GridLayoutItem], None]): A typing.Iterable of GridLayoutItem objects to be added to the layout.
+            instances (typing.Optional[typing.Iterable[GridLayoutItem]]): A typing.Iterable of GridLayoutItem objects to be added to the layout.
         """
 		super().__init__(widget_init=widget_with_layout_init.widget_init)
 		
@@ -473,37 +477,37 @@ class PyWidgetWithGridLayout(PyWidget):
 		"""Clears all items from the layout."""
 		self.grid_layout.clear_layout()
 	
-	def clear_widget_layout_by_type(self, type_to_clear: type):
+	def clear_widget_layout_by_type(self, type_to_clear: typing.Union[type, tuple[type, ...]]):
 		"""
         Clears items of a specific type from the layout.
 
         Args:
-            type_to_clear (type): The type of items to clear.
+            type_to_clear (typing.Union[type, tuple[type, ...]]): The type of items to clear.
         """
 		self.grid_layout.clear_layout_by_type(type_to_clear)
 	
-	def get_all_instances(self) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances(self) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all widgets and layouts in the layout.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		return self.grid_layout.get_all_instances()
 	
-	def get_all_instances_of_type(self, type_to_get: type) -> typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]:
+	def get_all_instances_of_type(self, type_to_get: typing.Union[type, tuple[type, ...]]) -> typing.Generator[typing.Any, typing.Any, None]:
 		"""
         Returns a generator of all instances of a specific type in the layout.
 
         Args:
-            type_to_get (type): The type of instances to retrieve.
+            type_to_get (typing.Union[type, tuple[type, ...]]): The type of instances to retrieve.
 
         Returns:
-            typing.Generator[typing.Union[QWidget, QLayout], typing.Any, None]: A generator of all widgets and layouts.
+            typing.Generator[typing.Any, typing.Any, None]: A generator of all widgets and layouts.
         """
 		return self.grid_layout.get_all_instances_of_type(type_to_get)
 	
-	def get_instance(self, index: int) -> typing.Union[QWidget, QLayout]:
+	def get_instance(self, index: int) -> typing.Any:
 		"""
         Returns the instance at a given index.
 
@@ -511,7 +515,7 @@ class PyWidgetWithGridLayout(PyWidget):
             index (int): Index of the instance.
 
         Returns:
-            typing.Union[QWidget, QLayout]: The instance at the given index.
+            typing.Any: The instance at the given index.
         """
 		return self.grid_layout.get_instance(index)
 	
@@ -524,12 +528,12 @@ class PyWidgetWithGridLayout(PyWidget):
         """
 		return self.grid_layout.get_number_of_instances()
 	
-	def get_number_of_instances_of_type(self, type_to_check: type) -> int:
+	def get_number_of_instances_of_type(self, type_to_check: typing.Union[type, tuple[type, ...]]) -> int:
 		"""
         Returns the number of instances of a specific type.
 
         Args:
-            type_to_check (type): The type to check.
+            type_to_check (typing.Union[type, tuple[type, ...]]): The type to check.
 
         Returns:
             int: The number of instances of the given type.

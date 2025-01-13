@@ -57,7 +57,10 @@ class HorizontalPadChoicerInit(WidgetWithLayoutInit):
             pads_area_init (StackedWidgetInit): Pads area initialization parameters.
             header_on_top (bool): Whether the header is on top.
         """
-		super().__init__(widget_init=main_widget_init.widget_init, layout_init=main_widget_init.layout_init)
+		super().__init__(
+				widget_init=main_widget_init.widget_init,
+				layout_init=main_widget_init.layout_init
+		)
 		
 		self.buttons_area_init = buttons_area_init
 		self.pads_area_init = pads_area_init
@@ -111,7 +114,10 @@ class PyHorizontalPadChoicer(PyWidgetWithVerticalLayout):
     A widget that allows choosing between different "pads" (widgets) using a horizontal button bar.
     """
 	
-	def __init__(self, pad_choicer_init: HorizontalPadChoicerInit = HorizontalPadChoicerInit()):
+	def __init__(
+			self,
+			pad_choicer_init: HorizontalPadChoicerInit = HorizontalPadChoicerInit()
+	):
 		"""
         Initializes a PyHorizontalPadChoicer.
 
@@ -159,9 +165,12 @@ class PyHorizontalPadChoicer(PyWidgetWithVerticalLayout):
             pad_to_choice (typing.Union[int, str]): The index or name of the pad to choose.
         """
 		number_of_pad = (
-			pad_to_choice
-			if isinstance(pad_to_choice, int)
-			else [pad_choicer_item_.item_name for pad_choicer_item_ in self.pad_choicer_items].index(pad_to_choice))
+				pad_to_choice if isinstance(pad_to_choice, int)
+				else [
+					pad_choicer_item_.item_name
+					for pad_choicer_item_ in self.pad_choicer_items
+				].index(pad_to_choice)
+		)
 		
 		for i in range(len(self.pad_choicer_items)):
 			self.pad_choicer_items[i].button.setEnabled(i != number_of_pad)
@@ -182,9 +191,16 @@ class PyHorizontalPadChoicer(PyWidgetWithVerticalLayout):
 		
 		self.pad_choicer_items.append(pad_choicer_item)
 		
-		self.buttons_widget.setFixedHeight(int(max(pad_choicer_item_.button.size().height() for pad_choicer_item_ in self.pad_choicer_items)
-				+ self.layout_init.contents_margins[1]
-				+ self.layout_init.contents_margins[3]))
+		self.buttons_widget.setFixedHeight(
+				int(
+						max(
+								pad_choicer_item_.button.size().height()
+								for pad_choicer_item_ in self.pad_choicer_items
+						) +
+						self.layout_init.contents_margins[1] +
+						self.layout_init.contents_margins[3]
+				)
+		)
 		
 		if self.pad_choicer_items[self.pads_choice_widget.currentIndex()].button.isEnabled():
 			self.pad_choicer_items[self.pads_choice_widget.currentIndex()].button.setEnabled(False)
@@ -221,9 +237,16 @@ class PyHorizontalPadChoicer(PyWidgetWithVerticalLayout):
 			self.buttons_to_choice_scroll_area.remove_instance(pad_choicer_item.button)
 		
 			if len(self.pad_choicer_items) > 0:
-				self.buttons_widget.setFixedHeight(int(max(pad_choicer_item_.button.size().height() for pad_choicer_item_ in self.pad_choicer_items)
-						+ self.layout_init.contents_margins[1]
-						+ self.layout_init.contents_margins[3]))
+				self.buttons_widget.setFixedHeight(
+						int(
+								max(
+										pad_choicer_item_.button.size().height()
+										for pad_choicer_item_ in self.pad_choicer_items
+								) +
+								self.layout_init.contents_margins[1] +
+								self.layout_init.contents_margins[3]
+						)
+				)
 	
 	def to_button_parent(self) -> PyWidgetWithHorizontalLayout:
 		"""

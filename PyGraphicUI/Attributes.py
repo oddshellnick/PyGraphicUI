@@ -43,7 +43,7 @@ class PyFont(QFont):
 			weight: int = 50,
 			word_spacing: int = 0,
 			size_type: typing.Literal["pixel", "point", "pointf"] = "point",
-			size:  typing.Union[int, float] = 10
+			size: typing.Union[int, float] = 10
 	):
 		"""
         Initializes a PyFont object.
@@ -187,7 +187,13 @@ class PyRGBFColor(QColor):
         color = PyRGBFColor(red=1.0, green=0.5, blue=0.0)
     """
 	
-	def __init__(self, red: float = 0.0, green: float = 0.0, blue: float = 0.0, alpha: float = 255.0):
+	def __init__(
+			self,
+			red: float = 0.0,
+			green: float = 0.0,
+			blue: float = 0.0,
+			alpha: float = 255.0
+	):
 		"""
         Initializes a PyRGBFColor object.
 
@@ -237,7 +243,7 @@ class PyPen(QPen):
 			color: QColor = PyRGBColor(),
 			cosmetic: bool = True,
 			dash_offset: float = 0.0,
-			dash_patters: typing.Union[typing.Iterable[float], None] = None,
+			dash_patters: typing.Optional[typing.Iterable[float]] = None,
 			join_style: Qt.PenJoinStyle = Qt.PenJoinStyle.RoundJoin,
 			miter_limit: float = 0.0,
 			style: Qt.PenStyle = Qt.PenStyle.SolidLine,
@@ -251,7 +257,7 @@ class PyPen(QPen):
             color (QColor): The color of the pen. Defaults to PyRGBColor().
             cosmetic (bool): Whether the pen is cosmetic. Defaults to True.
             dash_offset (float): The dash offset value. Defaults to 0.0.
-            dash_patters (typing.Union[typing.Iterable[float], None]): A typing.Iterable of float values representing the dash pattern. Defaults to None.
+            dash_patters (typing.Optional[typing.Iterable[float]]): A typing.Iterable of float values representing the dash pattern. Defaults to None.
             join_style (Qt.PenJoinStyle): The join style for the pen. Defaults to Qt.PenJoinStyle.RoundJoin.
             miter_limit (float): The miter limit value. Defaults to 0.0.
             style (Qt.PenStyle): The pen style. Defaults to Qt.PenStyle.SolidLine.
@@ -282,7 +288,13 @@ class PyHSVFColor(QColor):
 
     """
 	
-	def __init__(self, hue: float = 0.0, saturation: float = 0.0, value: float = 0.0, alpha: float = 255.0):
+	def __init__(
+			self,
+			hue: float = 0.0,
+			saturation: float = 0.0,
+			value: float = 0.0,
+			alpha: float = 255.0
+	):
 		"""
         Initializes a PyHSVFColor object.
 
@@ -311,7 +323,13 @@ class PyHSVColor(QColor):
         color = PyHSVColor(hue=120, saturation=255, value=128)
     """
 	
-	def __init__(self, hue: int = 0, saturation: int = 0, value: int = 0, alpha: int = 255):
+	def __init__(
+			self,
+			hue: int = 0,
+			saturation: int = 0,
+			value: int = 0,
+			alpha: int = 255
+	):
 		"""
         Initializes a PyHSVColor object.
 
@@ -336,7 +354,13 @@ class PyHSLFColor(QColor):
     A custom QColor class that provides a convenience method for setting the color using HSL float values.
     """
 	
-	def __init__(self, hue: float = 0.0, saturation: float = 0.0, lightness: float = 0.0, alpha: float = 255.0):
+	def __init__(
+			self,
+			hue: float = 0.0,
+			saturation: float = 0.0,
+			lightness: float = 0.0,
+			alpha: float = 255.0
+	):
 		"""
         Initializes a PyHSLFColor object.
 
@@ -356,7 +380,13 @@ class PyHSLColor(QColor):
     A custom QColor class that provides a convenience method for setting the color using HSL values.
     """
 	
-	def __init__(self, hue: int = 0, saturation: int = 0, lightness: int = 0, alpha: int = 255):
+	def __init__(
+			self,
+			hue: int = 0,
+			saturation: int = 0,
+			lightness: int = 0,
+			alpha: int = 255
+	):
 		"""
         Initializes a PyHSLColor object.
 
@@ -404,7 +434,14 @@ class PyCMYKColor(QColor):
     A custom QColor class that provides a convenience method for setting the color using CMYK values.
     """
 	
-	def __init__(self, cyan: int = 0, magenta: int = 0, yellow: int = 0, black: int = 0, alpha: int = 255):
+	def __init__(
+			self,
+			cyan: int = 0,
+			magenta: int = 0,
+			yellow: int = 0,
+			black: int = 0,
+			alpha: int = 255
+	):
 		"""
         Initializes a PyCMYKColor object.
 
@@ -425,16 +462,23 @@ class PyBrush(QBrush):
     A custom QBrush class that provides convenience methods for setting common brush properties.
     """
 	
-	def __init__(self, style: Qt.BrushStyle = Qt.BrushStyle.SolidPattern, color: typing.Union[QColor, None] = None, texture: typing.Union[QPixmap, None] = None, transform: typing.Union[QTransform, None] = None, texture_image: typing.Union[QImage, None] = None, 	):
+	def __init__(
+			self,
+			style: Qt.BrushStyle = Qt.BrushStyle.SolidPattern,
+			color: typing.Optional[QColor] = None,
+			texture: typing.Optional[QPixmap] = None,
+			transform: typing.Optional[QTransform] = None,
+			texture_image: typing.Optional[QImage] = None
+	):
 		"""
         Initializes a PyBrush object.
 
         Args:
             style (Qt.BrushStyle): The brush style. Defaults to Qt.BrushStyle.SolidPattern.
-            color (typing.Union[QColor, None]): The color of the brush. Defaults to None.
-            texture (typing.Union[QPixmap, None]): The texture of the brush. Defaults to None.
-            transform (typing.Union[QTransform, None]): The transformation to be applied to the texture. Defaults to None.
-            texture_image (typing.Union[QImage, None]): The image to be used as the texture. Defaults to None.
+            color (typing.Optional[QColor]): The color of the brush. Defaults to None.
+            texture (typing.Optional[QPixmap]): The texture of the brush. Defaults to None.
+            transform (typing.Optional[QTransform]): The transformation to be applied to the texture. Defaults to None.
+            texture_image (typing.Optional[QImage]): The image to be used as the texture. Defaults to None.
         """
 		super().__init__()
 		
@@ -486,8 +530,8 @@ class ObjectSize:
     A class for representing the size of an object.
 
     Attributes:
-        width (typing.Union[int, None]): The width of the object.
-        height (typing.Union[int, None]): The height of the object.
+        width (typing.Optional[int]): The width of the object.
+        height (typing.Optional[int]): The height of the object.
         size (QSize | None): The size of the object as a QSize object.
 
     :Usage:
@@ -496,13 +540,17 @@ class ObjectSize:
 
     """
 	
-	def __init__(self, width:  typing.Union[int, None] = None, height:  typing.Union[int, None] = None):
+	def __init__(
+			self,
+			width: typing.Optional[int] = None,
+			height: typing.Optional[int] = None
+	):
 		"""
         Initializes an ObjectSize object.
 
         Args:
-            width (typing.Union[int, None]): The width of the object.
-            height (typing.Union[int, None]): The height of the object.
+            width (typing.Optional[int]): The width of the object.
+            height (typing.Optional[int]): The height of the object.
 
         :Usage:
             fixed_size = ObjectSize(width=100, height=50)
@@ -510,11 +558,8 @@ class ObjectSize:
         """
 		self.width, self.height = width, height
 		if self.width is not None and self.height is not None:
-		
 			self.size = QSize(self.width, self.height)
-		
 		else:
-		
 			self.size = None
 
 
@@ -525,7 +570,7 @@ class LinearLayoutItem:
     Attributes:
         instance (typing.Union[QWidget, QLayout]): The widget or layout instance.
         stretch (int): The stretch factor.
-        alignment (typing.Union[Qt.AlignmentFlag, None]): The alignment flag.
+        alignment (typing.Optional[Qt.AlignmentFlag]): The alignment flag.
 
     :Usage:
         widget = QWidget()
@@ -536,7 +581,7 @@ class LinearLayoutItem:
 			self,
 			instance: typing.Union[QWidget, QLayout],
 			stretch: int = 0,
-			alignment: typing.Union[Qt.AlignmentFlag, None] = None
+			alignment: typing.Optional[Qt.AlignmentFlag] = None
 	):
 		"""
         Initializes a LinearLayoutItem object.
@@ -544,7 +589,7 @@ class LinearLayoutItem:
         Args:
             instance (typing.Union[QWidget, QLayout]): The widget or layout to be placed in the linear layout.
             stretch (int): The stretch factor for the item.
-            alignment (typing.Union[Qt.AlignmentFlag, None]): The alignment of the item within its space.
+            alignment (typing.Optional[Qt.AlignmentFlag]): The alignment of the item within its space.
 
         :Usage:
             label = QLabel("Label")
@@ -620,7 +665,12 @@ class GridRectangle:
             stretched_rect = GridRectangle(vertical_position=1, horizontal_position=2, vertical_stretch=1, horizontal_stretch=2)
 
         """
-		self.vertical_position, self.horizontal_position, self.vertical_stretch, self.horizontal_stretch = (vertical_position, horizontal_position, vertical_stretch, horizontal_stretch)
+		self.vertical_position, self.horizontal_position, self.vertical_stretch, self.horizontal_stretch = (
+				vertical_position,
+				horizontal_position,
+				vertical_stretch,
+				horizontal_stretch
+		)
 
 
 class GridLayoutItem:
@@ -630,7 +680,7 @@ class GridLayoutItem:
     Attributes:
         instance (typing.Union[QWidget, QLayout]): The widget or layout instance.
         stretch (GridRectangle | None): The stretch rectangle.
-        alignment (typing.Union[Qt.AlignmentFlag, None]): The alignment flag.
+        alignment (typing.Optional[Qt.AlignmentFlag]): The alignment flag.
 
     :Usage:
         widget = QWidget()

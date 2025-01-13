@@ -37,7 +37,7 @@ class TreeViewStyle(BaseStyle):
 		if self.style_sheet_object is None:
 			self.set_style_sheet_object(ObjectOfStyle(CssObject("QTreeView")))
 		else:
-			self.style_sheet_object.add_css_object_to_style_sheet("QTreeView")
+			self.style_sheet_object.add_css_object("QTreeView")
 		
 		self.update_style()
 
@@ -50,12 +50,15 @@ class TreeViewStyleSheet(BaseStyleSheet):
         TreeViewStyleSheet(tree_view_style=[TreeViewStyle(), TreeViewStyle()])
     """
 	
-	def __init__(self, tree_view_style: typing.Union[TreeViewStyle, typing.Iterable[TreeViewStyle], None] = None):
+	def __init__(
+			self,
+			tree_view_style: typing.Optional[typing.Union[TreeViewStyle, typing.Iterable[TreeViewStyle]]] = None
+	):
 		"""
         Initializes a TreeViewStyleSheet object.
 
         Args:
-            tree_view_style (typing.Union[TreeViewStyle, typing.Iterable[TreeViewStyle], None]): A TreeViewStyle object or typing.Iterable of TreeViewStyle objects representing the styles to be applied to the QTreeView objects.
+            tree_view_style (typing.Optional[typing.Union[TreeViewStyle, typing.Iterable[TreeViewStyle]]]): A TreeViewStyle object or typing.Iterable of TreeViewStyle objects representing the styles to be applied to the QTreeView objects.
         """
 		super().__init__()
 		
@@ -80,7 +83,7 @@ class ChainTreeViewStyle(BaseStyle):
 	def __init__(
 			self,
 			parent_css_object: typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]],
-			widget_selector: typing.Union[tuple[str, Selector], None] = None,
+			widget_selector: typing.Optional[tuple[str, Selector]] = None,
 			**kwargs
 	):
 		"""
@@ -88,10 +91,14 @@ class ChainTreeViewStyle(BaseStyle):
 
         Args:
             parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The style sheet object or typing.Iterable of objects that the style is applied to, from which the QTreeView will inherit styles.
-            widget_selector (typing.Union[tuple[str, Selector], None]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
+            widget_selector (typing.Optional[tuple[str, Selector]]): A tuple containing the type of widget and the selector to apply the styles to, in case the widget is not a direct descendant of the parent_css_object.
             **kwargs: Additional keyword arguments passed to the BaseStyle constructor.
         """
-		new_parent_objects = get_new_parent_objects(parent_css_object, widget_selector, ("QTreeView", Selector(SelectorFlag.Descendant)))
+		new_parent_objects = get_new_parent_objects(
+				parent_css_object,
+				widget_selector,
+				("QTreeView", Selector(SelectorFlag.Descendant))
+		)
 		
 		kwargs = get_kwargs_without_arguments("object_of_style", **kwargs)
 		

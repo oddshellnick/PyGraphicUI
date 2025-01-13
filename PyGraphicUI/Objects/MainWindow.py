@@ -15,30 +15,30 @@ class MainWindowInit:
 
     Attributes:
         name (str): The object name of the main window. Defaults to "main_window".
-        parent (typing.Union[QWidget, None]): The parent widget. Defaults to None.
+        parent (typing.Optional[QWidget]): The parent widget. Defaults to None.
         enabled (bool): Whether the main window is enabled. Defaults to True.
         visible (bool): Whether the main window is visible. Defaults to True.
         style_sheet (str): The style sheet to apply to the main window. Defaults to "".
-        minimum_size (typing.Union[ObjectSize, None]): The minimum size of the main window. Defaults to None.
-        maximum_size (typing.Union[ObjectSize, None]): The maximum size of the main window. Defaults to None.
-        fixed_size (typing.Union[ObjectSize, None]): The fixed size of the main window. Defaults to None.
-        size_policy (typing.Union[QSizePolicy, None]): The size policy of the main window. Defaults to None.
-        graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect to apply to the main window. Defaults to None.
+        minimum_size (typing.Optional[ObjectSize]): The minimum size of the main window. Defaults to None.
+        maximum_size (typing.Optional[ObjectSize]): The maximum size of the main window. Defaults to None.
+        fixed_size (typing.Optional[ObjectSize]): The fixed size of the main window. Defaults to None.
+        size_policy (typing.Optional[QSizePolicy]): The size policy of the main window. Defaults to None.
+        graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect to apply to the main window. Defaults to None.
         window_flag (tuple[Qt.WindowType, bool]): The window flags to set. Defaults to (Qt.WindowType.Window, True).
     """
 	
 	def __init__(
 			self,
 			name: str = "main_window",
-			parent: typing.Union[QWidget, None] = None,
+			parent: typing.Optional[QWidget] = None,
 			enabled: bool = True,
 			visible: bool = True,
 			style_sheet: str = "",
-			minimum_size: typing.Union[ObjectSize, None] = None,
-			maximum_size: typing.Union[ObjectSize, None] = None,
-			fixed_size: typing.Union[ObjectSize, None] = None,
-			size_policy: typing.Union[QSizePolicy, None] = None,
-			graphic_effect: typing.Union[QGraphicsEffect, None] = None,
+			minimum_size: typing.Optional[ObjectSize] = None,
+			maximum_size: typing.Optional[ObjectSize] = None,
+			fixed_size: typing.Optional[ObjectSize] = None,
+			size_policy: typing.Optional[QSizePolicy] = None,
+			graphic_effect: typing.Optional[QGraphicsEffect] = None,
 			window_flag: tuple[Qt.WindowType, bool] = (Qt.WindowType.Window, True),
 			window_title: str = "program"
 	):
@@ -47,15 +47,15 @@ class MainWindowInit:
 
         Args:
             name (str): The object name.
-            parent (typing.Union[QWidget, None]): The parent widget.
+            parent (typing.Optional[QWidget]): The parent widget.
             enabled (bool): Whether the main window is enabled.
             visible (bool): Whether the main window is visible.
             style_sheet (str): The style sheet to apply.
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size.
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size.
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size.
-            size_policy (typing.Union[QSizePolicy, None]): The size policy.
-            graphic_effect (typing.Union[QGraphicsEffect, None]): The graphic effect.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size.
+            size_policy (typing.Optional[QSizePolicy]): The size policy.
+            graphic_effect (typing.Optional[QGraphicsEffect]): The graphic effect.
             window_flag (tuple[Qt.WindowType, bool]): The window flags.
         """
 		self.name = name
@@ -101,12 +101,12 @@ class PyMainWindow(QMainWindow):
 		if main_window_init.size_policy is not None:
 			self.setSizePolicy(main_window_init.size_policy)
 	
-	def set_minimum_size(self, minimum_size: typing.Union[ObjectSize, None]):
+	def set_minimum_size(self, minimum_size: typing.Optional[ObjectSize]):
 		"""
         Sets the minimum size of the main window.
 
         Args:
-            minimum_size (typing.Union[ObjectSize, None]): The minimum size to set.
+            minimum_size (typing.Optional[ObjectSize]): The minimum size to set.
         """
 		if minimum_size is not None:
 			if minimum_size.size is not None:
@@ -116,12 +116,12 @@ class PyMainWindow(QMainWindow):
 			elif minimum_size.height is not None:
 				self.setMinimumHeight(minimum_size.height)
 	
-	def set_maximum_size(self, maximum_size: typing.Union[ObjectSize, None]):
+	def set_maximum_size(self, maximum_size: typing.Optional[ObjectSize]):
 		"""
         Sets the maximum size of the main window.
 
         Args:
-            maximum_size (typing.Union[ObjectSize, None]): The maximum size to set.
+            maximum_size (typing.Optional[ObjectSize]): The maximum size to set.
         """
 		if maximum_size is not None:
 			if maximum_size.size is not None:
@@ -131,12 +131,12 @@ class PyMainWindow(QMainWindow):
 			elif maximum_size.height is not None:
 				self.setMaximumHeight(maximum_size.height)
 	
-	def set_fixed_size(self, fixed_size: typing.Union[ObjectSize, None]):
+	def set_fixed_size(self, fixed_size: typing.Optional[ObjectSize]):
 		"""
         Sets the fixed size of the main window.
 
         Args:
-            fixed_size (typing.Union[ObjectSize, None]): The fixed size to set.
+            fixed_size (typing.Optional[ObjectSize]): The fixed size to set.
         """
 		if fixed_size is not None:
 			if fixed_size.size is not None:

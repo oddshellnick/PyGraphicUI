@@ -23,9 +23,9 @@ class BorderTopColor:
             border_color (Brush): The border top color value.
         """
 		self.border_top_color = ""
-		self.set_border_color(border_color)
+		self.set(border_color)
 	
-	def set_border_color(self, color: Brush):
+	def set(self, color: Brush):
 		"""
         Sets the border top color value.
 
@@ -61,9 +61,9 @@ class BorderRightColor:
             border_color (Brush): The border right color value.
         """
 		self.border_right_color = ""
-		self.set_border_color(border_color)
+		self.set(border_color)
 	
-	def set_border_color(self, color: Brush):
+	def set(self, color: Brush):
 		"""
         Sets the border right color value.
 
@@ -99,9 +99,9 @@ class BorderLeftColor:
             border_color (Brush): The border left color value.
         """
 		self.border_left_color = ""
-		self.set_border_color(border_color)
+		self.set(border_color)
 	
-	def set_border_color(self, color: Brush):
+	def set(self, color: Brush):
 		"""
         Sets the border left color value.
 
@@ -144,9 +144,9 @@ class BorderColor:
             border_color (BoxColors): The border color value.
         """
 		self.border_color = ""
-		self.set_border_color(border_color)
+		self.set(border_color)
 	
-	def set_border_color(self, border_color: BoxColors):
+	def set(self, border_color: BoxColors):
 		"""
         Sets the border color value.
 
@@ -182,9 +182,9 @@ class BorderBottomColor:
             border_color (Brush): The border bottom color value.
         """
 		self.border_bottom_color = ""
-		self.set_border_color(border_color)
+		self.set(border_color)
 	
-	def set_border_color(self, color: Brush):
+	def set(self, color: Brush):
 		"""
         Sets the border bottom color value.
 

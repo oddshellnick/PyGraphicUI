@@ -19,26 +19,26 @@ class Icon:
         "url(https://example.com/icon.png) normal on"
     """
 	
-	def __init__(self, url: Url, mode: str = None, state: str = None):
+	def __init__(self, url: Url, mode: typing.Optional[str], state: typing.Optional[str]):
 		"""
         Initializes an Icon object.
 
         Args:
             url (Url): The URL of the icon image.
-            mode (str): Optional mode for the icon. Default is None.
-            state (str): Optional state for the icon. Default is None.
+            mode (typing.Optional[str]): Optional mode for the icon. Default is None.
+            state (typing.Optional[str]): Optional state for the icon. Default is None.
         """
 		self.icon = ""
-		self.set_url(url, mode, state)
+		self.set(url, mode, state)
 	
-	def set_url(self, url: Url, mode: str = None, state: str = None):
+	def set(self, url: Url, mode: typing.Optional[str], state: typing.Optional[str]):
 		"""
         Sets the icon value with optional mode and state.
 
         Args:
             url (Url): The URL of the icon image.
-            mode (str): Optional mode for the icon. Default is None.
-            state (str): Optional state for the icon. Default is None.
+            mode (typing.Optional[str]): Optional mode for the icon. Default is None.
+            state (typing.Optional[str]): Optional state for the icon. Default is None.
 
         Returns:
             Icon: The updated Icon object.
@@ -81,9 +81,9 @@ class IconProperty:
             icon (typing.Union[Icon, typing.Iterable[Icon]]): The icon value(s).
         """
 		self.icon_property = ""
-		self.set_url(icon)
+		self.set(icon)
 	
-	def set_url(self, icon: typing.Union[Icon, typing.Iterable[Icon]]):
+	def set(self, icon: typing.Union[Icon, typing.Iterable[Icon]]):
 		"""
         Sets the icon property value.
 

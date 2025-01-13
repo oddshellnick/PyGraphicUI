@@ -23,9 +23,9 @@ class Boolean:
             boolean (bool): The boolean value.
         """
 		self.boolean = ""
-		self.set_boolean(boolean)
+		self.set(boolean)
 	
-	def set_boolean(self, boolean: bool):
+	def set(self, boolean: bool):
 		"""
         Sets the boolean value.
 

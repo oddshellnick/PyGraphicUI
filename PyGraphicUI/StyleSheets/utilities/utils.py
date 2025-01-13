@@ -11,7 +11,10 @@ from PyGraphicUI.StyleSheets.utilities.ObjectOfStyle import (
 )
 
 
-def get_object_of_style_arg(**kwargs) -> tuple[typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle], None], dict[str, typing.Any]]:
+def get_object_of_style_arg(**kwargs) -> tuple[
+	typing.Optional[typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]],
+	dict[str, typing.Any]
+]:
 	"""
     Extracts the "object_of_style" argument from function arguments.
 
@@ -19,7 +22,7 @@ def get_object_of_style_arg(**kwargs) -> tuple[typing.Union[ObjectOfStyle, typin
         **kwargs: Keyword arguments.
 
     Returns:
-        tuple[typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle], None], dict[str, typing.Any]]: A tuple containing the "object_of_style" argument and remaining keyword arguments.
+        tuple[typing.Optional[typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]], dict[str, typing.Any]]: A tuple containing the "object_of_style" argument and remaining keyword arguments.
     """
 	if "object_of_style" in kwargs:
 		object_of_style_arg = kwargs.pop("object_of_style")
@@ -55,7 +58,7 @@ def get_objects_of_style(parent_objects: tuple[str, Selector], **kwargs) -> tupl
 		for i in range(len(object_of_style)):
 			object_of_style[i].add_css_object_to_object(parent_objects[0], parent_objects[1])
 	elif isinstance(object_of_style, ObjectOfStyle):
-		object_of_style.add_css_object_to_object(parent_objects[0], parent_objects[1])
+		object_of_style.add_css_object(parent_objects[0], parent_objects[1])
 	else:
 		object_of_style = ObjectOfStyle(CssObject(parent_objects[0], Selector(SelectorFlag.Type)))
 	
@@ -63,8 +66,14 @@ def get_objects_of_style(parent_objects: tuple[str, Selector], **kwargs) -> tupl
 
 
 def get_new_parent_objects(
-		parent_css_object: typing.Union[ObjectOfStyle, list[ObjectOfStyle], tuple[ObjectOfStyle], array.array[ObjectOfStyle], collections.deque[ObjectOfStyle]],
-		widget_selector: typing.Union[tuple[str, Selector], None],
+		parent_css_object: typing.Union[
+			ObjectOfStyle,
+			list[ObjectOfStyle],
+			tuple[ObjectOfStyle],
+			array.array[ObjectOfStyle],
+			collections.deque[ObjectOfStyle]
+		],
+		widget_selector: typing.Optional[tuple[str, Selector]],
 		next_widget_selector: tuple[str, Selector]
 ) -> typing.Union[
 	ObjectOfStyle,
@@ -78,7 +87,7 @@ def get_new_parent_objects(
 
     Args:
         parent_css_object (typing.Union[ObjectOfStyle, typing.Iterable[ObjectOfStyle]]): The parent CSS object(s) to update.
-        widget_selector (typing.Union[tuple[str, Selector], None]): An optional widget selector to also add to the parent.
+        widget_selector (typing.Optional[tuple[str, Selector]]): An optional widget selector to also add to the parent.
         next_widget_selector (tuple[str, Selector]): The widget selector to add as a child of the parent.
 
     Returns:
@@ -86,15 +95,15 @@ def get_new_parent_objects(
     """
 	if isinstance(parent_css_object, (list, tuple, array.array, collections.deque)):
 		for i in range(len(parent_css_object)):
-			parent_css_object[i].add_css_object_to_object(next_widget_selector[0], next_widget_selector[1])
+			parent_css_object[i].add_css_object(next_widget_selector[0], next_widget_selector[1])
 	
 			if widget_selector is not None:
-				parent_css_object[i].add_css_object_to_object(widget_selector[0], widget_selector[1])
+				parent_css_object[i].add_css_object(widget_selector[0], widget_selector[1])
 	else:
-		parent_css_object.add_css_object_to_object(next_widget_selector[0], next_widget_selector[1])
+		parent_css_object.add_css_object(next_widget_selector[0], next_widget_selector[1])
 	
 		if widget_selector is not None:
-			parent_css_object.add_css_object_to_object(widget_selector[0], widget_selector[1])
+			parent_css_object.add_css_object(widget_selector[0], widget_selector[1])
 	
 	return parent_css_object
 
