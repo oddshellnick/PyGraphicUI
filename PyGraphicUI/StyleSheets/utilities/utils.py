@@ -56,7 +56,7 @@ def get_objects_of_style(parent_objects: tuple[str, Selector], **kwargs) -> tupl
 	
 	if isinstance(object_of_style, (list, tuple, array.array, collections.deque)):
 		for i in range(len(object_of_style)):
-			object_of_style[i].add_css_object_to_object(parent_objects[0], parent_objects[1])
+			object_of_style[i].add_css_object(parent_objects[0], parent_objects[1])
 	elif isinstance(object_of_style, ObjectOfStyle):
 		object_of_style.add_css_object(parent_objects[0], parent_objects[1])
 	else:

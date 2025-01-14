@@ -30,7 +30,7 @@ def get_description() -> str:
 
 setup(
     name="PyGraphicUI",
-    version="1.5.7",
+    version="1.5.8",
     author="oddshellnick",
     author_email="oddshellnick.programming@gmail.com",
     description=get_description(),
